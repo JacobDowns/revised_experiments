@@ -11,9 +11,11 @@ class ScaleFunctions(object):
   def __init__(self, m, u_b, k_min = 5e-5, k_max = pcs['k'], shutoff_length = 30.0 * pcs['spd'], u_b_max = 100.0, lag_time = 0.0):
 
     # Melt
-    self.m = m
+    self.m = Function(m.function_space())
+    self.m.assign(m)
     # Sliding
-    self.u_b = u_b    
+    self.u_b = Function(u_b.function_space())
+    self.u_b.assign(u_b)
     # Get function space from the melt function
     self.V_cg = m.function_space()
     # Maximum melt input
