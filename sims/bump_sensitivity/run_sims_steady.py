@@ -13,7 +13,7 @@ Conductivity tuned to produce summer steady state pressure around 0.8 OB.
 MPI_rank = MPI.rank(mpi_comm_world())
 
 # Simulation numbers
-ns = [4]
+ns = [0]
 
 # Name for each run
 titles = []
@@ -95,4 +95,4 @@ for n in ns:
       
     i += 1
     
-  model.write_steady_file('../../inputs/sliding_sensitivity/' + titles[n])
+  model.write_steady_file('../../inputs/bump_sensitivity/' + titles[n])
