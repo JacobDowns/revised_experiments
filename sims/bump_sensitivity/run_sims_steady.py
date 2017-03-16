@@ -13,7 +13,7 @@ Conductivity tuned to produce summer steady state pressure around 0.8 OB.
 MPI_rank = MPI.rank(mpi_comm_world())
 
 # Simulation numbers
-ns = [1]
+ns = [4]
 
 # Name for each run
 titles = []
@@ -27,13 +27,13 @@ titles.append('steady_trough_hr_2')
 input_file = '../../inputs/synthetic/inputs_trough_high.hdf5'
 
 # Initial conditions for each run
-hs = [0.025, 0.05, 0.3, 0.7, 1.5]
+hs = [0.025, 0.05, 0.41, 0.6, 1.5]
 # Bump heights for each run
 h_rs = [0.05, 0.1, 0.5, 1.0, 2.0]
 # Bump lengths for each run
 l_rs = [2.0, 2.0, 2.0, 2.0, 2.0]
 # Tuned conductivities for each run
-ks = [1.27e-2, 5.24e-3, 8.9e-4, 3.05e-4, 2e-4]
+ks = [1.27e-2, 5.2e-3, 7.1e-4, 3e-4, 1.3e-4]
 
 
 for n in ns:
@@ -62,9 +62,9 @@ for n in ns:
   # Seconds per day
   spd = pcs['spd']
   # End time
-  T = 200.0 * spd
+  T = 450.0 * spd
   # Day subdivisions 
-  N = 4
+  N = 3
   # Time step
   dt = spd / N
   # Iteration count
@@ -79,11 +79,14 @@ for n in ns:
 
     # Print the average pfo    
     avg_pfo = assemble(model.pfo * dx(model.mesh)) / assemble(1.0 * dx(model.mesh))
-    
+    # Print average water height
+    avg_h = assemble(model.h * dx(model.mesh)) / assemble(1.0 * dx(model.mesh))
+
     if MPI_rank == 0: 
       print ("Avg. PFO: ",  avg_pfo)
+      print ("Avg. h: ", avg_h)
     
-    if i % 3 == 0:
+    if i % (10*N) == 0:
       model.write_pvds(['pfo', 'h'])
       model.checkpoint(['h'])
     
