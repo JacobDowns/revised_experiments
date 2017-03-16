@@ -13,7 +13,7 @@ Conductivity tuned to produce summer steady state pressure around 0.8 OB.
 MPI_rank = MPI.rank(mpi_comm_world())
 
 # Simulation numbers
-ns = [2]
+ns = [1]
 
 # Name for each run
 titles = []
@@ -63,8 +63,10 @@ for n in ns:
   spd = pcs['spd']
   # End time
   T = 200.0 * spd
+  # Day subdivisions 
+  N = 4
   # Time step
-  dt = spd / 3.0
+  dt = spd / N
   # Iteration count
   i = 0
   
@@ -83,8 +85,6 @@ for n in ns:
     
     if i % 3 == 0:
       model.write_pvds(['pfo', 'h'])
-      
-    if i % 3 == 0:
       model.checkpoint(['h'])
     
     if MPI_rank == 0: 

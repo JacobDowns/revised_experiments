@@ -14,7 +14,7 @@ either a fast (100 m/a max) or slow (5 m/a max) winter sliding speed.
 MPI_rank = MPI.rank(mpi_comm_world())
 
 # Simulations numbers
-ns = [4,5,6]
+ns = [5]
 
 # Input files for each run
 inputs_l = '../../inputs/sliding_sensitivity/steady_trough_l.hdf5'

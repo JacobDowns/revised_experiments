@@ -28,7 +28,7 @@ model_inputs['constants'] = sim_constants
 # Create the sheet model
 model = SheetModel(model_inputs)
 # Set conductivity
-model.set_k(interpolate(k, model.V_cg))
+model.set_k(interpolate(Constant(k), model.V_cg))
 
 
 ## Run the simulation
@@ -37,8 +37,10 @@ model.set_k(interpolate(k, model.V_cg))
 spd = pcs['spd']
 # End time
 T = 200.0 * spd
+# Day subdivisions
+N = 24
 # Time step
-dt = spd / 3.0
+dt = spd / N
 # Iteration count
 i = 0
 
@@ -46,8 +48,12 @@ while model.t < T:
   if MPI_rank == 0: 
     current_time = model.t / spd
     print ('Current time: ' + str(current_time))
+    
+  if i % (N*5) == 0:
+    model.write_pvds(['pfo', 'h'])
+    model.checkpoint(['h'])
   
-  model.step(dt)
+  model.step_constrained(dt)
 
   # Print the average pfo    
   avg_pfo = assemble(model.pfo * dx(model.mesh)) / assemble(1.0 * dx(model.mesh))
@@ -55,11 +61,7 @@ while model.t < T:
   if MPI_rank == 0: 
     print ("Avg. PFO: ",  avg_pfo)
   
-  if i % 3 == 0:
-    model.write_pvds(['pfo', 'h'])
-    
-  if i % 3 == 0:
-    model.checkpoint(['h'])
+
   
   if MPI_rank == 0: 
     print

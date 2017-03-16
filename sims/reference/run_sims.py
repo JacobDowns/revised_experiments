@@ -8,7 +8,7 @@ from scale_functions import *
 MPI_rank = MPI.rank(mpi_comm_world())
 
 # Simulations numbers
-ns = [0, 1]
+ns = [0]
 
 # Input files for each run
 inputs_flat = '../../inputs/reference/steady_flat.hdf5'
@@ -41,8 +41,10 @@ for n in ns:
   spd = pcs['spd']
   # End time
   T = 9.0 * spm
+  # Day subdivisions
+  N = 24
   # Time step
-  dt = spd / 24.0
+  dt = spd / N
   # Iteration count
   i = 0
   
@@ -52,17 +54,17 @@ for n in ns:
     # Update the sliding speed
     model.set_u_b(scale_functions.get_u_b(model.t))  
     
+    if i % (N*10) == 0:
+      model.write_pvds(['pfo', 'h', 'm', 'u_b'])
+      
+    if i % (N/2) == 0:
+      model.checkpoint(['m', 'pfo', 'h', 'k', 'u_b'])
+    
     if MPI_rank == 0: 
       current_time = model.t / spd
       print ('Current time: ' + str(current_time))
     
     model.step(dt)
-    
-    if i % 10 == 0:
-      model.write_pvds(['pfo', 'h', 'm', 'u_b'])
-      
-    if i % 2.0 == 0:
-      model.checkpoint(['m', 'pfo', 'h', 'k', 'u_b'])
     
     if MPI_rank == 0: 
       print
