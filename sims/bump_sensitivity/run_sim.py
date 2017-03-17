@@ -22,7 +22,7 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Input files for each run
-h_rs = [0.05, 0.1, 0.5, 1.0, 2.0]
+h_rs = [0.05, 0.1, 0.5, 1, 2]
 # Input files for each run
 input_file = '../../inputs/bump_sensitivity/steady_trough_hr_' + str(h_rs[n]) + '.hdf5'
 # Title for each run
