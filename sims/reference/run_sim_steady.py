@@ -1,4 +1,3 @@
-
 from dolfin import *
 from dolfin import MPI, mpi_comm_world
 from sheet_model import *
@@ -7,8 +6,8 @@ from sheet_runner import *
 import sys
 
 """ 
-This script generates steady states for various bump heights on a trough geometry.
-Conductivity tuned to produce summer steady state pressure around 0.8 OB. 
+Generates steady states for a flat bed or trough with conductivity tuned to 
+produce an average summer PFO of around 0.8 OB.
 """
 
 # Process number
@@ -21,21 +20,25 @@ n = 0
 if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
-# Velocity scale factors for each run
-u_b_scales = [2.0/3.0, 1.0, 4.0/3.0]
-# Tuned conductivities for each run
-ks = [6e-3, 5.24e-3, 4.9e-3]
-# Low, medium, high melt
-ms = ['l', 'm', 'h']
+# Name for each run
+titles = []
+titles.append('steady_flat')
+titles.append('steady_trough')
+title = titles[n]
 
 # Input files for each run
-input_file = '../../inputs/synthetic/inputs_trough_high.hdf5'
-# Title for each run
-title = 'steady_trough' + ms[n]
+input_files = []
+input_files.append('../../inputs/synthetic/inputs_flat_high.hdf5')
+input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
+input_file = input_files[n]
+
+# Tuned conductivities for each run
+ks = [5.2e-3, 5.24e-3]
+
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-steady_file = '../../inputs/sliding_sensitivity/' + title
+steady_file = '../../inputs/reference/' + title
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
@@ -48,7 +51,6 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "u_b scale: " + str(u_b_scales[n])
   print "k: " + str(ks[n])
   print
   
@@ -83,8 +85,6 @@ def pre_step(model):
     print
 
 runner = SheetRunner(model_inputs, options, pre_step = pre_step)
- # Set sliding speed  
-runner.model.u_b.assign(project(runner.model.u_b * Constant(u_b_scales[n]), runner.model.V_cg))
 # Set conductivity
 runner.model.set_k(interpolate(Constant(ks[n]),runner.model.V_cg))
 

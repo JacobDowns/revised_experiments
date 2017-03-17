@@ -6,6 +6,9 @@ from scale_functions import *
 from sheet_runner import *
 import sys
 
+""" 
+This script runs one of two reference simulations on a flat bed or trough. 
+"""
 # Process number
 MPI_rank = MPI.rank(mpi_comm_world())
 
@@ -16,20 +19,11 @@ n = 0
 if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
-# Summer sliding speed
-summer_speed = ['l', 'l', 'm', 'm', 'h', 'h']
-# Winter sliding speed
-winter_speed = ['h', 'l', 'h', 'l', 'h', 'l']
-# Maximum sliding speed for each run
-high_max = 100.0
-low_max = 5.0
-u_b_maxs = [high_max, low_max, high_max, low_max, high_max, low_max]
-
-
+# Name for each run
+titles = ['flat', 'trough']
+title = titles[n]
 # Input files for each run
-input_file = '../../inputs/sliding_sensitivity/steady_trough_' + summer_speed[n] + '.hdf5'
-# Title for each run
-title = summer_speed[n] + '_' + winter_speed[n]
+input_file = '../../inputs/reference/steady_' + title + '.hdf5'
 # Output directory 
 out_dir = 'results_' + title
 
@@ -44,7 +38,6 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "u_b_max: " + str(u_b_maxs[n])
   print
   
 
@@ -66,7 +59,7 @@ options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N/2
 options['scale_m'] = True
 options['scale_u_b'] = True
-options['scale_u_b_max'] = u_b_maxs[n]
+options['scale_u_b_max'] = 100.0
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 

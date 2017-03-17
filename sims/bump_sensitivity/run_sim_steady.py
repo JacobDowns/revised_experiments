@@ -69,7 +69,7 @@ N = 3
 dt = spd / N
 
 options = {}
-options['checkpoint_interval'] = N*10
+options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N*10
 options['checkpoint_vars'] = ['h']
 options['pvd_vars'] = ['pfo', 'h']

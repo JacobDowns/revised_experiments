@@ -59,8 +59,9 @@ N = 48
 dt = spd / N
 
 options = {}
-options['checkpoint_interval'] = N*10
+options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N/2
+options['scale_m'] = True
 options['scale_u_b'] = True
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
