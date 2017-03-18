@@ -5,17 +5,17 @@ Runs the channel model.
 
 from dolfin import *
 from dolfin import MPI, mpi_comm_world
-from sheet_model import *
+from channel_model import *
 from scale_functions import *
 import pickle
 
-class SheetRunner(object):
+class ChannelRunner(object):
   
   def __init__(self, model_inputs, options = None, pre_step = None, post_step = None):
     # Process number
     self.MPI_rank = MPI.rank(mpi_comm_world())
     # Create the sheet model
-    self.model = SheetModel(model_inputs)
+    self.model = ChannelModel(model_inputs)
     # Function called before the model is stepped forward each iteration
     self.pre_step = pre_step
     # Function called after the model is stepped forward each iteration
@@ -35,7 +35,7 @@ class SheetRunner(object):
     # Number of time steps between checkpoints
     self.options['checkpoint_interval'] = 1
     # Checkpoint variables
-    self.options['checkpoint_vars'] = ['h', 'q']
+    self.options['checkpoint_vars'] = ['h', 'q', 'S', 'phi']
     # Variables to write as pvds
     self.options['pvd_vars'] = ['pfo', 'h']
     # Scale m in winter simulation?
@@ -53,8 +53,6 @@ class SheetRunner(object):
     self.options['scale_lag_time'] = 0.0
     # u_b_max for winter  scaling
     self.options['scale_u_b_max'] = 100.0
-    # Turn on pressure constraints
-    self.options['constraints'] = False
     
     # Overwrite any changed options
     if options:
@@ -110,12 +108,7 @@ class SheetRunner(object):
       if self.pre_step:
         self.pre_step(self.model)
       
-      if self.options['constraints']:
-        # Take a step with constraints
-        self.model.step_constrained(dt)
-      else :
-        # Take a step
-        self.model.step(dt)
+      self.model.step(dt)
       
       # Call post step function
       if self.post_step:

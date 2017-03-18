@@ -1,16 +1,14 @@
 from dolfin import *
 from dolfin import MPI, mpi_comm_world
-from sheet_model import *
 from sim_constants import *
-from scale_functions import *
 from sheet_runner import *
 import sys
 
 """ 
-This script runs one of six winter simulations. Starting from steady states 
-with a variety of different bump heights, sliding speed is decreased during the 
-fall to a maximum of 100 (m/a) as  melt shuts off. 
+Winter simulation on flat bed with spatially varying k and either high or low
+melt input. 
 """
+
 # Process number
 MPI_rank = MPI.rank(mpi_comm_world())
 
@@ -21,12 +19,20 @@ n = 0
 if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
+# Name for each run
+titles = ['high', 'low']
+title = titles[n]
+
 # Input files for each run
-h_rs = [0.05, 0.1, 0.5, 1, 2]
-# Input files for each run
-input_file = '../../inputs/bump_sensitivity/steady_trough_hr_' + str(h_rs[n]) + '.hdf5'
-# Title for each run
-title = 'trough_hr_' + str(h_rs[n])
+input_files = []
+input_files.append('../../inputs/synthetic_vark/steady_high.hdf5')
+input_files.append('../../inputs/synthetic_vark/steady_low.hdf5')
+input_file = input_files[n]
+
+# Tuned conductivities for each run
+k_maxs = [7e-3, 3.5e-3]
+k_mins = [2e-5, 2e-5]
+
 # Output directory 
 out_dir = 'results_' + title
 
@@ -39,9 +45,10 @@ model_inputs['constants'] = sim_constants
 if MPI_rank == 0:
   print "Simulation: " + str(n)
   print "Title: " + title
-  print "h_r: " + str(h_rs[n])
   print "Input file: " + input_file
   print "Output dir: " + out_dir
+  print "k_min: " + str(k_mins[n])
+  print "k_max: " + str(k_maxs[n])
   print
   
 
@@ -63,9 +70,11 @@ options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N/2
 options['scale_m'] = True
 options['scale_u_b'] = True
+options['scale_k'] = True
+options['scale_k_min'] = k_mins[n]
+options['scale_k_max'] = k_maxs[n]
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
-options['constraints'] = True
 
 runner = SheetRunner(model_inputs, options)
 runner.run(T, dt)
