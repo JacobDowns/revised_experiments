@@ -70,7 +70,4 @@ options['pvd_vars'] = ['pfo', 'h']
 options['constraints'] = True
 
 runner = SheetRunner(model_inputs, options)
-
-File('h.pvd')
-quit()
 runner.run(T, dt)
