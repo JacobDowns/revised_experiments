@@ -7,7 +7,7 @@ from sheet_runner import *
 import sys
 
 """ 
-This script runs one of six winter simulations. Starting from steady states 
+This script runs one of five winter simulations. Starting from steady states 
 with a variety of different bump heights, sliding speed is decreased during the 
 fall to a maximum of 100 (m/a) as  melt shuts off. 
 """
@@ -21,8 +21,8 @@ n = 0
 if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
-# Input files for each run
-h_rs = [0.05, 0.1, 0.5, 1, 2]
+# Bump heights for each run
+h_rs = [0.05, 0.1, 0.5, 1.0, 2.0]
 # Input files for each run
 input_file = '../../inputs/bump_sensitivity/steady_trough_hr_' + str(h_rs[n]) + '.hdf5'
 # Title for each run
@@ -33,7 +33,9 @@ out_dir = 'results_' + title
 model_inputs = {}
 model_inputs['input_file'] = input_file
 model_inputs['out_dir'] = out_dir
+sim_constants['h_r'] = h_rs[n]
 model_inputs['constants'] = sim_constants
+
 
 # Print simulation details
 if MPI_rank == 0:
@@ -68,4 +70,7 @@ options['pvd_vars'] = ['pfo', 'h']
 options['constraints'] = True
 
 runner = SheetRunner(model_inputs, options)
+
+File('h.pvd')
+quit()
 runner.run(T, dt)

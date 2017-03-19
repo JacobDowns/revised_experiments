@@ -9,12 +9,12 @@ tweaks are needed.
 
 ### Get data
 
-hrs = [0.05, 0.1, 0.5, 1, 2]
+labels = ['l_l', 'l_h', 'm_l', 'm_h', 'h_l', 'h_h']
 
-for i in range(len(hrs)):
+for i in range(len(labels)):
   print i 
-  hr = hrs[i]
-  view = TimeView('../hdf5_results/hr_' + str(hr) + '.hdf5')
+  label = labels[i]
+  view = TimeView('../hdf5_results/' + labels[i] + '.hdf5')
 
   # Times
   ts = view.get_ts() / pcs['spm']

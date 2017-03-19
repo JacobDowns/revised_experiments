@@ -3,17 +3,17 @@ from constants import *
 
 ts = loadtxt('ts.txt')
 pfos1 = loadtxt('pfos1.txt')
-pfos2 = loadtxt('pfos2.txt')
+#pfos2 = loadtxt('pfos2.txt')
 avg_pfos1 = loadtxt('avg_pfos1.txt')
-avg_pfos2 = loadtxt('avg_pfos2.txt')
+#avg_pfos2 = loadtxt('avg_pfos2.txt')
 avg_ms1 = loadtxt('avg_ms1.txt')
-avg_ms2 = loadtxt('avg_ms2.txt')
+#avg_ms2 = loadtxt('avg_ms2.txt')
 avg_hs1 = loadtxt('avg_hs1.txt')
-avg_hs2 = loadtxt('avg_hs2.txt')
+#avg_hs2 = loadtxt('avg_hs2.txt')
 avg_ubs1 = loadtxt('avg_ubs1.txt')
-avg_ubs2 = loadtxt('avg_ubs2.txt')
+#avg_ubs2 = loadtxt('avg_ubs2.txt')
 avg_ks1 = loadtxt('avg_ks1.txt')
-avg_ks2 = loadtxt('avg_ks2.txt')
+#avg_ks2 = loadtxt('avg_ks2.txt')
 
 
 ### Plot pressures at points
@@ -25,9 +25,9 @@ plot(ts, pfos1[0,:], 'r', linewidth = lw, label = '1 Flat')
 plot(ts, pfos1[1,:], 'g', linewidth = lw, label = '2 Flat')
 plot(ts, pfos1[2,:], 'b', linewidth = lw, label = '3 Flat')
 
-plot(ts, pfos2[0,:], 'r--', linewidth = lw, label = '1 Trough')
-plot(ts, pfos2[1,:], 'g--', linewidth = lw, label = '2 Trough')
-plot(ts, pfos2[2,:], 'b--', linewidth = lw, label = '3 Trough')
+#plot(ts, pfos2[0,:], 'r--', linewidth = lw, label = '1 Trough')
+#plot(ts, pfos2[1,:], 'g--', linewidth = lw, label = '2 Trough')
+#plot(ts, pfos2[2,:], 'b--', linewidth = lw, label = '3 Trough')
 
 xlim([0.0, max(ts)])
 xlabel('Time (Months)')
@@ -35,8 +35,9 @@ ylabel('Pressure (Fraction of Overburden)')
 legend()
 grid(True)
 
-savefig('images/ref.png', dpi = 500)
+savefig('images/synthetic_vark.png', dpi = 500)
 
+quit()
 
 ### Plot melt, u_b, and k
 

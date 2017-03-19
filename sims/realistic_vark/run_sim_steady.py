@@ -57,8 +57,8 @@ options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N*10
 options['checkpoint_vars'] = ['h']
 options['pvd_vars'] = ['pfo', 'h']
-options['scale_k_min'] = k_mins[n]
-options['scale_k_max'] = k_maxs[n]
+options['scale_k_min'] = k_min
+options['scale_k_max'] = k_max
 options['constraints'] = True
 
 # Function called prior to each step
