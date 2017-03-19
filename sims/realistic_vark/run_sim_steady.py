@@ -17,7 +17,7 @@ MPI_rank = MPI.rank(mpi_comm_world())
 # Input file
 input_file = '../../inputs/IS/inputs_is.hdf5'
 # Tuned conductivities
-k_min = 2e-5
+k_min = 5e-6
 k_max = 7e-3
 # Title for each run
 title = 'steady_is_vark'

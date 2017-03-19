@@ -67,7 +67,7 @@ options['scale_m'] = True
 options['scale_u_b'] = True
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
-options['constraints'] = True
+options['constraints'] = False
 
 runner = SheetRunner(model_inputs, options)
 runner.run(T, dt)
