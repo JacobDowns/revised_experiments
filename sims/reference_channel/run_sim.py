@@ -85,7 +85,7 @@ def pre_step(model):
     print "Avg. h: " + str(avg_h)
     print
 
-runner = SheetRunner(model_inputs, options, pre_step = pre_step)
+runner = ChannelRunner(model_inputs, options, pre_step = pre_step)
 runner.model.set_m(project(runner.model.m, runner.model.V_cg))
 
 runner.run(T, dt)
