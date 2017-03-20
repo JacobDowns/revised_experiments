@@ -32,7 +32,7 @@ input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
 input_file = input_files[n]
 
 # Tuned conductivities for each run
-ks = [5.2e-3, 5.24e-3]
+ks = [3e-3, 2e-3]
 
 # Output directory 
 out_dir = 'results_' + title

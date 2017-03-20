@@ -6,7 +6,7 @@ hrs = [0.05, 0.1, 0.5, 1, 2]
 
 ts = loadtxt('ts.txt')
 colors = ['r', 'g', 'b', 'k', 'y']
-labels = [r'$h_r = 0.05$', r'$h_r = 0.1$', r'$h_r = 0.5$', r'$h_r = 1$', r'$h_r = 2$']
+labels = [r'$h_r = 0.05 m$', r'$h_r = 0.1 m$', r'$h_r = 0.5 m$', r'$h_r = 1 m$', r'$h_r = 2 m$']
 
 
 ### Plot avg. pressure
