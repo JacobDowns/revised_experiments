@@ -16,7 +16,7 @@ MPI_rank = MPI.rank(mpi_comm_world())
 # Input file
 input_file = '../../inputs/realistic_vark/steady_is_vark.hdf5'
 # Tuned conductivities
-k_min = 5e-6
+k_min = 2e-5
 k_max = 7e-3
 # Title for each run
 title = 'is_vark'
@@ -47,7 +47,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 64
+N = 48
 # Time step
 dt = spd / N
 
@@ -62,6 +62,8 @@ options['scale_k_max'] = k_max
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 options['constraints'] = True
+
+
 
 runner = SheetRunner(model_inputs, options)
 runner.run(T, dt)

@@ -24,19 +24,23 @@ lw = 1.5
 plot(ts, pfos1[0,:], 'r', linewidth = lw, label = '1 Flat')
 plot(ts, pfos1[1,:], 'g', linewidth = lw, label = '2 Flat')
 plot(ts, pfos1[2,:], 'b', linewidth = lw, label = '3 Flat')
+plot(ts, avg_pfos1, 'k--', linewidth = lw, label = 'Avg.')
 
 #plot(ts, pfos2[0,:], 'r--', linewidth = lw, label = '1 Trough')
 #plot(ts, pfos2[1,:], 'g--', linewidth = lw, label = '2 Trough')
 #plot(ts, pfos2[2,:], 'b--', linewidth = lw, label = '3 Trough')
 
 xlim([0.0, max(ts)])
+ylim([0.68, 0.95])
 xlabel('Time (Months)')
 ylabel('Pressure (Fraction of Overburden)')
-legend()
+legend(loc=4)
 grid(True)
 
 savefig('images/synthetic_vark.png', dpi = 500)
 
+
+print str(average(avg_pfos1))
 quit()
 
 ### Plot melt, u_b, and k

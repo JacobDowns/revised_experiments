@@ -1,14 +1,13 @@
 from dolfin import *
 from dolfin import MPI, mpi_comm_world
-from sheet_model import *
 from sim_constants import *
-from scale_functions import *
-from sheet_runner import *
+from channel_runner import *
 import sys
 
 """ 
-This script runs one of two reference simulations on a flat bed or trough. 
+Runs the reference experiment with the channel model on flat bed or trough. 
 """
+
 # Process number
 MPI_rank = MPI.rank(mpi_comm_world())
 
@@ -22,10 +21,20 @@ if len(sys.argv) > 1:
 # Name for each run
 titles = ['flat', 'trough']
 title = titles[n]
+
 # Input files for each run
-input_file = '../../inputs/reference/steady_' + title + '.hdf5'
+input_files = []
+input_files.append('../../inputs/reference_channel/steady_flat.hdf5')
+input_files.append('../../inputs/reference_channel/steady_trough.hdf5')
+input_file = input_files[n]
+
+# Tuned conductivities for each run
+ks = [3e-3, 5.24e-3]
+
 # Output directory 
-out_dir = 'results1_' + title
+out_dir = 'results_' + title
+# Steady state file
+steady_file = '../../inputs/reference_channel/' + title
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
@@ -38,6 +47,7 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
+  print "k: " + str(ks[n])
   print
   
 

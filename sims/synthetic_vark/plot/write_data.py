@@ -9,7 +9,7 @@ tweaks are needed.
 
 ### Get data
 
-view1 = TimeView('../hdf5_results/high.hdf5')
+view1 = TimeView('../hdf5_results/out.hdf5')
 #view2 = TimeView('../hdf5_results/low.hdf5')
 
 ts = view1.get_ts() / pcs['spm']

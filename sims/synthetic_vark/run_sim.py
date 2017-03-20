@@ -31,7 +31,7 @@ input_file = input_files[n]
 
 # Tuned conductivities for each run
 k_maxs = [7e-3, 3.5e-3]
-k_mins = [5e-6, 5e-6]
+k_mins = [1e-6, 1e-6]
 
 # Output directory 
 out_dir = 'results_' + title

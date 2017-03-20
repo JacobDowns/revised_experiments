@@ -6,18 +6,19 @@ hrs = [0.05, 0.1, 0.5, 1, 2]
 
 ts = loadtxt('ts.txt')
 colors = ['r', 'g', 'b', 'k', 'y']
-labels = [r'$h_r = 0.05$', r'$h_r = 0.1$', r'$h_r = 0.5$', r'$h_r = 15$', r'$h_r = 2$']
+labels = [r'$h_r = 0.05$', r'$h_r = 0.1$', r'$h_r = 0.5$', r'$h_r = 1$', r'$h_r = 2$']
 
 
 ### Plot avg. pressure
 
 figure(figsize = (12, 4.5))
-lw = 1
+lw = 2
 
 for i in range(len(hrs)):
   hr = hrs[i]
   #pfos = loadtxt('pfos' + str(i) + '.txt')
   avg_pfos = loadtxt('avg_pfos' + str(i) + '.txt')
+  print "Avg. " + str(hr) + ': ' + str(average(avg_pfos))
   #avg_ms = loadtxt('avg_ms' + str(i) + '.txt')
   #avg_hs = loadtxt('avg_hs' + str(i) + '.txt')
   #avg_ubs = loadtxt('avg_ubs' + str(i) + '.txt')
@@ -31,8 +32,6 @@ legend()
 grid(True)
 
 savefig('images/bump_sensitivity.png', dpi = 500)
-
-
 
 ### Plot inputs
 

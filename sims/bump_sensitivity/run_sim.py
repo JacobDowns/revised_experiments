@@ -46,6 +46,7 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print
   
+quit()
 
 ### Run options
 
