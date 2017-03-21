@@ -32,7 +32,7 @@ plot(ts, avg_pfos1, 'k--', linewidth = lw, label = 'Avg.')
 #plot(ts, pfos2[2,:], 'b--', linewidth = lw, label = '3 Trough')
 
 xlim([0.0, max(ts)])
-ylim([0.42, 0.95])
+ylim([0.42, 1.0])
 xlabel('Time (Months)')
 ylabel('Pressure (Fraction of Overburden)')
 legend(loc=3, bbox_to_anchor=(0.1, 0.0))
