@@ -7,7 +7,7 @@ figure(figsize = (12, 8.5))
 lw = 2
 ts = loadtxt('ts.txt')
 labels = [r'$l \to l$', r'$l \to h$', r'$m \to l$', r'$m \to h$', r'$h \to l$', r'$h \to h$']
-titles = ['Slow Summer', 'Moderate Summer', 'Fast Summer']
+titles = ['(a) Slow Summer', '(b) Moderate Summer', '(c) Fast Summer']
 
 for i in range(3):
   subplot(3,1,i+1)
@@ -31,6 +31,8 @@ for i in range(3):
     ylabel('Average Pressure (Fraction of Overburden)')
   legend()
   grid(True)
+  
+xlim([0,8])
 
 savefig('images/sliding_sensitivity.png', dpi = 500)
 tight_layout()

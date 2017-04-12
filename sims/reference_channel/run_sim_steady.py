@@ -32,7 +32,7 @@ input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
 input_file = input_files[n]
 
 # Tuned conductivities for each run
-ks = [3e-3, 2e-3]
+ks = [3e-3, 2.5e-3]
 
 # Output directory 
 out_dir = 'results_' + title
@@ -68,7 +68,7 @@ dt = spd / N
 options = {}
 options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N*10
-options['checkpoint_vars'] = ['h', 'S', 'phi']
+options['checkpoint_vars'] = ['h', 'S', 'phi', 'pfo']
 options['pvd_vars'] = ['pfo', 'h']
 
 # Function called prior to each step

@@ -15,12 +15,15 @@ ff = FacetFunctionDouble(view1.mesh)
 p = TRPlot(view1.mesh)
 out = File('S/S.pvd')
 out_h = File('S/h.pvd')
+out_pfo = File('S/pfo.pvd')
 
 for i in range(view1.num_steps):
   print i
   p.copy_tr_to_facet(view1.get_S(i), ff)
   out << ff
   out_h << view1.get_h(i)
+  out_pfo << view1.get_pfo(i)
+  
 
 quit()
 

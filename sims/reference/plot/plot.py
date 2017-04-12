@@ -34,8 +34,9 @@ xlabel('Time (Months)')
 ylabel('Pressure (Fraction of Overburden)')
 legend()
 grid(True)
+xlim([0,8])
 
-savefig('images/ref.png', dpi = 500)
+savefig('images/ref', dpi = 500)
 
 
 ### Plot melt, u_b, and k
@@ -63,11 +64,7 @@ xlabel('Time (Months)')
 ylabel('Avg. k')
 legend()
 
+
+
 savefig('images/inputs.png', dpi = 500)
 tight_layout()
-
-
-### Compute the average winter pressure (average in time and space)
-
-print "Flat average: " + str(average(avg_pfos1))
-print "Trough average: " + str(average(avg_pfos2))
