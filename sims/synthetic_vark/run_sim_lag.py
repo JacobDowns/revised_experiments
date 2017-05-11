@@ -27,7 +27,6 @@ title = titles[n]
 
 # Input files for each run
 input_file = '../../inputs/synthetic_vark/steady_high.hdf5'
-input_file = input_files[n]
 
 # Tuned conductivities for each run
 k_max = 7e-3
@@ -47,8 +46,9 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "k_min: " + str(k_mins[n])
-  print "k_max: " + str(k_maxs[n])
+  print "k_min: " + str(k_min)
+  print "k_max: " + str(k_max)
+  print "lag: " + str(lag_times[n] / spd)
   print
   
 
