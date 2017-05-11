@@ -1,18 +1,18 @@
 from pylab import *
 from constants import *
 
-ts = loadtxt('ts.txt')
-pfos1 = loadtxt('pfos1.txt')
+ts = loadtxt('trough/ts.txt')
+pfos1 = loadtxt('trough/pfos1.txt')
 #pfos2 = loadtxt('pfos2.txt')
-avg_pfos1 = loadtxt('avg_pfos1.txt')
+avg_pfos1 = loadtxt('trough/avg_pfos1.txt')
 #avg_pfos2 = loadtxt('avg_pfos2.txt')
-avg_ms1 = loadtxt('avg_ms1.txt')
+avg_ms1 = loadtxt('trough/avg_ms1.txt')
 #avg_ms2 = loadtxt('avg_ms2.txt')
-avg_hs1 = loadtxt('avg_hs1.txt')
+avg_hs1 = loadtxt('trough/avg_hs1.txt')
 #avg_hs2 = loadtxt('avg_hs2.txt')
-avg_ubs1 = loadtxt('avg_ubs1.txt')
+avg_ubs1 = loadtxt('trough/avg_ubs1.txt')
 #avg_ubs2 = loadtxt('avg_ubs2.txt')
-avg_ks1 = loadtxt('avg_ks1.txt')
+avg_ks1 = loadtxt('trough/avg_ks1.txt')
 #avg_ks2 = loadtxt('avg_ks2.txt')
 
 
@@ -35,9 +35,9 @@ ylabel('Pressure (Fraction of Overburden)')
 legend(loc = 3)
 grid(True)
 
-savefig('images/ref_channel.png', dpi = 500)
+savefig('images/ref_trough_channel.png', dpi = 500)
 
-print "Flat Avg: " + str(average(avg_pfos1))
+print "Trough Avg: " + str(average(avg_pfos1))
 quit()
 
 
