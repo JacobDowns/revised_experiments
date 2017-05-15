@@ -5,8 +5,7 @@ from sheet_runner import *
 import sys
 
 """ 
-Generates steady states for a flat bed with spatially variable k, and either
-high or low melt input. k_max tuned to give pressure around 0.8 OB. 
+Generates steady states for a flat bed with spatially variable k for lag experiment.
 """
 
 # Process number
