@@ -33,8 +33,8 @@ input_files.append('../../inputs/lag/steady_low.hdf5')
 input_file = input_files[n / 3]
 
 # Min and max conductivities
-k_min = 4e-3
-k_max = 1e-6
+k_max = 4e-3
+k_min = 1e-6
 
 # Output directory 
 out_dir = 'results_' + title
