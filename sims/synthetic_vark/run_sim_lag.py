@@ -20,17 +20,25 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['day_lag', 'week_lag', 'month_lag']
-spd = sim_constants['spd']
-lag_times = [spd, 7.*spd, 30.*spd]
+titles = ['high_day', 'high_week', 'high_month', 'low_day', 'low_week', 'low_month']
 title = titles[n]
+spd = sim_constants['spd']
+lag_times = [spd, 7.*spd, 30.*spd, spd, 7.*spd, 30.*spd]
+lag_time = lag_times[n]
 
 # Input files for each run
-input_file = '../../inputs/synthetic_vark/steady_high.hdf5'
+input_files = []
+input_files.append('../../inputs/synthetic_vark/steady_high.hdf5')
+input_files.append('../../inputs/synthetic_vark/steady_low.hdf5')
+input_file = input_files[n / 3]
 
 # Tuned conductivities for each run
-k_max = 7e-3
-k_min = 1e-6
+k_maxs = [7e-3, 3.5e-3]
+k_mins = [1e-6, 1e-6]
+# Min k for this run
+k_min = k_mins[n/3]
+# Max k for this run
+k_max = k_maxs[n/3]
 
 # Output directory 
 out_dir = 'results_' + title
@@ -48,7 +56,7 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print "k_min: " + str(k_min)
   print "k_max: " + str(k_max)
-  print "lag: " + str(lag_times[n] / spd)
+  print "lag: " + str(lag_time / spd)
   print
   
 
@@ -65,6 +73,7 @@ N = 48
 # Time step
 dt = spd / N
 
+
 options = {}
 options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N/2
@@ -73,9 +82,11 @@ options['scale_u_b'] = True
 options['scale_k'] = True
 options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
-options['scale_lag_time'] = lag_times[n]
+options['scale_lag_time'] = lag_time
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
 runner = SheetRunner(model_inputs, options)
 runner.run(T, dt)
+
+quit()
