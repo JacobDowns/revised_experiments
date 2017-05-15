@@ -33,12 +33,15 @@ input_files.append('../../inputs/synthetic_vark/steady_low.hdf5')
 input_file = input_files[n / 3]
 
 # Tuned conductivities for each run
-k_maxs = [7e-3, 3.5e-3]
-k_mins = [1e-6, 1e-6]
+#k_maxs = [7e-3, 3.5e-3]
+#k_mins = [1e-6, 1e-6]
 # Min k for this run
-k_min = k_mins[n/3]
+#k_min = k_mins[n/3]
 # Max k for this run
-k_max = k_maxs[n/3]
+#k_max = k_maxs[n/3]
+
+k_min = 4e-3
+k_max = 1e-6
 
 # Output directory 
 out_dir = 'results_' + title
