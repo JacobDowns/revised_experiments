@@ -9,7 +9,7 @@ tweaks are needed.
 
 ### Get data
 
-labels = ['low_day_lag', 'low_week_lag', 'low_month_lag', 'high_day_lag', 'high_week_lag', 'high_month_lag']
+labels = ['low_day', 'low_week', 'low_month', 'high_day', 'high_week', 'high_month']
 
 for i in range(len(labels)):
   print i 
