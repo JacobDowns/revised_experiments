@@ -83,5 +83,5 @@ options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
 
-runner = ChannelRunner(model_inputs, options, pre_step = pre_step)
+runner = ChannelRunner(model_inputs, options)
 runner.run(T, dt)
