@@ -12,24 +12,27 @@ avg_ks = loadtxt('avg_ks.txt')
 
 ### Plot pressures at points
 
-figure(figsize = (12, 4.5))
-lw = 1.5
+fig = figure(figsize = (13., 5.5))
+matplotlib.rcParams.update({'font.size': 16})
+lw = 2.5
 
 plot(ts, pfos[0,:], 'r', linewidth = lw, label = '1')
 plot(ts, pfos[1,:], 'g', linewidth = lw, label = '2')
 plot(ts, pfos[2,:], 'b', linewidth = lw, label = '3')
 plot(ts, pfos[3,:], 'k', linewidth = lw, label = '4')
-plot(ts, avg_pfos, 'k--', linewidth = lw, label = 'Avg.')
+#plot(ts, avg_pfos, 'k--', linewidth = lw, label = 'Avg.')
 
 
 ylim([0.3, 1.0])
 xlim([0.0, max(ts)])
 xlabel('Time (Months)')
-ylabel('Pressure (Fraction of Overburden)')
+ylabel('Water Pressure (Flotation Fraction)')
 legend(loc=5)
 grid(True)
 
 savefig('images/ref_is.png', dpi = 500)
+
+quit()
 
 
 ### Plot melt, u_b, and k
