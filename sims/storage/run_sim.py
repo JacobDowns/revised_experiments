@@ -45,7 +45,6 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "k: " + str(ks[n])
   print "e_v: " + str(sim_constants['e_v'])
   print
   
