@@ -19,7 +19,7 @@ class ScaleFunctions(object):
     # Get function space from the melt function
     self.V_cg = m.function_space()
     # Maximum melt input
-    if m_max = None:
+    if m_max == None:
       self.m_max = m.vector().max()
     else :
       self.m_max = m_max
