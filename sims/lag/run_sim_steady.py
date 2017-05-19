@@ -29,8 +29,9 @@ input_files.append('../../inputs/synthetic/inputs_flat_low.hdf5')
 input_file = input_files[n]
 
 # Tuned conductivities for each run
-k_max = 4e-3
+k_max = 5e-3
 k_min = 1e-6
+m_max = 5.0
 
 # Output directory 
 out_dir = 'results_' + title
@@ -50,6 +51,7 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print "k_min: " + str(k_min)
   print "k_max: " + str(k_max)
+  print "m_max: " + str(m_max)
   print
   
 
@@ -71,6 +73,7 @@ options['checkpoint_vars'] = ['h']
 options['pvd_vars'] = ['pfo', 'h']
 options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
+options['scale_m_max'] = m_max
 
 # Function called prior to each step
 def pre_step(model):
