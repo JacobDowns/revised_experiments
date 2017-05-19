@@ -35,6 +35,7 @@ input_file = input_files[n / 3]
 # Min and max conductivities
 k_min = 1e-6
 k_max = 2e-3
+m_max = 5.0
 
 # Output directory 
 out_dir = 'results_' + title
@@ -52,6 +53,7 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print "k_min: " + str(k_min)
   print "k_max: " + str(k_max)
+  print "m_max: " + str(m_max)
   print "lag: " + str(lag_time / spd)
   print
   
@@ -78,10 +80,10 @@ options['scale_u_b'] = True
 options['scale_k'] = True
 options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
+options['scale_m_max'] = m_max
 options['scale_lag_time'] = lag_time
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
-
 
 runner = ChannelRunner(model_inputs, options)
 runner.run(T, dt)

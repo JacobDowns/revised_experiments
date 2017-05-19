@@ -48,7 +48,7 @@ class ChannelRunner(object):
     self.options['scale_k_min'] = 5e-5
     self.options['scale_k_max'] = 5e-3
     # m_max for winter conductivity scaling
-    self.options['m_max'] = None
+    self.options['scale_m_max'] = None
     # Duration of melt shut off for winter scaling
     self.options['scale_shutoff_length'] = 30.0 * self.spd
     # Lag of conductivity behind melt for winter simulations
@@ -72,7 +72,7 @@ class ChannelRunner(object):
         u_b_max = self.options['scale_u_b_max'],
         shutoff_length = self.options['scale_shutoff_length'],
         lag_time = self.options['scale_lag_time'],
-        m_max = self.options['m_max'])    
+        m_max = self.options['scale_m_max'])    
     
       
   # Runs the sheet model to end time T with time step dt

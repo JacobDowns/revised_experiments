@@ -22,7 +22,7 @@ class ScaleFunctions(object):
     if m_max == None:
       self.m_max = m.vector().max()
     else :
-      self.m_max = m_max
+      self.m_max = m_max / pcs['spy']
     # Shutoff length
     self.shutoff_length = shutoff_length
     # Minimum conductivity

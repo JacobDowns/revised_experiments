@@ -33,6 +33,7 @@ input_file = input_files[n]
 # Use same conductivity for each run
 k_min = 1e-6
 k_max = 2e-3
+m_max = 5.0
 
 # Output directory 
 out_dir = 'results_' + title
@@ -52,6 +53,7 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print "k_min: " + str(k_min)
   print "k_max: " + str(k_max)
+  print "m_max: " + str(m_max)
   print
   
 
@@ -73,6 +75,7 @@ options['checkpoint_vars'] = ['h', 'S', 'phi', 'pfo']
 options['pvd_vars'] = ['pfo', 'h']
 options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
+options['scale_m_max'] = m_max
 
 # Function called prior to each step
 def pre_step(model):
