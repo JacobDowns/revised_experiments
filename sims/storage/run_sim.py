@@ -5,8 +5,8 @@ from channel_runner import *
 import sys
 
 """ 
-Runs the reference experiment with the channel model on flat bed or trough. 
-This run uses a larger englacial either a low or a high englacial void ratio.
+Runs winter simulation on a trough with fixed k and either a low or high 
+englacial void ratio.
 """
 
 # Process number
@@ -24,10 +24,7 @@ titles = ['low_void', 'high_void']
 title = titles[n]
 
 # Input files for each run
-input_files = []
-input_files.append('../../inputs/reference_channel/steady_flat.hdf5')
-input_files.append('../../inputs/reference_channel/steady_trough.hdf5')
-input_file = input_files[n]
+input_file = '../../inputs/reference_channel/steady_trough.hdf5'
 
 # Output directory 
 out_dir = 'results_' + title
@@ -88,5 +85,4 @@ def pre_step(model):
 
 runner = ChannelRunner(model_inputs, options, pre_step = pre_step)
 runner.model.set_m(project(runner.model.m, runner.model.V_cg))
-
 runner.run(T, dt)
