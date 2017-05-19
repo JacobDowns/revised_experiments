@@ -64,7 +64,8 @@ pfo2[pfo2 > 1.0] = 1.0
 ### Plot the steady state pressure
 
 fig = figure(figsize = (26,13.5))
-matplotlib.rcParams.update({'font.size': 24})
+fs = 26
+matplotlib.rcParams.update({'font.size': fs})
 subplot(2,1,1)
 
 # Load a paraview color map
@@ -75,6 +76,7 @@ desaturated = LinearSegmentedColormap('desaturated', cdict)
 cont = tricontourf(vx, vy, fi, pfo1, 100, cmap = desaturated, aspect = 'auto')
 # Keep proper aspect ratio
 axis('scaled')
+axis('off')
 xlim([-2.0, 72.0])
 ylim([-2.0, 22.0])
 clim(0.0, 1.0)
@@ -96,8 +98,9 @@ pfo2 = append(pfo2, 1.0 - 1e-16)
 cont = tricontourf(vx, vy, fi, pfo2, 100, cmap = desaturated, aspect = 'auto')
 # Keep proper aspect ratio
 axis('scaled')
-xlabel('x (km)')
-ylabel('y (km)')
+axis('off')
+#xlabel('x (km)')
+#ylabel('y (km)')
 xlim([-2.0, 72.0])
 ylim([-2.0, 22.0])
 clim(0.0, 1.0)
@@ -106,8 +109,9 @@ title('(b) End of Winter')
 plot(xs, ys, 'k', linewidth = 2)
 
 subplots_adjust(right=0.95)
-cbar_ax = fig.add_axes([0.9, 0.15, 0.02, 0.7])
-fig.colorbar(cont, cax = cbar_ax, ticks = linspace(0.0, 1.0, 11), label = 'Water Pressure (Flotation Fraction)')
+cbar_ax = fig.add_axes([0.9, 0.2, 0.015, 0.6])
+cb = fig.colorbar(cont, cax = cbar_ax, ticks = linspace(0.0, 1.0, 11), label = 'Water Pressure (Flotation Fraction)')
+cb.ax.tick_params(labelsize=fs) 
 
 savefig('images/is_ref_2d.png')
 #show()

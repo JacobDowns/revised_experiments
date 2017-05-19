@@ -8,7 +8,7 @@ from constants import *
 
 class ScaleFunctions(object):
   
-  def __init__(self, m, u_b, k_min = 5e-5, k_max = 5e-3, shutoff_length = 30.0 * pcs['spd'], u_b_max = 100.0, lag_time = 0.0):
+  def __init__(self, m, u_b, k_min = 5e-5, k_max = 5e-3, shutoff_length = 30.0 * pcs['spd'], u_b_max = 100.0, lag_time = 0.0, m_max = None):
 
     # Melt
     self.m = Function(m.function_space())
@@ -19,7 +19,10 @@ class ScaleFunctions(object):
     # Get function space from the melt function
     self.V_cg = m.function_space()
     # Maximum melt input
-    self.m_max = m.vector().max()
+    if m_max = None:
+      self.m_max = m.vector().max()
+    else :
+      self.m_max = m_max
     # Shutoff length
     self.shutoff_length = shutoff_length
     # Minimum conductivity

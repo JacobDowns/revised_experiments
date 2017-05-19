@@ -6,7 +6,7 @@ import sys
 
 """ 
 Runs the reference experiment with the channel model on flat bed or trough. 
-This run uses a larger englacial void ratio e_v of 1e-2 (see sim_constants).
+This run uses a larger englacial either a low or a high englacial void ratio.
 """
 
 # Process number
@@ -20,7 +20,7 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['flat', 'trough']
+titles = ['low_void', 'high_void']
 title = titles[n]
 
 # Input files for each run
@@ -33,6 +33,9 @@ input_file = input_files[n]
 out_dir = 'results_' + title
 # Steady state file
 steady_file = '../../inputs/reference_channel/' + title
+e_vs = [1e-4, 1e-2]
+e_v = e_vs[n]
+sim_constants['e_v'] = e_v
 
 model_inputs = {}
 model_inputs['input_file'] = input_file

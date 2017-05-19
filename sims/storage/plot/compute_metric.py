@@ -5,7 +5,7 @@ ts = loadtxt('flat/ts.txt')
 # Only include points after melt shuts off
 indexes = ts > 1.0
 
-titles = ['flat', 'trough']
+titles = ['flat']
 
 for title in titles:
   print title
