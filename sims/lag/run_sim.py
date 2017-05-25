@@ -33,7 +33,7 @@ input_files.append('../../inputs/lag/steady_low.hdf5')
 input_file = input_files[n / 3]
 
 # Min and max conductivities
-k_max = 4e-3
+k_max = 5e-3
 k_min = 1e-6
 m_max = 5.0
 
@@ -66,7 +66,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 48
+N = 96
 # Time step
 dt = spd / N
 

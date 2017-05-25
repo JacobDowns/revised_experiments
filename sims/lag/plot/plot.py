@@ -13,7 +13,7 @@ figure(figsize = (12, 4.5))
 lw = 2
 
 for i in range(len(labels)):
-  avg_hs = loadtxt('avg_pfos' + str(i) + '.txt')
+  avg_hs = loadtxt('avg_hs' + str(i) + '.txt')
   plot(ts, avg_hs, colors[i], linewidth = lw, label = labels[i])
   
 xlabel('Time (Months)')
