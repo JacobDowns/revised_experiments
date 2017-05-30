@@ -6,6 +6,7 @@ import sys
 
 """ 
 Generates steady states for a flat bed with spatially variable k for lag experiment.
+Original tuning.
 """
 
 # Process number

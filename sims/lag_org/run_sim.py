@@ -6,7 +6,7 @@ import sys
 
 """ 
 Winter simulation on flat bed with spatially varying k and high melt input. 
-Lag time varies from a day to a month. 
+Lag time varies from a day to a month.  Original tuning. 
 """
 
 # Process number
