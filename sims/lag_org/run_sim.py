@@ -28,8 +28,8 @@ lag_time = lag_times[n]
 
 # Input files for each run
 input_files = []
-input_files.append('../../inputs/lag/steady_high.hdf5')
-input_files.append('../../inputs/lag/steady_low.hdf5')
+input_files.append('../../inputs/lag_org/steady_high.hdf5')
+input_files.append('../../inputs/lag_org/steady_low.hdf5')
 input_file = input_files[n / 3]
 
 # Min and max conductivities

@@ -36,7 +36,7 @@ m_max = 5.0
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-steady_file = '../../inputs/lag/' + title
+steady_file = '../../inputs/lag_org/' + title
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
