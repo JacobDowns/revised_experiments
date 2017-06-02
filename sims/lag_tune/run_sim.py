@@ -93,15 +93,5 @@ options['constraints'] = constrain
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
-# Function called prior to each step
-def pre_step(model):
-  min_pfo = model.pfo.vector().min()
-  min_h = model.h.vector().min()
-  
-  if MPI_rank == 0:
-    print "Min. PFO: " + str(min_pfo)
-    print "Min. h: " + str(min_h)
-    print
-
-runner = SheetRunner(model_inputs, options, pre_step = pre_step)
+runner = SheetRunner(model_inputs, options)
 runner.run(T, dt)

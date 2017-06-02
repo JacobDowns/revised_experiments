@@ -19,7 +19,7 @@ for i in range(len(labels)):
 
 ylim([0.35, 0.85])
 xlabel('Time (Months)')
-ylabel('Spatially Avg. Water Pressure (Flotation Fraction)')
+ylabel('Spatially Averaged Pressure (Flotation Fraction)')
 legend(loc=4)
 grid(True)
 savefig('images/lag_pressure.png', dpi = 500)
@@ -40,56 +40,7 @@ legend()
 grid(True)
 savefig('images/lag_sheet.png', dpi = 500)
 
-
-### Plot pressure at test points
-figure(figsize = (12, 4.5))
-lw = 2
-
-titles = ['(a)', '(b)', '(c)']
-for i in range(3):
-  subplot(1,3,i+1)
-  title(titles[i])
-  pfos_low = loadtxt('pfos' + str(i) + '.txt')
-  pfos_high = loadtxt('pfos' + str(i + 3) + '.txt')
-  
-  plot(ts, pfos_low[0,:], 'r--', label = 'low, 1', linewidth = lw)
-  plot(ts, pfos_high[0,:], 'r', label = 'high, 1', linewidth = lw)
-  
-  plot(ts, pfos_low[1,:], 'g--', label = 'low, 2', linewidth = lw)
-  plot(ts, pfos_high[1,:], 'g', label = 'high, 2', linewidth = lw)
-  
-  plot(ts, pfos_low[2,:], 'b--', label = 'low, 3', linewidth = lw)
-  plot(ts, pfos_high[2,:], 'b', label = 'high, 3', linewidth = lw)
-  
-  if i == 1:
-    xlabel('Time (Months)')
-  
-  if i == 0:
-    ylabel('Water Pressure (Flotation Fraction)')
-    legend(loc=4)
-    
-  grid(True)
-  ylim([0.35, 0.95])
-  
-tight_layout() 
-savefig('images/lag_points.png', dpi = 500)
-
 """
-for i in range(len(labels)):
-  print 'pfos' + str(i) + '.txt'
-  pfos = loadtxt('pfos' + str(i) + '.txt')
-  plot(ts, pfos[0,:], label = labels[i] + ', 1')
-  #plot(ts, pfos[0,:], 'g', label = labels[i] + ', 2')
-  #plot(ts, pfos[0,:], 'b', label = labels[i] + ', 3')
-  ylabel('Water Pressure (Flotation Fraction)')
-  legend()
-
-
-
-"""
-
-### Plot inputs
-
 figure(figsize = (12, 4.5))
 lw = 2
 
@@ -118,4 +69,4 @@ for i in range(len(labels)):
   legend()
 
 savefig('images/inputs.png', dpi = 500)
-tight_layout()
+tight_layout()"""
