@@ -32,7 +32,7 @@ input_file = input_files[n]
 
 # Use same conductivity for each run
 k_min = 1e-6
-k_max = 3e-3
+k_max = 2e-3
 m_max = 5.0
 
 # Output directory 

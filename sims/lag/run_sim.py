@@ -30,7 +30,7 @@ lag_time = lag_times[n % 3]
 # slight negative pressures that  begin to corrupt the solution. To avoid this
 # we use constraints for this run.
 constraints = [False, False, True]
-contstrain = constraints[n % 3]
+constrain = constraints[n % 3]
 
 
 # Input files for each run
@@ -89,6 +89,7 @@ options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
 options['scale_m_max'] = m_max
 options['scale_lag_time'] = lag_time
+options['constraints'] = constrain
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 

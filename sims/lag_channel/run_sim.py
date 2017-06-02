@@ -20,11 +20,11 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['high_day', 'high_week', 'high_month', 'low_day', 'low_week', 'low_month']
+titles = ['high_one', 'high_two', 'high_week', 'low_one', 'low_two', 'low_week']
 title = titles[n]
 spd = sim_constants['spd']
-lag_times = [spd, 7.*spd, 30.*spd, spd, 7.*spd, 30.*spd]
-lag_time = lag_times[n]
+lag_times = [spd, 2.*spd, 7.*spd]
+lag_time = lag_times[n % 3]
 
 # Input files for each run
 input_files = []
@@ -34,7 +34,7 @@ input_file = input_files[n / 3]
 
 # Min and max conductivities
 k_min = 1e-6
-k_max = 3e-3
+k_max = 2e-3
 m_max = 5.0
 
 # Output directory 
@@ -67,14 +67,14 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 96
+N = 100
 # Time step
 dt = spd / N
 
 
 options = {}
 options['pvd_interval'] = N
-options['checkpoint_interval'] = N/2
+options['checkpoint_interval'] = N/5
 options['scale_m'] = True
 options['scale_u_b'] = True
 options['scale_k'] = True
