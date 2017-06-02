@@ -29,7 +29,7 @@ input_files.append('../../inputs/synthetic/inputs_flat_low.hdf5')
 input_file = input_files[n]
 
 # Tuned conductivities for each run
-k_max = 5e-3
+k_max = 7e-3
 k_min = 1e-6
 m_max = 5.0
 

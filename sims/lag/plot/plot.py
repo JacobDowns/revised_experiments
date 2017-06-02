@@ -3,32 +3,42 @@ from constants import *
 
 
 ts = loadtxt('ts.txt')
-colors = ['r', 'b', 'g', 'r--', 'b--', 'g--']
-labels = ['low_day', 'low_week', 'low_month', 'high_day', 'high_week', 'high_month']
+colors = ['r--', 'b--', 'g--', 'r', 'b', 'g']
+labels = ['low: 1 day', 'low: 2 day', 'low: week', 'high: 1 day', 'high: 2 day', 'high: week'] 
+
 
 
 ### Plot avg. pressure
 
+figure(figsize = (12, 4.5))
+lw = 2
 
+for i in range(len(labels)):
+  avg_pfos = loadtxt('avg_pfos' + str(i) + '.txt')
+  plot(ts, avg_pfos, colors[i], linewidth = lw, label = labels[i])
+
+ylim([0.35, 0.85])
+xlabel('Time (Months)')
+ylabel('Spatially Averaged Pressure (Flotation Fraction)')
+legend(loc=4)
+grid(True)
+savefig('images/lag_pressure.png', dpi = 500)
+
+
+
+### Plot avg. sheet height
 figure(figsize = (12, 4.5))
 lw = 2
 
 for i in range(len(labels)):
   avg_hs = loadtxt('avg_hs' + str(i) + '.txt')
   plot(ts, avg_hs, colors[i], linewidth = lw, label = labels[i])
-  
-  #pfos = loadtxt('pfos' + str(i) + '.txt')
-  #plot(ts, pfos[0,:], 'r', linewidth = lw, label = labels[i] + ' 1')
-  #plot(ts, pfos[1,:], linewidth = lw, label = labels[i] + ' 2')
-  #plot(ts, pfos[2,:], 'b', linewidth = lw, label = labels[i] + ' 3')
 
 xlabel('Time (Months)')
-#ylabel('Average Sheet Thickness (m)')
+ylabel('Spatially Averaged Sheet Thickness (m)')
 legend()
 grid(True)
-
-savefig('images/lag.png', dpi = 500)
-
+savefig('images/lag_sheet.png', dpi = 500)
 
 """
 figure(figsize = (12, 4.5))

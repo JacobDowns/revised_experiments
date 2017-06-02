@@ -6,7 +6,7 @@ import sys
 
 """ 
 Winter simulation on a trough with spatially varying k and high melt input. 
-Lag time varies from a day to a month. 
+Lag time varies from a day to a week.
 """
 
 # Process number
@@ -34,7 +34,7 @@ input_file = input_files[n / 3]
 
 # Min and max conductivities
 k_min = 1e-6
-k_max = 2e-3
+k_max = 3e-3
 m_max = 5.0
 
 # Output directory 
