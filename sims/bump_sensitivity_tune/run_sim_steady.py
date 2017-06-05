@@ -8,7 +8,7 @@ import sys
 
 """ 
 This script generates steady states for various bump heights on a trough geometry.
-Conductivity tuned to produce summer steady state pressure around 0.8 OB. 
+Conductivity tuned to produce summer steady state pressure around 0.95 OB. 
 """
 
 # Process number

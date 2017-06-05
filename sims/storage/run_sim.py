@@ -29,7 +29,6 @@ input_file = '../../inputs/reference_channel/steady_trough.hdf5'
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-steady_file = '../../inputs/reference_channel/' + title
 e_vs = [1e-4, 1e-2]
 e_v = e_vs[n]
 sim_constants['e_v'] = e_v
@@ -38,6 +37,7 @@ model_inputs = {}
 model_inputs['input_file'] = input_file
 model_inputs['out_dir'] = out_dir
 model_inputs['constants'] = sim_constants
+model_inputs['checkpoint_file'] = '../hdf5_results/' + title
 
 # Print simulation details
 if MPI_rank == 0:
@@ -58,7 +58,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 64
+N = 100
 # Time step
 dt = spd / N
 

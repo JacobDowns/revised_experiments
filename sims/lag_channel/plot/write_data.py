@@ -1,6 +1,7 @@
 from time_view import *
 from pylab import *
 from constants import *
+from dolfin import *
 
 """
 Write data to text files for plotting -- speeds things up when lots of plot 
@@ -9,7 +10,8 @@ tweaks are needed.
 
 ### Get data
 
-labels = ['low_day', 'low_week', 'low_month', 'high_day', 'high_week', 'high_month']
+labels = ['low_one', 'low_two', 'low_week', 'high_one', 'high_two', 'high_week']
+
 
 for i in range(len(labels)):
   print i 
@@ -38,5 +40,19 @@ for i in range(len(labels)):
   savetxt('avg_hs' + str(i) + '.txt', avg_hs)
   savetxt('avg_ubs' + str(i) + '.txt', avg_ubs * pcs['spy'])
   savetxt('avg_ks' + str(i) + '.txt', avg_ks)
+  
 
+"""
+view = TimeView('../hdf5_results/high_month.hdf5')
+ts = view.get_ts() / pcs['spm']
+out1 = File('pvds/pfo.pvd')
+out2 = File('pvds/h.pvd')
+out3 = File('pvds/m.pvd')
+out4 = File('pvds/u_b.pvd')
 
+for i in range(0, len(ts), 2):
+  print i
+  out1 << view.get_pfo(i)
+  out2 << view.get_h(i)
+  out3 << view.get_m(i)
+  out4 << view.get_u_b(i)"""

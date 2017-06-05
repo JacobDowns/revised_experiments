@@ -4,15 +4,15 @@ from sheet_model import *
 from sim_constants import *
 from sheet_runner import *
 import sys
+from scipy.optimize import minimize_scalar
 
 """ 
 Generates steady states for a flat bed or trough with conductivity tuned to 
 produce an average summer PFO of around 0.95 OB.
 """
-
+set_log_level(50)
 # Process number
 MPI_rank = MPI.rank(mpi_comm_world())
-
 
 ### Model inputs 
 
@@ -24,7 +24,7 @@ if len(sys.argv) > 1:
 titles = ['steady_flat', 'steady_trough']
 title = titles[n]
 # Tuned conductivities for each run
-ks = [2.6e-3, 2.6e-3]
+ks = [0.00258, 0.00251]
 k = ks[n]
 
 # Input files for each run
@@ -59,7 +59,7 @@ if MPI_rank == 0:
 # Seconds per day
 spd = pcs['spd']
 # End time
-T = 400.0 * spd
+T = 150.0 * spd
 # Day subdivisions
 N = 4
 # Time step
@@ -82,12 +82,45 @@ def pre_step(model):
     print "Avg. PFO: " + str(avg_pfo)
     print "Avg. h: " + str(avg_h)
     print
-
+    
+    
+### To tune k, we'll use the simplex method
+    
 runner = SheetRunner(model_inputs, options, pre_step = pre_step)
-# Set conductivity
-runner.model.set_k(interpolate(Constant(k),runner.model.V_cg))
+target_pfo = 0.95
 
+# Objective function   
+def f(k):
+  if MPI_rank == 0:
+    print "k: "  + str(k)
+    print
+  
+  # Set conductivity
+  runner.model.set_k(interpolate(Constant(k),runner.model.V_cg))
+  # Run simulation
+  runner.run(runner.model.t + T, dt, steady_file = steady_file)
+  
+  
+  # Return average pressure
+  avg_pfo = assemble(runner.model.pfo * dx(runner.model.mesh)) / assemble(1.0 * dx(runner.model.mesh))
+  err = abs(avg_pfo - target_pfo)
+  
+  if MPI_rank == 0:
+    print
+    print "Error: " + str(err)
+    print
+  
+  return err
+  
+# Do the optimization
+options = {}
+options['maxiter'] = 10
+options['disp'] = True
+res = minimize_scalar(f, bounds=(2.4e-3, 2.7e-3), method='bounded', tol = 1.1e-4, options = options)
 
-### Run simulation
+if MPI_rank == 0:
+  print
+  print res.x
 
-runner.run(T, dt, steady_file = steady_file)
+  
+  
