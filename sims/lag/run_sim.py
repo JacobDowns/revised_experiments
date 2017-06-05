@@ -89,7 +89,7 @@ options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
 options['scale_m_max'] = m_max
 options['scale_lag_time'] = lag_time
-options['constraints'] = constrain
+options['constraints'] = False
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
