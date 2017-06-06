@@ -127,7 +127,7 @@ class SheetRunner(object):
       self.pprint('')
       i += 1
       
-    # Simulation is file, write steady state file if desired
+    # Simulation is done, write steady state file if desired
     if steady_file:
       self.model.write_steady_file(steady_file)
     

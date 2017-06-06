@@ -20,7 +20,7 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['low_void', 'high_void']
+titles = ['no_void', 'low_void', 'high_void']
 title = titles[n]
 
 # Input files for each run
@@ -29,7 +29,7 @@ input_file = '../../inputs/reference_channel/steady_trough.hdf5'
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-e_vs = [1e-4, 1e-2]
+e_vs = [0.0, 1e-4, 1e-2]
 e_v = e_vs[n]
 sim_constants['e_v'] = e_v
 

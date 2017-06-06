@@ -74,7 +74,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 256
+N = 300
 # Time step
 dt = spd / N
 
@@ -89,7 +89,7 @@ options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
 options['scale_m_max'] = m_max
 options['scale_lag_time'] = lag_time
-options['constraints'] = False
+options['constraints'] = True
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
