@@ -31,13 +31,14 @@ input_file = input_files[n]
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-steady_file = '../../inputs/reference_channel/' + title
+checkpoint_file = '../hdf5_results/' + title
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
 model_inputs['out_dir'] = out_dir
 model_inputs['constants'] = sim_constants
 model_inputs['use_channels'] = False
+model_inputs['checkpoint_file'] = checkpoint_file
 
 # Print simulation details
 if MPI_rank == 0:
@@ -45,6 +46,7 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
+  print "Checkpint file: " + checkpoint_file
   print
   
 
