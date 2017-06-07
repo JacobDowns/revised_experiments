@@ -5,7 +5,8 @@ from channel_runner import *
 import sys
 
 """ 
-Runs the reference experiment with the channel model on flat bed or trough. 
+Runs winter simulation on a trough with fixed k and either a low or high 
+englacial void ratio.
 """
 
 # Process number
@@ -19,26 +20,24 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['flat', 'trough']
+titles = ['no_void', 'low_void', 'high_void']
 title = titles[n]
 
 # Input files for each run
-input_files = []
-input_files.append('../../inputs/reference/steady_flat.hdf5')
-input_files.append('../../inputs/reference/steady_trough.hdf5')
-input_file = input_files[n]
+input_file = '../../inputs/reference_channel/steady_trough.hdf5'
 
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-checkpoint_file = '../hdf5_results/' + title
+e_vs = [0.0, 1e-4, 1e-2]
+e_v = e_vs[n]
+sim_constants['e_v'] = e_v
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
 model_inputs['out_dir'] = out_dir
 model_inputs['constants'] = sim_constants
-model_inputs['use_channels'] = False
-model_inputs['checkpoint_file'] = checkpoint_file
+model_inputs['checkpoint_file'] = '../hdf5_results/' + title
 
 # Print simulation details
 if MPI_rank == 0:
@@ -46,7 +45,7 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "Checkpint file: " + checkpoint_file
+  print "e_v: " + str(sim_constants['e_v'])
   print
   
 
@@ -59,12 +58,12 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 64
+N = 100
 # Time step
 dt = spd / N
 
 options = {}
-options['pvd_interval'] = N * 10
+options['pvd_interval'] = N
 options['checkpoint_interval'] = N/2
 options['scale_m'] = True
 options['scale_u_b'] = True

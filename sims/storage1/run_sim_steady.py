@@ -5,7 +5,8 @@ from channel_runner import *
 import sys
 
 """ 
-Runs the reference experiment with the channel model on flat bed or trough. 
+Generates steady states for a flat bed or trough with conductivity tuned to 
+produce an average summer PFO of around 0.8 OB. Channel model runs.
 """
 
 # Process number
@@ -19,26 +20,27 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['flat', 'trough']
+titles = []
+titles.append('steady_flat')
+titles.append('steady_trough')
 title = titles[n]
 
 # Input files for each run
 input_files = []
-input_files.append('../../inputs/reference/steady_flat.hdf5')
-input_files.append('../../inputs/reference/steady_trough.hdf5')
+input_files.append('../../inputs/synthetic/inputs_flat_high.hdf5')
+input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
 input_file = input_files[n]
 
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-checkpoint_file = '../hdf5_results/' + title
+steady_file = '../../inputs/reference_channel/' + title
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
 model_inputs['out_dir'] = out_dir
 model_inputs['constants'] = sim_constants
 model_inputs['use_channels'] = False
-model_inputs['checkpoint_file'] = checkpoint_file
 
 # Print simulation details
 if MPI_rank == 0:
@@ -46,30 +48,25 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "Checkpint file: " + checkpoint_file
+  print "k: " + str(ks[n])
   print
   
 
 ### Run options
 
-# Seconds per month
-spm = pcs['spm']
 # Seconds per day
 spd = pcs['spd']
 # End time
-T = 9.0 * spm
+T = 150.0 * spd
 # Day subdivisions
-N = 64
+N = 4
 # Time step
 dt = spd / N
 
 options = {}
-options['pvd_interval'] = N * 10
-options['checkpoint_interval'] = N/2
-options['scale_m'] = True
-options['scale_u_b'] = True
-options['scale_u_b_max'] = 100.0
-options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
+options['pvd_interval'] = N*50
+options['checkpoint_interval'] = N*50
+options['checkpoint_vars'] = ['h', 'S', 'phi', 'pfo']
 options['pvd_vars'] = ['pfo', 'h']
 
 # Function called prior to each step
@@ -84,6 +81,41 @@ def pre_step(model):
     print "Avg. h: " + str(avg_h)
     print
 
+
+### To tune k, we'll use the simplex method
+    
 runner = ChannelRunner(model_inputs, options, pre_step = pre_step)
-runner.model.set_m(project(runner.model.m, runner.model.V_cg))
-runner.run(T, dt)
+target_pfo = 0.80
+
+# Objective function   
+def f(k):
+  if MPI_rank == 0:
+    print "k: "  + str(k)
+    print
+  
+  # Set conductivity
+  runner.model.set_k(interpolate(Constant(k),runner.model.V_cg))
+  # Run simulation
+  runner.run(runner.model.t + T, dt, steady_file = steady_file)
+  
+  
+  # Return average pressure
+  avg_pfo = assemble(runner.model.pfo * dx(runner.model.mesh)) / assemble(1.0 * dx(runner.model.mesh))
+  err = abs(avg_pfo - target_pfo)
+  
+  if MPI_rank == 0:
+    print
+    print "Error: " + str(err)
+    print
+  
+  return err
+  
+# Do the optimization
+options = {}
+options['maxiter'] = 10
+options['disp'] = True
+res = minimize_scalar(f, bounds=(2e-3, 5e-3), method='bounded', tol = 1.09e-4, options = options)
+
+if MPI_rank == 0:
+  print
+  print res.x
