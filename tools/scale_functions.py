@@ -29,8 +29,6 @@ class ScaleFunctions(object):
     self.k_min = k_min
     # Maximum conductivity
     self.k_max = k_max
-    # Scaling parameter that sets the maximum possible conductivity
-    self.a = (k_max - k_min) / self.m_max
     # Lag of conductivity behind melt
     self.b = lag_time
     # Parameter in the sliding speed scale function 
@@ -48,7 +46,7 @@ class ScaleFunctions(object):
   
   # Conductivity scale function
   def k_scale(self, t):
-    return self.a * self.m_scale(t - self.b)
+    return ((self.k_max - self.k_min) / self.m_max) * self.m_scale(t - self.b)
 
 
   # Sliding speed scale function

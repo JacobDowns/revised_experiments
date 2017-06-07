@@ -25,12 +25,6 @@ title = titles[n]
 spd = sim_constants['spd']
 lag_times = [spd, 2.*spd, 7.*spd]
 lag_time = lag_times[n % 3]
-# I've noted that if there is very little water in the sheet as in the week lag 
-# runs, there is some instability that occurs when k is decreased that causes
-# slight negative pressures that  begin to corrupt the solution. To avoid this
-# we use constraints for this run.
-constraints = [False, False, True]
-constrain = constraints[n % 3]
 
 
 # Input files for each run
@@ -40,7 +34,7 @@ input_files.append('../../inputs/lag/steady_low.hdf5')
 input_file = input_files[n / 3]
 
 # Min and max conductivities
-k_max = 7e-3
+k_max = 0.00709
 k_min = 1e-6
 m_max = 5.0
 
@@ -62,7 +56,6 @@ if MPI_rank == 0:
   print "k_max: " + str(k_max)
   print "lag: " + str(lag_time / spd)
   print "m_max: " + str(m_max)
-  print "constrain: " + str(constrain)
   print  
 
 ### Run options
@@ -80,7 +73,7 @@ dt = spd / N
 
 
 options = {}
-options['pvd_interval'] = N*2
+options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N/2
 options['scale_m'] = True
 options['scale_u_b'] = True
@@ -89,7 +82,7 @@ options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
 options['scale_m_max'] = m_max
 options['scale_lag_time'] = lag_time
-options['constraints'] = True
+options['constraints'] = False
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
