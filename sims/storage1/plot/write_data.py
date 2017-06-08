@@ -9,7 +9,7 @@ tweaks are needed.
 
 ### Get data
 
-titles = ['low_void', 'high_void']
+titles = ['no_void', 'low_void', 'high_void']
 
 for i in range(len(titles)):
   print i
