@@ -15,7 +15,6 @@ avg_ubs2 = loadtxt('avg_ubs2.txt')
 avg_ks1 = loadtxt('avg_ks1.txt')
 avg_ks2 = loadtxt('avg_ks2.txt')
 
-
 ### Plot pressures at points
 
 fig = figure(figsize = (13., 5.5))
@@ -37,7 +36,7 @@ legend()
 grid(True)
 xlim([0,8])
 
-savefig('images/ref', dpi = 500)
+savefig('images/ref1', dpi = 500)
 quit()
 
 
