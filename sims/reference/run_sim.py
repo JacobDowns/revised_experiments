@@ -50,7 +50,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 48
+N = 64
 # Time step
 dt = spd / N
 

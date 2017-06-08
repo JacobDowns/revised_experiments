@@ -6,7 +6,7 @@ import sys
 
 """ 
 Runs winter simulation on a trough with fixed k and either a low or high 
-englacial void ratio.
+englacial void ratio. Sheet model run.
 """
 
 # Process number
@@ -24,7 +24,7 @@ titles = ['no_void', 'low_void', 'high_void']
 title = titles[n]
 
 # Input files for each run
-input_file = '../../inputs/reference_channel/steady_trough.hdf5'
+input_file = '../../inputs/reference/steady_trough.hdf5'
 
 # Output directory 
 out_dir = 'results_' + title
@@ -38,6 +38,7 @@ model_inputs['input_file'] = input_file
 model_inputs['out_dir'] = out_dir
 model_inputs['constants'] = sim_constants
 model_inputs['checkpoint_file'] = '../hdf5_results/' + title
+model_inputs['use_channels'] = False
 
 # Print simulation details
 if MPI_rank == 0:
@@ -58,7 +59,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 100
+N = 64
 # Time step
 dt = spd / N
 
@@ -84,5 +85,5 @@ def pre_step(model):
     print
 
 runner = ChannelRunner(model_inputs, options, pre_step = pre_step)
-runner.model.set_m(project(runner.model.m, runner.model.V_cg))
+#runner.model.set_m(project(runner.model.m, runner.model.V_cg))
 runner.run(T, dt)

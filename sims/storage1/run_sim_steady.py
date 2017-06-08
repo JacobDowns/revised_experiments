@@ -3,6 +3,7 @@ from dolfin import MPI, mpi_comm_world
 from sim_constants import *
 from channel_runner import *
 import sys
+from scipy.optimize import minimize_scalar
 
 """ 
 Generates steady states for a flat bed or trough with conductivity tuned to 
@@ -48,7 +49,6 @@ if MPI_rank == 0:
   print "Title: " + title
   print "Input file: " + input_file
   print "Output dir: " + out_dir
-  print "k: " + str(ks[n])
   print
   
 
@@ -66,7 +66,7 @@ dt = spd / N
 options = {}
 options['pvd_interval'] = N*50
 options['checkpoint_interval'] = N*50
-options['checkpoint_vars'] = ['h', 'S', 'phi', 'pfo']
+options['checkpoint_vars'] = ['h', 'phi']
 options['pvd_vars'] = ['pfo', 'h']
 
 # Function called prior to each step
