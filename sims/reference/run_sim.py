@@ -2,7 +2,6 @@ from dolfin import *
 from dolfin import MPI, mpi_comm_world
 from sheet_model import *
 from sim_constants import *
-from scale_functions import *
 from sheet_runner import *
 import sys
 
@@ -50,7 +49,7 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 64
+N = 100
 # Time step
 dt = spd / N
 
