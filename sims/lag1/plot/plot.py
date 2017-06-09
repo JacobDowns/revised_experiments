@@ -17,7 +17,7 @@ for i in range(len(labels)):
   avg_pfos = loadtxt('avg_pfos' + str(i) + '.txt')
   plot(ts, avg_pfos, colors[i], linewidth = lw, label = labels[i])
 
-ylim([0.35, 0.85])
+ylim([0.7, 0.85])
 xlabel('Time (Months)')
 ylabel('Spatially Avg. Water Pressure (Flotation Fraction)')
 legend(loc=4)

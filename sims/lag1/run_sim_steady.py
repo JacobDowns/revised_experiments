@@ -1,12 +1,11 @@
 from dolfin import *
 from dolfin import MPI, mpi_comm_world
 from sim_constants import *
-from sheet_runner import *
+from channel_runner import *
 import sys
-from scipy.optimize import minimize_scalar
 
 """ 
-Generates steady states for a trough bed with spatially variable k for lag experiment.
+Generates steady states for a trough for high or low melt with the same conductivity. 
 """
 
 # Process number
@@ -20,24 +19,26 @@ if len(sys.argv) > 1:
   n = int(sys.argv[1])
 
 # Name for each run
-titles = ['steady_high', 'steady_low']
+titles = []
+titles.append('steady_low')
+titles.append('steady_high')
 title = titles[n]
 
 # Input files for each run
 input_files = []
-input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
 input_files.append('../../inputs/synthetic/inputs_trough_low.hdf5')
+input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
 input_file = input_files[n]
 
-# Tuned conductivities for each run
-k_max = 0.00709
+# Use same conductivity for each run
 k_min = 1e-6
+k_max = 2e-3
 m_max = 5.0
 
 # Output directory 
 out_dir = 'results_' + title
 # Steady state file
-steady_file = '../../inputs/lag/' + title
+steady_file = '../../inputs/lag_channel/' + title
 
 model_inputs = {}
 model_inputs['input_file'] = input_file
@@ -61,16 +62,16 @@ if MPI_rank == 0:
 # Seconds per day
 spd = pcs['spd']
 # End time
-T = 250.0 * spd
+T = 2000.0 * spd
 # Day subdivisions
-N = 3
+N = 12
 # Time step
 dt = spd / N
 
 options = {}
 options['pvd_interval'] = N*10
 options['checkpoint_interval'] = N*10
-options['checkpoint_vars'] = ['h']
+options['checkpoint_vars'] = ['h', 'S', 'phi', 'pfo']
 options['pvd_vars'] = ['pfo', 'h']
 options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
@@ -88,44 +89,11 @@ def pre_step(model):
     print "Avg. h: " + str(avg_h)
     print
 
- # Run simulation
-    
-runner = SheetRunner(model_inputs, options, pre_step = pre_step)
+runner = ChannelRunner(model_inputs, options, pre_step = pre_step)
+# Set a spatially varying k
 runner.model.set_k(runner.scale_functions.get_k(0.0))
-runner.run(runner.model.t + T, dt, steady_file = steady_file)
 
-"""
-### To tune k, we'll use the simplex method
 
-target_pfo = 0.80
+### Run simulation
 
-# Objective function   
-def f(k_max):
-  if MPI_rank == 0:
-    print "k_max: "  + str(k_max)
-    print
-  
-  runner.scale_functions.k_max = k_max
- 
-  
-  
-  # Return average pressure
-  avg_pfo = assemble(runner.model.pfo * dx(runner.model.mesh)) / assemble(1.0 * dx(runner.model.mesh))
-  err = abs(avg_pfo - target_pfo)
-  
-  if MPI_rank == 0:
-    print
-    print "Error: " + str(err)
-    print
-  
-  return err
-  
-# Do the optimization
-options = {}
-options['maxiter'] = 10
-options['disp'] = True
-res = minimize_scalar(f, bounds=(4e-3, 9e-3), method='bounded', tol = 1e-3, options = options)
-
-if MPI_rank == 0:
-  print
-  print res.x"""
+runner.run(T, dt, steady_file = steady_file)

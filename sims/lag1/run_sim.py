@@ -1,11 +1,11 @@
 from dolfin import *
 from dolfin import MPI, mpi_comm_world
 from sim_constants import *
-from sheet_runner import *
+from channel_runner import *
 import sys
 
 """ 
-Winter simulation on flat bed with spatially varying k and high melt input. 
+Winter simulation on a trough with spatially varying k and high melt input. 
 Lag time varies from a day to a week.
 """
 
@@ -26,16 +26,15 @@ spd = sim_constants['spd']
 lag_times = [spd, 2.*spd, 7.*spd]
 lag_time = lag_times[n % 3]
 
-
 # Input files for each run
 input_files = []
-input_files.append('../../inputs/lag/steady_high.hdf5')
-input_files.append('../../inputs/lag/steady_low.hdf5')
+input_files.append('../../inputs/lag_channel/steady_high.hdf5')
+input_files.append('../../inputs/lag_channel/steady_low.hdf5')
 input_file = input_files[n / 3]
 
 # Min and max conductivities
-k_max = 0.00709
 k_min = 1e-6
+k_max = 2e-3
 m_max = 5.0
 
 # Output directory 
@@ -54,9 +53,10 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print "k_min: " + str(k_min)
   print "k_max: " + str(k_max)
-  print "lag: " + str(lag_time / spd)
   print "m_max: " + str(m_max)
-  print  
+  print "lag: " + str(lag_time / spd)
+  print
+  
 
 ### Run options
 
@@ -67,14 +67,14 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 64
+N = 100
 # Time step
 dt = spd / N
 
 
 options = {}
-options['pvd_interval'] = N*10
-options['checkpoint_interval'] = N/2
+options['pvd_interval'] = N
+options['checkpoint_interval'] = N/5
 options['scale_m'] = True
 options['scale_u_b'] = True
 options['scale_k'] = True
@@ -82,19 +82,8 @@ options['scale_k_min'] = k_min
 options['scale_k_max'] = k_max
 options['scale_m_max'] = m_max
 options['scale_lag_time'] = lag_time
-options['constraints'] = False
 options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k']
 options['pvd_vars'] = ['pfo', 'h']
 
-# Function called prior to each step
-def pre_step(model):
-  min_pfo = model.pfo.vector().min()
-  min_h = model.h.vector().min()
-  
-  if MPI_rank == 0:
-    print "Min. PFO: " + str(min_pfo)
-    print "Min. h: " + str(min_h)
-    print
-
-runner = SheetRunner(model_inputs, options, pre_step = pre_step)
+runner = ChannelRunner(model_inputs, options)
 runner.run(T, dt)
