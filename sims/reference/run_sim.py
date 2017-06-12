@@ -47,9 +47,9 @@ spm = pcs['spm']
 # Seconds per day
 spd = pcs['spd']
 # End time
-T = 9.0 * spm
+T = 2.0 * spm
 # Day subdivisions
-N = 100
+N = 72
 # Time step
 dt = spd / N
 
@@ -76,5 +76,4 @@ def pre_step(model):
 
 runner = SheetRunner(model_inputs, options, pre_step = pre_step)
 runner.model.set_m(project(runner.model.m, runner.model.V_cg))
-
 runner.run(T, dt)

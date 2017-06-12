@@ -57,12 +57,12 @@ spd = pcs['spd']
 # End time
 T = 9.0 * spm
 # Day subdivisions
-N = 48
+N = 100
 # Time step
 dt = spd / N
 
 options = {}
-options['pvd_interval'] = N*10
+options['pvd_interval'] = N*50
 options['checkpoint_interval'] = N/2
 options['scale_m'] = True
 options['scale_u_b'] = True

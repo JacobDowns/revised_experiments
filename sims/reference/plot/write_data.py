@@ -22,6 +22,9 @@ for i in range(len(titles)):
   avg_ubs = view.get_avg_u_b_array()
   avg_ks = view.get_avg_k_array()
   
+  print ts
+  print
+  
   savetxt('ts.txt', ts)
   savetxt('pfos' + str(i+1) + '.txt', pfos)
   savetxt('avg_pfos' + str(i+1) + '.txt', avg_pfos)

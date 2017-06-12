@@ -57,9 +57,9 @@ spm = pcs['spm']
 # Seconds per day
 spd = pcs['spd']
 # End time
-T = 9.0 * spm
+T = 2.0 * spm
 # Day subdivisions
-N = 100
+N = 72
 # Time step
 dt = spd / N
 
