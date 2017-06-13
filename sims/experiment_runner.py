@@ -96,13 +96,15 @@ class ExperimentRunner(object):
       options['maxiter'] = 10
       options['disp'] = True
       
-      print (run_options['k_bound_low'], run_options['k_bound_high'])
-      quit()
+      if self.MPI_rank == 0:
+        print "Bounds: "  
+        print (run_options['k_bound_low'], run_options['k_bound_high'])
+        print
+
       res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.09e-4, options = options)
     
       if self.MPI_rank == 0:
-        print
-        print res.x
+        print "Tuned k: " + str(res.x)
         
     else :
       ### Non tuning run
