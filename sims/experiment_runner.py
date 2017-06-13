@@ -53,7 +53,7 @@ class ExperimentRunner(object):
       ### For a steady state tuning run, automatically tune pressure using simplex method
     
       spd = sim_constants['spd']
-      T = 150.0 * spd
+      T = 200.0 * spd
     
       # Get target PFO
       target_pfo = run_options['tune_pfo']
