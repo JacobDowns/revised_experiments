@@ -2,6 +2,7 @@
 import sim_constants
 from winter_run_opts import *
 from steady_run_opts import *
+from copy import deepcopy
 
 class Run(object):
   def __init__(self, title, input_file, experiment_title = '', steady = True):
@@ -9,9 +10,9 @@ class Run(object):
     self.is_steady = steady
     
     if steady :
-      self.run_options = steady_run_options
+      self.run_options = deepcopy(steady_run_options)
     else :
-      self.run_options = winter_run_options
+      self.run_options = deepcopy(winter_run_options)
     
     model_inputs = {}
     model_inputs['input_file'] = input_file

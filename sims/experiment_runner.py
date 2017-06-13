@@ -95,6 +95,9 @@ class ExperimentRunner(object):
       options = {}
       options['maxiter'] = 10
       options['disp'] = True
+      
+      print (run_options['k_bound_low'], run_options['k_bound_high'])
+      quit()
       res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.09e-4, options = options)
     
       if self.MPI_rank == 0:
