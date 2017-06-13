@@ -4,14 +4,20 @@ reference_experiment = Experiment('sliding', 'se')
 
 ### Slow summer steady
 run1 = reference_experiment.add_run('fast_steady', '../inputs/synthetic/inputs_slow_sliding.hdf5', steady = True)
+run1.run_options['k_bound_low'] = 1e-3
+run1.run_options['k_bound_high'] = 3e-2
 run1.run_options['k_max'] = 0.00258
 
 ### Noderate summer steady
 run2 = reference_experiment.add_run('moderate_steady', '../inputs/synthetic/inputs_moderate_sliding.hdf5', steady = True)
+run2.run_options['k_bound_low'] = 1e-3
+run2.run_options['k_bound_high'] = 3e-2
 run2.run_options['k_max'] = 0.00251
 
 ### Noderate summer steady
 run3 = reference_experiment.add_run('fast_steady', '../inputs/synthetic/inputs_fast_sliding.hdf5', steady = True)
+run1.run_options['k_bound_low'] = 1e-3
+run1.run_options['k_bound_high'] = 3e-2
 run3.run_options['k_max'] = 0.00251
 
 ###  Slow to fast
