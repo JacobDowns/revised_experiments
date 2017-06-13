@@ -1,6 +1,6 @@
 from experiment import *
 
-conductivity_experiment = Experiment('conductivity', 'ce')
+void_experiment = Experiment('void', 've')
 
 ### Steady state
 run1 = conductivity_experiment.add_run('steady', '../inputs/synthetic/inputs_flat_high.hdf5', steady = True)

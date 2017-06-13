@@ -31,6 +31,7 @@ class ExperimentRunner(object):
       print
       
     T = run_options['end_time']
+    dt = run_options['dt']
     
     # Function called prior to each step
     def pre_step(model):
@@ -44,74 +45,88 @@ class ExperimentRunner(object):
         print "Avg. h: " + str(avg_h)
         print
 
-
     # Channel runner object
     channel_runner = ChannelRunner(model_inputs, run_options, pre_step = pre_step)
     
+    
+    def set_k(k):
+      # Update the conductivity. If we allow for variable k then change k_max
+      # Otherwise change k_min and k_max so k is constant
+      if run_options['vark'] :
+        channel_runner.scale_functions.k_max = k
+      else :
+        channel_runner.scale_functions.k_min = k
+        channel_runner.scale_functions.k_max = k
+     
+      # Update conductivity
+      channel_runner.model.set_k(channel_runner.scale_functions.get_k(0.0))
 
-    if run.is_steady and tune:
-      ### For a steady state tuning run, automatically tune pressure using simplex method
-    
-      spd = sim_constants['spd']
-      T = 200.0 * spd
-    
-      # Get target PFO
-      target_pfo = run_options['tune_pfo']
+
+    if run.is_steady :
       # Steady state output file
       steady_file = model_inputs['steady_file']
+      
+      if tune:
+        ### Tuning steady state run
+      
+        # Get target PFO
+        target_pfo = run_options['tune_pfo']
 
-      # Objective function   
-      def f(k):
+  
+        # Objective function   
+        def f(k):
+          
+          if self.MPI_rank == 0:
+            print "k: "  + str(k)
+            print
+         
+          # Update conductivity
+          set_k(k)
+          # Run simulation for a while
+          channel_runner.run(channel_runner.model.t + 200.0*sim_constants['spd'], dt, steady_file = steady_file)
+          # Get average pressure
+          avg_pfo = assemble(channel_runner.model.pfo * dx(channel_runner.model.mesh)) / assemble(1.0 * dx(channel_runner.model.mesh))
+          # Compute error
+          err = abs(avg_pfo - target_pfo)
+          
+          if self.MPI_rank == 0:
+            print
+            print "Error: " + str(err)
+            print
+          
+          return err
+        
+        # Do the optimization
+        options = {}
+        options['maxiter'] = 6
+        options['disp'] = True
         
         if self.MPI_rank == 0:
-          print "k: "  + str(k)
+          print "Bounds: "  
+          print (run_options['k_bound_low'], run_options['k_bound_high'])
           print
-        
-        # Update the conductivity. If we allow for variable k then change k_max
-        # Otherwise change k_min and k_max so k is constant
-        if run_options['vark'] :
-          channel_runner.scale_functions.k_max = k
-        else :
-          channel_runner.scale_functions.k_min = k
-          channel_runner.scale_functions.k_max = k
-       
+  
+        res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.1e-4, options = options)
+      
+        if self.MPI_rank == 0:
+          print "Tuned k: " + str(res.x)
+      else :
+        ### Non-tuning steady state run
+      
+        print "Safsaf"
+        quit()
+      
         # Update conductivity
-        channel_runner.model.set_k(channel_runner.scale_functions.get_k(0.0))
-        # Run simulation for a while
-        channel_runner.run(channel_runner.model.t + T, dt, steady_file = steady_file)
-        # Get average pressure
-        avg_pfo = assemble(channel_runner.model.pfo * dx(channel_runner.model.mesh)) / assemble(1.0 * dx(channel_runner.model.mesh))
-        # Compute error
-        err = abs(avg_pfo - target_pfo)
-        
-        # Absolute tolerance can be wacky, so if the tuned pressure is close, call is good
-        #if err <= 0.011:
-        #  err = 0.
-        
-        if self.MPI_rank == 0:
-          print
-          print "Error: " + str(err)
-          print
-        
-        return err
-      
-      # Do the optimization
-      options = {}
-      options['maxiter'] = 10
-      options['disp'] = True
-      
-      if self.MPI_rank == 0:
-        print "Bounds: "  
-        print (run_options['k_bound_low'], run_options['k_bound_high'])
-        print
-
-      res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.1e-4, options = options)
-    
-      if self.MPI_rank == 0:
-        print "Tuned k: " + str(res.x)
+        set_k(run_options['scale_k_max'])
+        # Run simulation
+        channel_runner.run(T, dt, steady_file = steady_file) 
         
     else :
-      ### Non tuning run
-      channel_runner.run(T, dt, steady_file = steady_file) 
+      ### Winter run
+    
+      # Update conductivity
+      set_k(run_options['scale_k_max'])
+      # Run simulation
+      channel_runner.run(T, dt) 
 
     

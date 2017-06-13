@@ -12,7 +12,7 @@ class Experiment(object):
   
   # Add a steady state run to the experiment
   def add_run(self, title, input_file, steady):
-    run = Run(title, input_file, self.title, steady = True)
+    run = Run(title, input_file, self.title, steady = steady)
     self.runs[title] = run
     
     if steady :
