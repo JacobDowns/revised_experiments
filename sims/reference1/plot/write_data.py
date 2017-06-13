@@ -9,7 +9,7 @@ tweaks are needed.
 
 ### Get data
 
-titles = ['flat', 'trough']
+titles = ['flat2', 'trough2']
 
 for i in range(len(titles)):
   print i

@@ -15,10 +15,6 @@ avg_ubs2 = loadtxt('avg_ubs2.txt')
 avg_ks1 = loadtxt('avg_ks1.txt')
 avg_ks2 = loadtxt('avg_ks2.txt')
 
-print avg_ms1
-print
-print avg_ms2
-quit()
 
 ### Plot pressures at points
 
