@@ -23,6 +23,9 @@ steady_run_options['vark'] = False
 # Min and max conductivity parameters
 steady_run_options['scale_k_min'] = 1e-6
 steady_run_options['scale_k_max'] = sim_constants['k']
+# Bounds on conductivity used for automatic tuning
+steady_run_options['k_bound_low'] = 1e-3
+steady_run_options['k_bound_high'] = 1e-2
 # Enforce pressure constraints ?
 steady_run_options['constraints'] = False
 # Target spatially averaged pressure

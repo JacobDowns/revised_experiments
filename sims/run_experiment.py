@@ -14,6 +14,11 @@ MPI_rank = MPI.rank(mpi_comm_world())
 experiment_title = sys.argv[1]
 run_title = sys.argv[2]
 
+tune = True
+if len(sys.argv) > 3 :
+  print "here: " + sys.argv[3]
+  tune = bool(int(sys.argv[3]))
+
 runner = ExperimentRunner()
-runner.run(experiment_title, run_title)
+runner.run(experiment_title, run_title, tune)
 
