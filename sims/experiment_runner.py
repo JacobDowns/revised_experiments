@@ -5,7 +5,7 @@ from channel_runner import *
 import pprint
 from scipy.optimize import minimize_scalar
 from sim_constants import *
-s#et_log_level(30)
+set_log_level(30)
 
 class ExperimentRunner(object):
 
@@ -83,6 +83,10 @@ class ExperimentRunner(object):
         avg_pfo = assemble(channel_runner.model.pfo * dx(channel_runner.model.mesh)) / assemble(1.0 * dx(channel_runner.model.mesh))
         # Compute error
         err = abs(avg_pfo - target_pfo)
+        
+        # Absolute tolerance can be wacky, so if the tuned pressure is close, call is good
+        if err <= 0.011:
+          err = 0.
         
         if self.MPI_rank == 0:
           print
