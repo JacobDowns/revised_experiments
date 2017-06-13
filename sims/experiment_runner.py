@@ -85,8 +85,8 @@ class ExperimentRunner(object):
         err = abs(avg_pfo - target_pfo)
         
         # Absolute tolerance can be wacky, so if the tuned pressure is close, call is good
-        if err <= 0.011:
-          err = 0.
+        #if err <= 0.011:
+        #  err = 0.
         
         if self.MPI_rank == 0:
           print
@@ -105,7 +105,7 @@ class ExperimentRunner(object):
         print (run_options['k_bound_low'], run_options['k_bound_high'])
         print
 
-      res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.09e-4, options = options)
+      res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.1e-4, options = options)
     
       if self.MPI_rank == 0:
         print "Tuned k: " + str(res.x)
