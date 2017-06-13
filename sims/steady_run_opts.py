@@ -11,9 +11,9 @@ N = 4
 dt = spd / N
 steady_run_options['dt'] = dt
 # Number of iterations between pvd writes
-steady_run_options['pvd_interval'] = N*50
+steady_run_options['pvd_interval'] = N*100
 # Number of iterations between checkpoint file writes
-steady_run_options['checkpoint_interval'] = N*50
+steady_run_options['checkpoint_interval'] = N*100
 # Variables to checkpoints
 steady_run_options['checkpoint_vars'] = ['h', 'phi']
 # Variables to write to pvds

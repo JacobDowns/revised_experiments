@@ -13,7 +13,7 @@ N = 100
 dt = spd / N
 winter_run_options['dt'] = dt
 # Number of iterations between pvd writes
-winter_run_options['pvd_interval'] = N*10
+winter_run_options['pvd_interval'] = N*15
 # Number of iterations between checkpoint file writes
 winter_run_options['checkpoint_interval'] = N*2
 # Variables to checkpoints

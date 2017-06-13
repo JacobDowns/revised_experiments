@@ -5,6 +5,7 @@ from channel_runner import *
 import pprint
 from scipy.optimize import minimize_scalar
 from sim_constants import *
+import numpy as np
 set_log_level(30)
 
 class ExperimentRunner(object):
@@ -106,15 +107,16 @@ class ExperimentRunner(object):
           print (run_options['k_bound_low'], run_options['k_bound_high'])
           print
   
-        res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.1e-4, options = options)
+        res = minimize_scalar(f, bounds=(run_options['k_bound_low'], run_options['k_bound_high']), method='bounded', tol = 1.2e-4, options = options)
       
         if self.MPI_rank == 0:
           print "Tuned k: " + str(res.x)
+          
+        # Write out a file with the tuned conductivity value
+        np.savetxt(model_inputs['out_dir'] + '/' + run_title + '_tune.txt', np.array([res.x]))
+          
       else :
         ### Non-tuning steady state run
-      
-        print "Safsaf"
-        quit()
       
         # Update conductivity
         set_k(run_options['scale_k_max'])
