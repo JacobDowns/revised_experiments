@@ -80,6 +80,7 @@ class ExperimentRunner(object):
           if self.MPI_rank == 0:
             print "k: "  + str(k)
             print
+            print
          
           # Update conductivity
           set_k(k)

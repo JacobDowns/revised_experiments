@@ -16,7 +16,6 @@ run_title = sys.argv[2]
 
 tune = True
 if len(sys.argv) > 3 :
-  print "here: " + sys.argv[3]
   tune = bool(int(sys.argv[3]))
 
 runner = ExperimentRunner()
