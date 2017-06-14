@@ -96,6 +96,13 @@ class ExperimentRunner(object):
             print "Error: " + str(err)
             print
           
+          # Error tolerance is finicky and difficult to choose for this method
+          # so if error is small enough, call it good and break prematurely
+          if err <= 0.01:
+            # Write out a file with the tuned conductivity value
+            np.savetxt(model_inputs['out_dir'] + '/' + run_title + '_tune.txt', np.array([k]))
+            sys.exit(1)
+          
           return err
         
         # Do the optimization
