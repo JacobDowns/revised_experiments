@@ -17,7 +17,7 @@ class Run(object):
     model_inputs = {}
     model_inputs['input_file'] = input_file
     model_inputs['out_dir'] = experiment_title + '/' + 'results_' + title
-    model_inputs['constants'] = sim_constants
+    model_inputs['constants'] = deepcopy(sim_constants)
     model_inputs['steady_file'] = '../inputs/' + experiment_title + '/' + title
     model_inputs['checkpoint_file'] = 'hdf5_results/' + title 
     model_inputs['use_channels'] = False

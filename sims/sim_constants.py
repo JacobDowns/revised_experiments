@@ -35,6 +35,6 @@ sim_constants['c_t'] = 7.5e-8
 # Latent heat (J / kg)
 sim_constants['L'] = 3.34e5
 # Void storage ratio
-sim_constants['e_v'] = 1e-3#8.5e-4
+sim_constants['e_v'] = 0.0#1e-3#8.5e-4
 # Sheet width under channel (m)
 sim_constants['l_c'] = 2.0   
