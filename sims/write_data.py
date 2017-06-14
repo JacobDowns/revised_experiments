@@ -18,17 +18,15 @@ run_title = None
 if len(sys.argv) > 2:
   run_title = sys.argv[2]
 
-run = experiment_db[experiment_title].runs[run_title]
-
 def write_run(run):
-  print "Writing..."
-  print "Experiment: " + experiment_title
-  print "Run: " + run_title
+  input_file = run.model_inputs['out_dir'] + '/' + run.model_inputs['checkpoint_file'] + '.hdf5'
+  
+  print "Writing Run: " + run.title
+  print "Input File: " + input_file
   print
   
-  input_file = run.model_inputs['out_dir'] + '/' + run.model_inputs['checkpoint_file'] + '.hdf5'
-  view = TimeView('../hdf5_results/' + labels[i] + '.hdf5')
-  
+  view = TimeView(input_file)
+
   # Times
   ts = view.get_ts() / pcs['spm']
   # Pressure at points
@@ -44,21 +42,24 @@ def write_run(run):
   # Average conductivity
   avg_ks = view.get_avg_k_array()
   
-  out_dir = run.model_inputs['out_dir'] + '/txt_results/'
+  out_dir = run.model_inputs['out_dir'] + '/txt_data/'
   savetxt(out_dir + 'ts.txt', ts)
-  savetxt(out_dir + 'pfos' + str(i) + '.txt', pfos)
-  savetxt(out_dir + 'avg_pfos' + str(i) + '.txt', avg_pfos)
-  savetxt(out_dir + 'avg_ms' + str(i) + '.txt', avg_ms * pcs['spy'])
-  savetxt(out_dir + 'avg_hs' + str(i) + '.txt', avg_hs)
-  savetxt(out_dir + 'avg_ubs' + str(i) + '.txt', avg_ubs * pcs['spy'])
-  savetxt(out_dir + 'avg_ks' + str(i) + '.txt', avg_ks)
-  
-  
-write_run(run)
+  savetxt(out_dir + 'pfos.txt', pfos)
+  savetxt(out_dir + 'avg_pfos.txt', avg_pfos)
+  savetxt(out_dir + 'avg_ms.txt', avg_ms * pcs['spy'])
+  savetxt(out_dir + 'avg_hs.txt', avg_hs)
+  savetxt(out_dir + 'avg_ubs.txt', avg_ubs * pcs['spy'])
+  savetxt(out_dir + 'avg_ks.txt', avg_ks)
 
-### If a run title is specified, write data for that run alone
-#if run_title :
 
+# If a run title is specified, write data for that run alone
+if run_title :
+  write_run(experiment_db[experiment_title].runs[run_title])
+else :
+  print "Writing all runs."
+  # Otherwise write data for all runs
+  for run_title, run in experiment_db[experiment_title].winter_runs.iteritems():
+    write_run(run)
   
 
   

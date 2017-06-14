@@ -22,9 +22,38 @@ run = experiment_db[experiment_title].runs[run_title]
 
 def write_run(run):
   input_file = run.model_inputs['out_dir'] + '/' + run.model_inputs['checkpoint_file'] + '.hdf5'
-  print input_file
+  
+  print "Writing Run: " + run.title
+  print "Input File:" + input_file
+  
+  view = TimeView(input_file)
+
+  # Times
+  ts = view.get_ts() / pcs['spm']
+  # Pressure at points
+  pfos = view.get_pfo_array_at_points([10e3, 20e3, 50e3], [10e3, 10e3, 10e3])
+  # Average pressure
+  avg_pfos = view.get_avg_pfo_array()
+  # Average melt
+  avg_ms = view.get_avg_m_array()
+  # Average sheet height
+  avg_hs = view.get_avg_h_array()
+  # Average sliding velocity 
+  avg_ubs = view.get_avg_u_b_array()
+  # Average conductivity
+  avg_ks = view.get_avg_k_array()
+  
+  out_dir = run.model_inputs['out_dir'] + '/txt_data/'
+  savetxt(out_dir + 'ts.txt', ts)
+  savetxt(out_dir + 'pfos' + str(i) + '.txt', pfos)
+  savetxt(out_dir + 'avg_pfos' + str(i) + '.txt', avg_pfos)
+  savetxt(out_dir + 'avg_ms' + str(i) + '.txt', avg_ms * pcs['spy'])
+  savetxt(out_dir + 'avg_hs' + str(i) + '.txt', avg_hs)
+  savetxt(out_dir + 'avg_ubs' + str(i) + '.txt', avg_ubs * pcs['spy'])
+  savetxt(out_dir + 'avg_ks' + str(i) + '.txt', avg_ks)
   
 write_run(run)
+
 
 ### If a run title is specified, write data for that run alone
 #if run_title :
