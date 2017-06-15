@@ -5,20 +5,20 @@ sse_experiment = Experiment('sse')
 ### Slow summer steady
 run1 = sse_experiment.add_run('slow_steady', '../inputs/synthetic/inputs_slow_sliding.hdf5', steady = True)
 run1.run_options['k_bound_low'] = 1e-3
-run1.run_options['k_bound_high'] = 5e-3
-run1.run_options['scale_k_max'] = 3.673762078750735655e-03
+run1.run_options['k_bound_high'] = 3.5e-3
+#run1.run_options['scale_k_max'] = 3.673762078750735655e-03
 
 ### Moderate summer steady
 run2 = sse_experiment.add_run('moderate_steady', '../inputs/synthetic/inputs_moderate_sliding.hdf5', steady = True)
 run2.run_options['k_bound_low'] = 1e-3
-run2.run_options['k_bound_high'] = 5e-3
-run2.run_options['scale_k_max'] = 3.673762078750735655e-03
+run2.run_options['k_bound_high'] = 3.5e-3
+#run2.run_options['scale_k_max'] = 3.673762078750735655e-03
 
 ### Fast summer steady
 run3 = sse_experiment.add_run('fast_steady', '../inputs/synthetic/inputs_fast_sliding.hdf5', steady = True)
 run3.run_options['k_bound_low'] = 1e-3
-run3.run_options['k_bound_high'] = 5e-3
-run3.run_options['scale_k_max'] = 3.387332006320508196e-03
+run3.run_options['k_bound_high'] = 3e-3
+#run3.run_options['scale_k_max'] = 3.387332006320508196e-03
 
 ###  Slow to fast
 run4 = sse_experiment.add_run('s_f_winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
