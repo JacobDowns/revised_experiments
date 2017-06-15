@@ -1,9 +1,9 @@
 ## Encapsulates a single model run
-from experiment_reference import *
-from experiment_sliding import *
-from experiment_bump import *
+from experiment_ref import *
+from experiment_sse import *
+from experiment_bse import *
 
 experiment_db = {}
-experiment_db['reference'] = reference_experiment
-experiment_db['sliding'] = sliding_experiment
-experiment_db['bump'] = bump_experiment
+experiment_db['ref'] = ref_experiment
+experiment_db['sse'] = sse_experiment
+experiment_db['bse'] = bse_experiment

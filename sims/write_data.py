@@ -4,6 +4,7 @@ from pylab import *
 from sim_constants import *
 from experiment_db import *
 import sys
+import os
 
 """
 Write data to text files for plotting -- speeds things up when lots of plot 
@@ -42,7 +43,11 @@ def write_run(run):
   # Average conductivity
   avg_ks = view.get_avg_k_array()
   
-  out_dir = run.model_inputs['out_dir'] + '/txt_data/'
+  out_dir = run.model_inputs['out_dir'] + '/txt_results/'
+  
+  if not os.path.exists(out_dir):
+    os.makedirs(out_dir)
+    
   savetxt(out_dir + 'ts.txt', ts)
   savetxt(out_dir + 'pfos.txt', pfos)
   savetxt(out_dir + 'avg_pfos.txt', avg_pfos)

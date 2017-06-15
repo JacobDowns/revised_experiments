@@ -6,7 +6,7 @@ import pprint
 from scipy.optimize import minimize_scalar
 from sim_constants import *
 import numpy as np
-set_log_level(30)
+#set_log_level(30)
 
 class ExperimentRunner(object):
 
@@ -72,8 +72,13 @@ class ExperimentRunner(object):
       
         # Get target PFO
         target_pfo = run_options['tune_pfo']
+        
+        if 'h_0' in run_options:
+          h_0 = run_options['h_0']
+          print "Setting h_0 to: " + str(h_0)
+          print
+          channel_runner.model.set_h(Constant(h_0))
 
-  
         # Objective function   
         def f(k):
           
@@ -107,7 +112,7 @@ class ExperimentRunner(object):
         
         # Do the optimization
         options = {}
-        options['maxiter'] = 6
+        options['maxiter'] = 10
         options['disp'] = True
         
         if self.MPI_rank == 0:
