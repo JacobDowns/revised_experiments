@@ -6,7 +6,7 @@ import pprint
 from scipy.optimize import minimize_scalar
 from sim_constants import *
 import numpy as np
-#set_log_level(30)
+set_log_level(30)
 
 class ExperimentRunner(object):
 
