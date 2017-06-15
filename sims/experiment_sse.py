@@ -1,6 +1,6 @@
 from experiment import *
 
-sse_experiment = Experiment('sliding', 'sse')
+sse_experiment = Experiment('sse')
 
 ### Slow summer steady
 run1 = sse_experiment.add_run('slow_steady', '../inputs/synthetic/inputs_slow_sliding.hdf5', steady = True)
@@ -27,25 +27,25 @@ run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 
 ### Slow to slow
 run5 = sse_experiment.add_run('s_s_winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
-run5.run_options['u_b_max'] = 5.0
+run5.run_options['scale_u_b_max'] = 5.0
 run5.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 
 ###  Moderate to fast
 run6 = sse_experiment.add_run('m_f_winter', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
-run6.run_options['u_b_max'] = 100.0
+run6.run_options['scale_u_b_max'] = 100.0
 run6.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 
 ### Moderate to slow
 run7 = sse_experiment.add_run('m_s_winter', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
-run7.run_options['u_b_max'] = 5.0
+run7.run_options['scale_u_b_max'] = 5.0
 run7.run_options['scale_k_max'] = run2.run_options['scale_k_max']
   
 ###  Fast to fast
 run8 = sse_experiment.add_run('f_f_winter', run3.model_inputs['steady_file'] + '.hdf5', steady = False)
-run8.run_options['u_b_max'] = 100.0
+run8.run_options['scale_u_b_max'] = 100.0
 run8.run_options['scale_k_max'] = run3.run_options['scale_k_max']
 
 ### Fast to slow
 run9 = sse_experiment.add_run('f_s_winter', run3.model_inputs['steady_file'] + '.hdf5', steady = False)
-run9.run_options['u_b_max'] = 5.0
+run9.run_options['scale_u_b_max'] = 5.0
 run9.run_options['scale_k_max'] = run3.run_options['scale_k_max']

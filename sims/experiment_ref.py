@@ -1,6 +1,6 @@
 from experiment import *
 
-ref_experiment = Experiment('reference', 'ref')
+ref_experiment = Experiment('ref')
 
 ### Flat steady
 run1 = ref_experiment.add_run('flat_steady', '../inputs/synthetic/inputs_flat_high.hdf5', steady = True)

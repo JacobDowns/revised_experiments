@@ -62,8 +62,7 @@ class ChannelRunner(object):
         self.options[key] = options[key]
     
     # Write out the run options 
-    pickle.dump(self.options, open(model_inputs['out_dir'] + '/run_config.p', 'wb'))
-        
+    #pickle.dump(self.options, open(model_inputs['out_dir'] + '/run_config.p', 'wb'))
         
     ## Scaling object for winter simulation
     self.scale_functions = ScaleFunctions(self.model.m, self.model.u_b, 

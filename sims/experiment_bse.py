@@ -1,6 +1,6 @@
 from experiment import *
 
-bse_experiment = Experiment('bump', 'bse')
+bse_experiment = Experiment('bse')
 
 ### 5cm bump height steady
 run1 = bse_experiment.add_run('5_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
@@ -8,7 +8,7 @@ run1.model_inputs['constants']['h_r'] = 0.1
 run1.run_options['k_bound_low'] = 1e-3
 run1.run_options['k_bound_high'] = 1e-2
 run1.run_options['h_0'] = 0.077
-#run2.run_options['scale_k_max'] = 5e-4
+run1.run_options['scale_k_max'] = 3.769883437553952620e-03
 
 ### 50cm bump height steady
 run2 = bse_experiment.add_run('50_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
@@ -16,6 +16,7 @@ run2.model_inputs['constants']['h_r'] = 0.5
 run2.run_options['k_bound_low'] = 1e-4
 run2.run_options['k_bound_high'] = 1e-3
 run2.run_options['h_0'] = 0.356
+run2.run_options['tune_atol'] = 1e-4
 #run2.run_options['scale_k_max'] = 5e-4
 
 ### 100cm bump height steady
@@ -24,6 +25,7 @@ run3.model_inputs['constants']['h_r'] = 1.0
 run3.run_options['k_bound_low'] = 1e-4
 run3.run_options['k_bound_high'] = 8e-4
 run3.run_options['h_0'] = 0.7
+run3.run_options['tune_atol'] = 1e-4
 #run3.run_options['scale_k_max'] = 1e-4
 
 ### 100cm bump height steady
@@ -31,7 +33,8 @@ run4 = bse_experiment.add_run('200_steady', '../inputs/synthetic/inputs_trough_h
 run4.model_inputs['constants']['h_r'] = 2.0
 run4.run_options['k_bound_low'] = 8e-5
 run4.run_options['k_bound_high'] = 3e-4
-run3.run_options['h_0'] = 1.25
+run4.run_options['h_0'] = 1.25
+run4.run_options['tune_atol'] = 1e-4
 #run4.run_options['scale_k_max'] = 9e-4
 
 ### 5cm winter

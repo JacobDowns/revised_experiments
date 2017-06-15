@@ -3,9 +3,8 @@ from run import *
 
 class Experiment(object):
   
-  def __init__(self, title, abbreviation):
+  def __init__(self, title):
     self.title = title
-    self.abbreviation = abbreviation
     self.runs = {}
     self.steady_runs = {}
     self.winter_runs = {}

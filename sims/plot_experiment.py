@@ -11,13 +11,14 @@ Write data to text files for plotting -- speeds things up when lots of plot
 tweaks are needed. 
 """
 
-# Process number
-MPI_rank = MPI.rank(mpi_comm_world())
 experiment_title = sys.argv[1]
 
-run_title = None
-if len(sys.argv) > 2:
-  run_title = sys.argv[2]
+experiment = experiment_db[experiment_title]
+N = len(experiment.winter_runs)
+for run_title, run in experiment.winter_runs.iteritems():
+  input_dir = run.model_inputs['out_dir'] + '/txt_results/'
+  
+
 
 def write_run(run):
   input_file = run.model_inputs['out_dir'] + '/' + run.model_inputs['checkpoint_file'] + '.hdf5'

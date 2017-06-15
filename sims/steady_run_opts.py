@@ -30,4 +30,6 @@ steady_run_options['k_bound_high'] = 1e-2
 steady_run_options['constraints'] = False
 # Target spatially averaged pressure
 steady_run_options['tune_pfo'] = 0.9
+# Tolerance parameter for tuning
+steady_run_options['tun_atol'] = 1.2e-4
 
