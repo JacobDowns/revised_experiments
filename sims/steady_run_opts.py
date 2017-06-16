@@ -5,7 +5,7 @@ steady_run_options = {}
 
 # Run time
 spd = sim_constants['spd']
-steady_run_options['end_time'] = 250.0 * spd
+steady_run_options['end_time'] = 200.0 * spd
 # Time step
 N = 4
 dt = spd / N
