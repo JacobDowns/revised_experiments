@@ -90,7 +90,7 @@ class ExperimentRunner(object):
           # Update conductivity
           set_k(k)
           # Run simulation for a while
-          channel_runner.run(channel_runner.model.t + 200.0*sim_constants['spd'], dt, steady_file = steady_file)
+          channel_runner.run(channel_runner.model.t + T, dt, steady_file = steady_file)
           # Get average pressure
           avg_pfo = assemble(channel_runner.model.pfo * dx(channel_runner.model.mesh)) / assemble(1.0 * dx(channel_runner.model.mesh))
           # Compute error
@@ -105,6 +105,7 @@ class ExperimentRunner(object):
           # so if error is small enough, call it good and break prematurely
           if err <= 0.01:
             # Write out a file with the tuned conductivity value
+            print "Tuned k: " + str(k)
             np.savetxt(model_inputs['out_dir'] + '/' + run_title + '_tune.txt', np.array([k]))
             sys.exit(1)
           
@@ -112,7 +113,7 @@ class ExperimentRunner(object):
         
         # Do the optimization
         options = {}
-        options['maxiter'] = 10
+        options['maxiter'] = 15
         options['disp'] = True
         
         if self.MPI_rank == 0:
