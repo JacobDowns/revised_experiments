@@ -5,14 +5,18 @@ from experiment_conductivity import *
 le_experiment = Experiment('le')
 spd = sim_constants['spd']
 
-# Get the appropriate steady state file
-#
+### Steady state high melt
+run1 = le_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
+run1.run_options['vark'] = True
+run1.run_options['k_bound_low'] = 4e-3
+run1.run_options['k_bound_high'] = 8e-3
+run1.run_options['k_scale_max'] = 0.00458806211204
 
-run1 = lag_experiment.add_run('high_steady', steady_file, steady = True)
-run3.run_options['vark'] = True
-run3.run_options['scale_k_max'] = 5e-3
-run3.run_options['scale_k_lag'] = spd
-run3.model_inputs['constants']['e_v'] = 1e-6
+
+### Steady state low melt (Don't tune)
+run2 = le_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_low.hdf5', steady = True)
+run2.run_options['vark'] = True
+run2.run_options['k_scale_max'] = run1.run_options['k_scale_max']
 
 
 run1 = lag_experiment.add_run('one_winter', steady_file, steady = False)
