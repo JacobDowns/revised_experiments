@@ -1,25 +1,23 @@
 from experiment import *
 from sim_constants import *
-from experiment_conductivity import *
+from experiment_kse import *
 
 le_experiment = Experiment('le')
 spd = sim_constants['spd']
 
 ### Steady state high melt
-run1 = le_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
+run1 = kse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.run_options['vark'] = True
-run1.run_options['k_bound_low'] = 4e-3
-run1.run_options['k_bound_high'] = 8e-3
-run1.run_options['k_scale_max'] = 0.00458806211204
+run1.run_options['k_scale_max'] = experiment_kse.steady_runs['steady'].run_options['scale_k_max']
 
 
 ### Steady state low melt (Don't tune)
 run2 = le_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_low.hdf5', steady = True)
 run2.run_options['vark'] = True
-run2.run_options['k_scale_max'] = run1.run_options['k_scale_max']
+run2.run_options['k_scale_max'] = experiment_kse.steady_runs['steady'].run_options['scale_k_max']
 
-
-run1 = lag_experiment.add_run('one_winter', steady_file, steady = False)
+### High melt, day lag
+run1 = lag_experiment.add_run('high_one', steady_file, steady = False)
 run3.run_options['scale_k'] = True
 run3.run_options['vark'] = True
 run3.run_options['scale_k_max'] = 5e-3

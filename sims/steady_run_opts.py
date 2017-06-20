@@ -26,6 +26,8 @@ steady_run_options['scale_k_max'] = sim_constants['k']
 # Bounds on conductivity used for automatic tuning
 steady_run_options['k_bound_low'] = 1e-3
 steady_run_options['k_bound_high'] = 1e-2
+# m_max for melt scaling
+steady_run_options['scale_m_max'] = 5.0
 # Enforce pressure constraints ?
 steady_run_options['constraints'] = False
 # Target spatially averaged pressure
