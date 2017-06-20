@@ -13,7 +13,27 @@ class ExperimentRunner(object):
   def __init__(self):
     self.MPI_rank = MPI.rank(mpi_comm_world())
     self.pp = pprint.PrettyPrinter(indent=4)
+
+
+  ### Run all steady state simulations
+  def run_all_steady(self, experiment_title, tune = True):
+    experiment = experiment_db[experiment_title]
+    
+    for run_title in experiment.steady_runs.keys():
+      self.run(experiment_title, run_title, tune = tune)
+      print
+      print
+      
   
+  ### Run all winter simulations
+  def run_all_winter(self, experiment_title):
+    experiment = experiment_db[experiment_title]
+    
+    for run_title in experiment.winter_runs.keys():
+      self.run(experiment_title, run_title, tune = False)
+      print
+      print
+      
 
   ### Run a single experiment  
   def run(self, experiment_title, run_title, tune = True):

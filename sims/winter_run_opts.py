@@ -9,7 +9,7 @@ spd = sim_constants['spd']
 winter_run_options = {}
 winter_run_options['end_time'] = 9.0 * spm
 # Time step
-N = 100
+N = 200
 dt = spd / N
 winter_run_options['dt'] = dt
 # Number of iterations between pvd writes
