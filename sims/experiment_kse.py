@@ -5,7 +5,7 @@ kse_experiment = Experiment('kse')
 ### Steady state
 run1 = kse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.run_options['vark'] = True
-run1.run_options['k_bound_low'] = 1e-3
+run1.run_options['k_bound_low'] = 4e-3
 run1.run_options['k_bound_high'] = 8e-3
 run1.run_options['k_scale_max'] = 0.00458806211204
 
