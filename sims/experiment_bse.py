@@ -35,7 +35,7 @@ run4.run_options['k_bound_low'] = 1e-4
 run4.run_options['k_bound_high'] = 3e-4
 run4.run_options['h_0'] = 1.3
 run4.run_options['tune_atol'] = 1e-7
-run4.run_options['scale_k_max'] = 9.61803398875e-05
+run4.run_options['scale_k_max'] = 0.00010425724725
 
 ### 5cm winter
 run5 = bse_experiment.add_run('5_winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
