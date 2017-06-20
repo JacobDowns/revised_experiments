@@ -7,6 +7,7 @@ run1 = kse_experiment.add_run('steady', '../inputs/synthetic/inputs_flat_high.hd
 run1.run_options['vark'] = True
 run1.run_options['k_bound_low'] = 1e-3
 run1.run_options['k_bound_high'] = 8e-3
+run1.run_options['k_scale_max'] = 0.00458806211204
 
 ### Winter
 run2 = kse_experiment.add_run('winter', run1.model_inputs['steady_file'], steady = False)
