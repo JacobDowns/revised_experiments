@@ -6,8 +6,8 @@ gse_experiment = Experiment('kse')
 run1 = gse_experiment.add_run('steady', '../inputs/IS/inputs_is.hdf5', steady = True)
 run1.model_inputs['constants']['h_r'] = 0.15
 run1.run_options['constraints'] = True
-run1.run_options['k_bound_low'] = 4.5e-3
-run1.run_options['k_bound_high'] = 8e-3
+run1.run_options['k_bound_low'] = 1e-3
+run1.run_options['k_bound_high'] = 4e-3
 run1.run_options['k_scale_max'] = 5e-3
 
 
