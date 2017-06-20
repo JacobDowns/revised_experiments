@@ -18,7 +18,7 @@ run2.run_options['scale_k_max'] = 4.487874026589278725e-03
 
 # Time step
 spd = sim_constants['spd']
-N = 150
+N = 200
 dt = spd / N
 
 ### Flat winter
