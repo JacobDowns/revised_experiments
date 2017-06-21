@@ -14,5 +14,3 @@ run2 = kse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf
 run2.run_options['vark'] = True
 run2.run_options['scale_k'] = True
 run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
-  
-  
