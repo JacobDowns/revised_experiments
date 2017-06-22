@@ -1,6 +1,6 @@
 from experiment import *
 
-gse_experiment = Experiment('kse')
+gse_experiment = Experiment('gse')
 
 ### Steady state
 run1 = gse_experiment.add_run('steady', '../inputs/IS/inputs_is.hdf5', steady = True)
