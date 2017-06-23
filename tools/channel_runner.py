@@ -110,7 +110,10 @@ class ChannelRunner(object):
       if self.pre_step:
         self.pre_step(self.model)
       
-      self.model.step(dt)
+      # Take a step
+      self.model.step(dt, self.options['constraints'])
+      print self.options['constraints']
+      quit()
       
       # Call post step function
       if self.post_step:

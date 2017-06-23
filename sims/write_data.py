@@ -15,9 +15,9 @@ tweaks are needed.
 MPI_rank = MPI.rank(mpi_comm_world())
 experiment_title = sys.argv[1]
 
-run_title = None
-if len(sys.argv) > 2:
-  run_title = sys.argv[2]
+realistic = False
+if len(sys.argv) > 2 :
+  realistic = bool(int(sys.argv[2]))
 
 def write_run(run):
   input_file = run.model_inputs['out_dir'] + '/' + run.model_inputs['checkpoint_file'] + '.hdf5'
@@ -30,8 +30,22 @@ def write_run(run):
 
   # Times
   ts = view.get_ts() / pcs['spm']
+  
   # Pressure at points
-  pfos = view.get_pfo_array_at_points([10e3, 20e3, 50e3], [10e3, 10e3, 10e3])
+  if not realistic:
+    pfos = view.get_pfo_array_at_points([10e3, 20e3, 50e3], [10e3, 10e3, 10e3])
+  else :
+    # Coordinates of mesh vertices
+    coord = view.mesh.coordinates()
+    # x coords
+    vx = coord[:,0]
+    # y coords
+    vy = coord[:,1]
+    # Points to record pressure
+    xs = array([15, 30, 60, 13.13]) * 1000.0 + vx.min()
+    ys = array([10.4, 10.4, 10.4, 17.25]) * 1000.0 + vy.min()
+    pfos = view.get_pfo_array_at_points(xs, ys)
+  
   # Average pressure
   avg_pfos = view.get_avg_pfo_array()
   # Average melt
@@ -42,6 +56,8 @@ def write_run(run):
   avg_ubs = view.get_avg_u_b_array()
   # Average conductivity
   avg_ks = view.get_avg_k_array()
+  # Average englacial storage layer thickness
+  #avg_hes = view.get_avg_h_e_array()
   
   out_dir = run.model_inputs['out_dir'] + '/txt_results/'
   
@@ -55,13 +71,9 @@ def write_run(run):
   savetxt(out_dir + 'avg_hs.txt', avg_hs)
   savetxt(out_dir + 'avg_ubs.txt', avg_ubs * pcs['spy'])
   savetxt(out_dir + 'avg_ks.txt', avg_ks)
+  #savetxt(out_dir + 'avg_hes.txt', avg_hes)
 
-
-# If a run title is specified, write data for that run alone
-if run_title :
-  write_run(experiment_db[experiment_title].runs[run_title])
-else :
-  print "Writing all runs."
-  # Otherwise write data for all runs
-  for run_title, run in experiment_db[experiment_title].winter_runs.iteritems():
-    write_run(run)
+print "Writing all runs."
+# Otherwise write data for all runs
+for run_title, run in experiment_db[experiment_title].winter_runs.iteritems():
+  write_run(run)

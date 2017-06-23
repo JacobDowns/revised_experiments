@@ -24,7 +24,7 @@ class TxtResultsReader(object):
 
     for run_title, run in experiment_db[experiment_title].winter_runs.iteritems():
       self.run_titles.append(run_title)
-      in_dir = run.model_inputs['out_dir'] + '/txt_results/'
+      in_dir = '/home/fenics/shared/revised_experiments/sims/' + run.model_inputs['out_dir'] + '/txt_results/'
       
       self.ts = loadtxt(in_dir + 'ts.txt')
       self.pfos.append(loadtxt(in_dir + 'pfos.txt'))

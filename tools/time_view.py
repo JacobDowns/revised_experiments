@@ -56,6 +56,8 @@ class TimeView(object):
     self.pfo = Function(self.V_cg)
     # Conductivity
     self.k = Function(self.V_cg)
+    # Englacial storage
+    self.h_e = Function(self.V_cg)
     # Channel cross sectional area
     self.S = Function(self.V_tr)
     # Xi
@@ -168,6 +170,13 @@ class TimeView(object):
       return self.h
       
       
+  # Get h_e at the ith time step
+  def get_h_e(self, i):
+    if i < self.num_steps:
+      self.input_file.read(self.h_e, "h_e/vector_" + str(i))
+      return self.h_e
+      
+      
   # Get S at the ith time step
   def get_S(self, i):
     if i < self.num_steps:
@@ -231,6 +240,13 @@ class TimeView(object):
       return assemble(self.h * dx(self.mesh)) / assemble(1.0 * dx(self.mesh))
       
       
+  # Compute spatially averaged h_e at ith time step
+  def get_avg_h_e(self, i):
+    if i < self.num_steps:
+      self.get_h_e(i)
+      return assemble(self.h_e * dx(self.mesh)) / assemble(1.0 * dx(self.mesh))
+      
+      
   # Compute spatially averaged m at ith time step
   def get_avg_m(self, i):
     if i < self.num_steps:
@@ -278,6 +294,15 @@ class TimeView(object):
       hs[i] = self.get_avg_h(i)
         
     return hs
+    
+    
+  # Returns average englacial storage layer thickness through time
+  def get_avg_h_e_array(self):
+    hes = np.zeros(self.num_steps)    
+    for i in range(self.num_steps):
+      hes[i] = self.get_avg_h_e(i)
+        
+    return hes
       
       
   # Returns average sliding speed through time
