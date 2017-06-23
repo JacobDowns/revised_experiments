@@ -33,5 +33,5 @@ winter_run_options['scale_u_b'] = True
 # Scale conductivity ?
 winter_run_options['scale_k'] = False
 # Min and max conductivity parameters
-winter_run_options['scale_k_min'] = 9.75e-7
+winter_run_options['scale_k_min'] = 1e-6
 winter_run_options['scale_k_max'] = sim_constants['k']

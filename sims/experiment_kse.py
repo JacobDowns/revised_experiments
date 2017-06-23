@@ -9,6 +9,11 @@ run1.run_options['k_bound_low'] = 4e-3
 run1.run_options['k_bound_high'] = 8e-3
 run1.run_options['scale_k_max'] = 0.005527864045
 
+
+print run1.model_inputs['steady_file'] + '.hdf5'
+
+quit()
+
 ### Winter
 run2 = kse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run2.run_options['vark'] = True
