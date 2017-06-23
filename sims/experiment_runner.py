@@ -6,7 +6,7 @@ import pprint
 from scipy.optimize import minimize_scalar
 from sim_constants import *
 import numpy as np
-set_log_level(30)
+#set_log_level(30)
 
 class ExperimentRunner(object):
 
@@ -61,11 +61,15 @@ class ExperimentRunner(object):
       # Print average water height
       avg_h = assemble(model.h * dx(model.mesh)) / assemble(1.0 * dx(model.mesh))
       
+      max_S = 0.0
+      if model_inputs['use_channels']:
+        max_S = model.S.vector().max()
+        
       if self.MPI_rank == 0:
         print "Avg. PFO: " + str(avg_pfo)
         print "Avg. h: " + str(avg_h)
-        print
-
+        print "Max S: " + str(max_S)
+      
     # Channel runner object
     channel_runner = ChannelRunner(model_inputs, run_options, pre_step = pre_step)
     
