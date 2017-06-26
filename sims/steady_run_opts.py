@@ -21,7 +21,7 @@ steady_run_options['pvd_vars'] = ['pfo', 'h']
 # Use a spatially variable conductivity?
 steady_run_options['vark'] = False
 # Min and max conductivity parameters
-steady_run_options['scale_k_min'] = 1e-6
+steady_run_options['scale_k_min'] = 9e-7
 steady_run_options['scale_k_max'] = sim_constants['k']
 # Bounds on conductivity used for automatic tuning
 steady_run_options['k_bound_low'] = 1e-3

@@ -39,6 +39,7 @@ run4.run_options['vark'] = True
 run4.run_options['scale_k_max'] = scale_k_max
 run4.run_options['scale_k_lag'] = spd
 
+
 ### High melt, two day lag
 run5 = le_experiment.add_run('high_two', high_steady, steady = False)
 run5.run_options['scale_k'] = True

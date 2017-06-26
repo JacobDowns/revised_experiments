@@ -1,4 +1,5 @@
 from sim_constants import *
+from steady_run_opts import *
 
 # Seconds per month
 spm = sim_constants['spm']
@@ -33,5 +34,5 @@ winter_run_options['scale_u_b'] = True
 # Scale conductivity ?
 winter_run_options['scale_k'] = False
 # Min and max conductivity parameters
-winter_run_options['scale_k_min'] = 8.5e-7
+winter_run_options['scale_k_min'] = steady_run_options['scale_k_min']
 winter_run_options['scale_k_max'] = sim_constants['k']
