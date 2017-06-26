@@ -12,7 +12,6 @@ run1.run_options['k_bound_high'] = 1.2e-3
 run1.run_options['scale_k_max'] = 0.00127
 run1.run_options['end_time'] = 1000.0*spd
 run1.model_inputs['use_channels'] = True
-run1.run_options['k_bound_high'] = 3e-4
 
 
 ### Trough winter
