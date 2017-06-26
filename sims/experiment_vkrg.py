@@ -1,15 +1,24 @@
 from experiment import *
+from sim_constants import *
 
 vkrg_experiment = Experiment('vkrg')
+
+
+spd = sim_constants['spd']
+# Day subdivisions
+N = 24
+# Time step
+dt = spd / N
 
 ### Steady state
 run1 = vkrg_experiment.add_run('steady', '../inputs/IS/inputs_is.hdf5', steady = True)
 run1.run_options['vark'] = True
 run1.model_inputs['constants']['h_r'] = 0.15
+run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
-run1.run_options['k_bound_low'] = 5e-3
-run1.run_options['k_bound_high'] = 6.5e-3
-run1.run_options['scale_k_max'] = 0.00535410196625
+run1.run_options['k_bound_low'] = 9e-4
+run1.run_options['k_bound_high'] = 2e-3
+run1.run_options['scale_k_max'] = 0.00214589803375
 
 
 ### Winter

@@ -16,7 +16,7 @@ run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
 run1.run_options['k_bound_low'] = 9e-4
 run1.run_options['k_bound_high'] = 2e-3
-run1.run_options['scale_k_max'] = 0.00214589803375
+run1.run_options['scale_k_max'] = 0.00183951216287
 
 ### Winter
 run2 = gse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)

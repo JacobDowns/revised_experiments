@@ -7,9 +7,9 @@ spd = sim_constants['spd']
 
 ### Trough steady
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
-run1.run_options['k_bound_low'] = 1e-3
-run1.run_options['k_bound_high'] = 4e-3
-run1.run_options['scale_k_max'] = 4.487874026589278725e-03
+run1.run_options['k_bound_low'] = 8e-4
+run1.run_options['k_bound_high'] = 1.2e-3
+run1.run_options['scale_k_max'] = 0.00127
 run1.run_options['end_time'] = 1000.0*spd
 run1.model_inputs['use_channels'] = True
 
