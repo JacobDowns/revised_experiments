@@ -25,7 +25,7 @@ run3 = kse_experiment.add_run('steady2', '../inputs/synthetic/inputs_trough_high
 run3.run_options['vark'] = True
 run3.run_options['k_bound_low'] = 4e-3
 run3.run_options['k_bound_high'] = 8e-3
-run3.run_options['scale_k_min'] = 7e-7
+run3.run_options['scale_k_min'] = 5e-7
 run3.run_options['scale_k_max'] = 0.005527864045
 
 
