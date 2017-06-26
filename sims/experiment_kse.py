@@ -20,6 +20,5 @@ run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3 = kse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['vark'] = True
 run3.run_options['scale_k'] = True
-run3.run_options['scale_k_min'] = 1e-6
-run3.model_inputs['constants']['e_v'] = 1e-6  
+run3.run_options['scale_k_min'] = 8.5e-7
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']

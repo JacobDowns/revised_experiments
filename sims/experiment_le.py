@@ -30,7 +30,6 @@ run3.run_options['scale_k'] = True
 run3.run_options['vark'] = True
 run3.run_options['scale_k_max'] = scale_k_max
 run3.run_options['scale_k_lag'] = 0.0
-run3.model_inputs['constants']['e_v'] = 1e-8
 
 
 ### High melt, one day lag
@@ -39,8 +38,6 @@ run4.run_options['scale_k'] = True
 run4.run_options['vark'] = True
 run4.run_options['scale_k_max'] = scale_k_max
 run4.run_options['scale_k_lag'] = spd
-run4.model_inputs['constants']['e_v'] = 1e-8
-
 
 ### High melt, two day lag
 run5 = le_experiment.add_run('high_two', high_steady, steady = False)
@@ -48,7 +45,6 @@ run5.run_options['scale_k'] = True
 run5.run_options['vark'] = True
 run5.run_options['scale_k_max'] = scale_k_max
 run5.run_options['scale_k_lag'] = 2.0 * spd
-run5.model_inputs['constants']['e_v'] = 1e-8
 
 
 ### Low melt, no lag
@@ -57,7 +53,6 @@ run6.run_options['scale_k'] = True
 run6.run_options['vark'] = True
 run6.run_options['scale_k_max'] = scale_k_max
 run6.run_options['scale_k_lag'] = 0.0
-run6.model_inputs['constants']['e_v'] = 1e-8
 
 
 ### Low melt, one day lag
@@ -66,7 +61,6 @@ run7.run_options['scale_k'] = True
 run7.run_options['vark'] = True
 run7.run_options['scale_k_max'] = scale_k_max
 run7.run_options['scale_k_lag'] = spd
-run7.model_inputs['constants']['e_v'] = 1e-8
 
 
 ### Low melt, two day lag
@@ -75,6 +69,5 @@ run8.run_options['scale_k'] = True
 run8.run_options['vark'] = True
 run8.run_options['scale_k_max'] = scale_k_max
 run8.run_options['scale_k_lag'] = 2.0 * spd
-run8.model_inputs['constants']['e_v'] = 1e-8
 
   
