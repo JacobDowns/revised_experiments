@@ -27,4 +27,4 @@ run3.run_options['vark'] = True
 run3.run_options['scale_k'] = True
 run3.run_options['scale_k_min'] = run1.run_options['scale_k_min']
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
-run3.run_options['scale_k_lag'] = 3.0 * spd
+run3.run_options['scale_k_lag'] = 1.0 * spd
