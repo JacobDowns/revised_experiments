@@ -8,7 +8,7 @@ from constants import *
 
 class ScaleFunctions(object):
   
-  def __init__(self, m, u_b, k_min = 5e-5, k_max = 5e-3, shutoff_length = 30.0 * pcs['spd'], u_b_max = 100.0, lag_time = 0.0, m_max = None):
+  def __init__(self, m, u_b, k_min = 5e-5, k_max = 5e-3, shutoff_length = 30.0 * pcs['spd'], u_b_max = 100.0, lag_time = 0.0, m_max = None, m_min = 0.0):
 
     # Melt
     self.m = Function(m.function_space())
@@ -33,6 +33,8 @@ class ScaleFunctions(object):
     self.b = lag_time
     # Parameter in the sliding speed scale function 
     self.c = (u_b_max / pcs['spy']) / self.u_b.vector().max()
+    # Background basal melt
+    self.m_min = m_min
 
     
   # Melt scale function
@@ -56,7 +58,7 @@ class ScaleFunctions(object):
     
   # Gets the melt function at a particular time
   def get_m(self, t):
-    return project(Constant(self.m_scale(t)) * self.m, self.V_cg)
+    return project(Constant(self.m_scale(t)) * self.m + Constant(self.m_min), self.V_cg)
 
 
   # Gets the conductivity function at a particular time

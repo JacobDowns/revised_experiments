@@ -29,6 +29,8 @@ winter_run_options['constraints'] = False
 winter_run_options['scale_m'] = True
 # m_max for melt scaling
 winter_run_options['scale_m_max'] = 5.0
+# m_min for melt scaling
+winter_run_options['scale_m_min'] = 0.0
 # Scale sliding ?
 winter_run_options['scale_u_b'] = True
 # Scale conductivity ?

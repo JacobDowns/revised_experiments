@@ -71,7 +71,8 @@ class ChannelRunner(object):
         u_b_max = self.options['scale_u_b_max'],
         shutoff_length = self.options['scale_shutoff_length'],
         lag_time = self.options['scale_k_lag'],
-        m_max = self.options['scale_m_max'])    
+        m_max = self.options['scale_m_max'],
+        m_min = self.options['scale_m_min'])    
     
       
   # Runs the sheet model to end time T with time step dt
