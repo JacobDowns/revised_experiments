@@ -6,7 +6,7 @@ vkrg_experiment = Experiment('vkrg')
 
 spd = sim_constants['spd']
 # Day subdivisions
-N = 32
+N = 100
 # Time step
 dt = spd / N
 
