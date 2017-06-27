@@ -5,7 +5,7 @@ gse_experiment = Experiment('gse')
 
 spd = sim_constants['spd']
 # Day subdivisions
-N = 32
+N = 100
 # Time step
 dt = spd / N
 
@@ -13,8 +13,8 @@ dt = spd / N
 run1 = gse_experiment.add_run('steady', '../inputs/IS/inputs_is.hdf5', steady = True)
 run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
-run1.run_options['k_bound_low'] = 1e-3
-run1.run_options['k_bound_high'] = 5e-3
+run1.run_options['k_bound_low'] = 2e-3
+run1.run_options['k_bound_high'] = 6e-3
 run1.run_options['scale_k_max'] = 0.00183951216287
 
 ### Winter
