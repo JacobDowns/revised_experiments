@@ -25,12 +25,12 @@ run2.run_options['scale_m_min'] = 1e-9
 run3 = ref_experiment.add_run('flat_winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.run_options['scale_m_min'] = 1e-9
-run3.run_options['end_time'] = spm
+run3.run_options['end_time'] = 2.0 * spm
 
 ### Trough winter
 run4 = ref_experiment.add_run('trough_winter', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run4.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run4.run_options['scale_m_min'] = 1e-9
-run4.run_options['end_time'] = spm
+run4.run_options['end_time'] = 2.0 * spm
   
   
