@@ -25,7 +25,7 @@ run2.run_options['scale_k_min'] = run1.run_options['scale_k_min']
 run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run2.run_options['dt'] = dt
 run2.run_options['pvd_interval'] = N*15
-run2.run_options['checkpoint_interval'] = N*2
+run2.run_options['checkpoint_interval'] = N
 
 
 ### Winter 2
@@ -37,5 +37,5 @@ run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.run_options['scale_k_lag'] = 0.25 * spd
 run3.run_options['dt'] = dt
 run3.run_options['pvd_interval'] = N*15
-run3.run_options['checkpoint_interval'] = N*2
+run3.run_options['checkpoint_interval'] = N
 
