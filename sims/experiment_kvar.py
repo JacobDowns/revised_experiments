@@ -5,7 +5,7 @@ steady_file = kse_experiment.steady_runs['steady'].model_inputs['steady_file'] +
 
 kvar_experiment = Experiment('kvar')
 
-
+"""
 ### Winter 1
 run1 = kvar_experiment.add_run('winter1', steady_file, steady = False)
 run1.run_options['vark'] = True
@@ -21,7 +21,7 @@ run2.run_options['vark'] = True
 run2.run_options['scale_k'] = True
 run2.run_options['scale_k_min'] = 1e-6
 run2.run_options['scale_k_max'] = kse_experiment.steady_runs['steady'].run_options['scale_k_max']
-run2.model_inputs['constants']['e_v'] = 1e-3
+run2.model_inputs['constants']['e_v'] = 1e-3"""
 
 
 ### Winter 3
