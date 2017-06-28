@@ -5,9 +5,10 @@ ref_experiment = Experiment('ref')
 
 ### Flat steady
 run1 = ref_experiment.add_run('flat_steady', '../inputs/synthetic/inputs_flat_high.hdf5', steady = True)
-run1.run_options['k_bound_low'] = 3e-3
-run1.run_options['k_bound_high'] = 6e-3
+run1.run_options['k_bound_low'] = 4e-3
+run1.run_options['k_bound_high'] = 5e-3
 run1.run_options['scale_k_max'] = 4.416407864998738234e-03
+run1.run_options['scale_m_min'] = 1e-9
 
 
 ### Trough steady
@@ -15,6 +16,7 @@ run2 = ref_experiment.add_run('trough_steady', '../inputs/synthetic/inputs_troug
 run2.run_options['k_bound_low'] = 3e-3
 run2.run_options['k_bound_high'] = 6e-3
 run2.run_options['scale_k_max'] = 4.487874026589278725e-03
+run2.run_options['scale_m_min'] = 1e-9
 
 
 ### Flat winter
