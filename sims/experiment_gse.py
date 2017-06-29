@@ -15,7 +15,7 @@ run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
 run1.run_options['k_bound_low'] = 3e-3
 run1.run_options['k_bound_high'] = 6e-3
-run1.run_options['scale_k_max'] = 0.00183951216287
+run1.run_options['scale_k_max'] = 0.0037082039325
 run1.run_options['tune_pfo'] = 0.825
 
 ### Winter

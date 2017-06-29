@@ -19,7 +19,7 @@ for i in range(len(reader.run_titles)):
   title(run_title + ' PFO')
   
   for j in range(len(reader.pfos[i])):
-    plot(reader.ts, reader.pfos[i][j,:], linewidth = lw, label = run_title)
+    plot(reader.ts, reader.pfos[i][j,:], linewidth = lw, label = str(j))
   
   xlim([0.0, max(reader.ts)])
   xlabel('Time (Months)')

@@ -28,6 +28,6 @@ run2.model_inputs['constants']['e_v'] = 1e-3"""
 run3 = kvar_experiment.add_run('winter3', steady_file, steady = False)
 run3.run_options['vark'] = True
 run3.run_options['scale_k'] = True
-run3.run_options['scale_k_min'] = 1e-5
+run3.run_options['scale_k_min'] = 5e-5
 run3.run_options['scale_k_max'] = kse_experiment.steady_runs['steady'].run_options['scale_k_max']
 run3.run_options['scale_m_min'] = 1e-9
