@@ -27,6 +27,7 @@ run2.run_options['dt'] = dt
 run2.run_options['pvd_interval'] = N*15
 run2.run_options['checkpoint_interval'] = N
 run2.run_options['end_time'] = 1.25 * spm
+run2.run_options['pvd_vars'] = ['phi', 'h', 'pfo']
 
 
 ### Winter 2
@@ -40,4 +41,5 @@ run3.run_options['dt'] = dt
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N
 run3.run_options['end_time'] = 1.25 * spm
+run3.run_options['pvd_vars'] = ['pfo', 'h', 'phi']
 
