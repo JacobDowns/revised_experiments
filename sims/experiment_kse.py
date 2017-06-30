@@ -4,7 +4,7 @@ from sim_constants import *
 kse_experiment = Experiment('kse')
 spd = sim_constants['spd']
 
-N = 250
+N = 200
 dt = spd / N
 
 ### Steady state
@@ -12,7 +12,7 @@ run1 = kse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.
 run1.run_options['vark'] = True
 run1.run_options['k_bound_low'] = 4e-3
 run1.run_options['k_bound_high'] = 8e-3
-run1.run_options['scale_k_min'] = 1e-7
+run1.run_options['scale_k_min'] = 5e-7
 run1.run_options['scale_k_max'] = 0.005527864045
 
  

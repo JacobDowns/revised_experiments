@@ -49,3 +49,9 @@ run8.run_options['scale_k_max'] = run3.run_options['scale_k_max']
 run9 = sse_experiment.add_run('f_s_winter', run3.model_inputs['steady_file'] + '.hdf5', steady = False)
 run9.run_options['scale_u_b_max'] = 5.0
 run9.run_options['scale_k_max'] = run3.run_options['scale_k_max']
+
+run10 = sse_experiment.add_run('m_s_winter1', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
+run10.run_options['scale_u_b_max'] = 5.0
+run10.run_options['scale_k_max'] = run2.run_options['scale_k_max']
+run10.run_options['m_min'] = 1e-9
+  
