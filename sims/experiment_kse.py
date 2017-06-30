@@ -3,7 +3,7 @@ from sim_constants import *
 
 kse_experiment = Experiment('kse')
 spd = sim_constants['spd']
-
+spm = sim_constants['spm']
 N = 200
 dt = spd / N
 
@@ -26,6 +26,7 @@ run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run2.run_options['dt'] = dt
 run2.run_options['pvd_interval'] = N*15
 run2.run_options['checkpoint_interval'] = N
+run2.run_options['end_time'] = 1.25 * spm
 
 
 ### Winter 2
@@ -38,4 +39,5 @@ run3.run_options['scale_k_lag'] = 0.25 * spd
 run3.run_options['dt'] = dt
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N
+run3.run_options['end_time'] = 1.25 * spm
 
