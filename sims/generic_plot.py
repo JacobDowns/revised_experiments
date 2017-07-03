@@ -75,6 +75,8 @@ title(experiment_title + ' Avg. Melt')
 for i in range(len(reader.run_titles)):
   run_title = reader.run_titles[i]
   plot(reader.ts, reader.avg_ms[i], linewidth = lw, label = run_title)
+  print reader.avg_ms[i]
+  print
   
 xlim([0.0, max(reader.ts)])
 xlabel('Time (Months)')

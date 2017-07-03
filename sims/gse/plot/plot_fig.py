@@ -73,19 +73,17 @@ cont = tricontourf(vx, vy, fi, pfo1, 100, cmap = desaturated, aspect = 'auto')
 # Plot test points
 borehole_xs = array([15, 30, 60, 13.13]) 
 borehole_ys = array([10.4, 10.4, 10.4, 17.25]) 
-plot([borehole_xs[0]], [borehole_ys[0]], 'ko', ms = 14)
-plot([borehole_xs[1]], [borehole_ys[1]], 'ko', ms = 14)
-plot([borehole_xs[2]], [borehole_ys[2]], 'ko', ms = 14)
-plot([borehole_xs[3]], [borehole_ys[3]], 'ko', ms = 14)
+scatter(borehole_xs, borehole_ys, s=250, c='k', edgecolors='w', linewidth = 2)
 
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[0] + 1.9, borehole_ys[0] + 1.5, '1', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[1] + 1.9 , borehole_ys[1] + 1.5, '2', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[2] + 1.9, borehole_ys[2] + 1.5, '3', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[3] + 1.9, borehole_ys[3] + 1.5, '4', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[0] + 2.5, borehole_ys[0], '1', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[1] + 2.5 , borehole_ys[1], '2', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[2] + 2.5, borehole_ys[2], '3', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[3] + 2.5, borehole_ys[3], '4', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
 
 
 
@@ -113,19 +111,17 @@ pfo2 = append(pfo2, 1.0 - 1e-16)
 # Make a contour plot
 cont = tricontourf(vx, vy, fi, pfo2, 100, cmap = desaturated, aspect = 'auto')
 
-plot([borehole_xs[0]], [borehole_ys[0]], 'ko', ms = 14)
-plot([borehole_xs[1]], [borehole_ys[1]], 'ko', ms = 14)
-plot([borehole_xs[2]], [borehole_ys[2]], 'ko', ms = 14)
-plot([borehole_xs[3]], [borehole_ys[3]], 'ko', ms = 14)
+scatter(borehole_xs, borehole_ys, s=250, c='k', edgecolors='w', linewidth = 2)
 
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[0] + 1.9, borehole_ys[0] + 1.5, '1', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[1] + 1.9 , borehole_ys[1] + 1.5, '2', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[2] + 1.9, borehole_ys[2] + 1.5, '3', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
-bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 0.8)
-text(borehole_xs[3] + 1.9, borehole_ys[3] + 1.5, '4', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[0] + 2.5, borehole_ys[0], '1', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[1] + 2.5 , borehole_ys[1], '2', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[2] + 2.5, borehole_ys[2], '3', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.275", fc="white", ec="k", lw=3, alpha = 1.)
+text(borehole_xs[3] + 2.5, borehole_ys[3], '4', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
 
 # Keep proper aspect ratio
 axis('scaled')

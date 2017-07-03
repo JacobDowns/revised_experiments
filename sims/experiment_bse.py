@@ -56,3 +56,9 @@ run7.run_options['scale_k_max'] = run3.run_options['scale_k_max']
 run8 = bse_experiment.add_run('200_winter', run4.model_inputs['steady_file'] + '.hdf5', steady = False)
 run8.model_inputs['constants']['h_r'] = run4.model_inputs['constants']['h_r']
 run8.run_options['scale_k_max'] = run4.run_options['scale_k_max']
+
+### 200cm winter
+run9 = bse_experiment.add_run('200_winter1', run4.model_inputs['steady_file'] + '.hdf5', steady = False)
+run9.model_inputs['constants']['h_r'] = run4.model_inputs['constants']['h_r']
+run9.run_options['scale_k_max'] = run4.run_options['scale_k_max']
+run9.run_options['scale_m_min'] = 1e-9

@@ -23,4 +23,9 @@ run2 = gse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf
 run2.run_options['constraints'] = True
 run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
   
+### Winter1
+run3 = gse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
+run3.run_options['constraints'] = True
+run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
+run3.run_options['scale_m_min'] = 1e-9
   
