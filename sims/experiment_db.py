@@ -5,7 +5,7 @@ from experiment_vrse import *
 from experiment_kse import *
 from experiment_gse import *
 from experiment_le import *
-from experiment_vkrg import *
+from experiment_kge import *
 from experiment_cse import *
 #from experiment_kvre import *
 from experiment_kvar import *
@@ -18,6 +18,6 @@ experiment_db['vrse'] = vrse_experiment
 experiment_db['kse'] = kse_experiment
 experiment_db['gse'] = gse_experiment
 experiment_db['le'] = le_experiment
-experiment_db['vkrg'] = vkrg_experiment
+experiment_db['kge'] = kge_experiment
 experiment_db['cse'] = cse_experiment
 experiment_db['kvar'] = kvar_experiment
