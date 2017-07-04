@@ -34,7 +34,7 @@ low_steady = run2.model_inputs['steady_file'] + '.hdf5'
 
 
 ### High melt, no lag
-run3 = le_experiment.add_run('high_none', high_steady, steady = False)
+run3 = cle_experiment.add_run('high_none', high_steady, steady = False)
 run3.run_options['scale_k'] = True
 run3.run_options['vark'] = True
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -45,7 +45,7 @@ run3.model_inputs['use_channels'] = True
 
 
 ### High melt, one day lag
-run4 = le_experiment.add_run('high_one', high_steady, steady = False)
+run4 = cle_experiment.add_run('high_one', high_steady, steady = False)
 run4.run_options['scale_k'] = True
 run4.run_options['vark'] = True
 run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -56,7 +56,7 @@ run4.model_inputs['use_channels'] = True
 
 
 ### High melt, two day lag
-run5 = le_experiment.add_run('high_two', high_steady, steady = False)
+run5 = cle_experiment.add_run('high_two', high_steady, steady = False)
 run5.run_options['scale_k'] = True
 run5.run_options['vark'] = True
 run5.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -67,7 +67,7 @@ run5.model_inputs['use_channels'] = True
 
 
 ### Low melt, no lag
-run6 = le_experiment.add_run('low_none', low_steady, steady = False)
+run6 = cle_experiment.add_run('low_none', low_steady, steady = False)
 run6.run_options['scale_k'] = True
 run6.run_options['vark'] = True
 run6.run_options['scale_k_max'] = run2.run_options['scale_k_max']
@@ -78,7 +78,7 @@ run6.model_inputs['use_channels'] = True
 
 
 ### Low melt, one day lag
-run7 = le_experiment.add_run('low_one', low_steady, steady = False)
+run7 = cle_experiment.add_run('low_one', low_steady, steady = False)
 run7.run_options['scale_k'] = True
 run7.run_options['vark'] = True
 run7.run_options['scale_k_max'] = run2.run_options['scale_k_max']
@@ -89,7 +89,7 @@ run7.model_inputs['use_channels'] = True
 
 
 ### Low melt, two day lag
-run8 = le_experiment.add_run('low_two', low_steady, steady = False)
+run8 = cle_experiment.add_run('low_two', low_steady, steady = False)
 run8.run_options['scale_k'] = True
 run8.run_options['vark'] = True
 run8.run_options['scale_k_max'] = run2.run_options['scale_k_max']
