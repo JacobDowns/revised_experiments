@@ -10,7 +10,7 @@ spd = sim_constants['spd']
 run1 = cse_experiment.add_run('steady1', '../inputs/cse/steady.hdf5', steady = True)
 run1.run_options['k_bound_low'] = 1e-4
 run1.run_options['k_bound_high'] = 2e-4
-run1.run_options['scale_k_max'] = 2.5e-4
+run1.run_options['scale_k_max'] = 0.000138196601125
 run1.run_options['end_time'] = 1000.0*spd
 run1.model_inputs['use_channels'] = True
 run1.run_options['tune_atol'] = 1e-8
