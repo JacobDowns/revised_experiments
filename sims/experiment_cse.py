@@ -6,8 +6,8 @@ cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
 
 ### Trough steady
-#run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
-run1 = cse_experiment.add_run('steady1', '../inputs/cse/steady.hdf5', steady = True)
+run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
+#run1 = cse_experiment.add_run('steady1', '../inputs/cse/steady.hdf5', steady = True)
 run1.run_options['k_bound_low'] = 1e-4
 run1.run_options['k_bound_high'] = 2e-4
 run1.run_options['scale_k_max'] = 0.000138196601125
