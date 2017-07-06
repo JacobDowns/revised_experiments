@@ -15,14 +15,13 @@ run1 = kge_experiment.add_run('steady', '../inputs/IS/inputs_is.hdf5', steady = 
 run1.run_options['vark'] = True
 run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
-run1.run_options['k_bound_low'] = 6e-3
-run1.run_options['k_bound_high'] = 8e-3
+run1.run_options['k_bound_low'] = 9e-3
+run1.run_options['k_bound_high'] = 1e-2
 run1.run_options['scale_k_min'] = 5e-7
 run1.run_options['scale_k_max'] = 0.00214589803375
 run1.run_options['tune_pfo'] = 0.825
 run1.run_options['tune_atol'] = 1e-8
  
-
 ### Winter
 run2 = kge_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run2.run_options['vark'] = True

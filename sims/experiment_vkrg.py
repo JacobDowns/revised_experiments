@@ -15,9 +15,9 @@ run1 = vkrg_experiment.add_run('steady', '../inputs/IS/inputs_is.hdf5', steady =
 run1.run_options['vark'] = True
 run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
-run1.run_options['k_bound_low'] = 2.5e-3
-run1.run_options['k_bound_high'] = 6e-3
-run1.run_options['scale_k_min'] = 3e-8
+run1.run_options['k_bound_low'] = 5e-3
+run1.run_options['k_bound_high'] = 7e-3
+run1.run_options['scale_k_min'] = 5e-7
 run1.run_options['scale_k_max'] = 0.00214589803375
  
 

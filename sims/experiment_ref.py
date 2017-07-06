@@ -24,7 +24,6 @@ run3 = ref_experiment.add_run('flat_winter', run1.model_inputs['steady_file'] + 
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 
 
-
 ### Trough winter
 run4 = ref_experiment.add_run('trough_winter', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run4.run_options['scale_k_max'] = run2.run_options['scale_k_max']
@@ -35,3 +34,10 @@ run4.run_options['scale_m_min'] = 1e-9
 run5 = ref_experiment.add_run('trough_winter1', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run5.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run5.run_options['scale_m_min'] = 1e-9
+
+
+### Trough winter2
+run6 = ref_experiment.add_run('trough_winter2', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
+run6.run_options['scale_k_max'] = run2.run_options['scale_k_max']
+run6.run_options['scale_m_min'] = 1e-9
+run6.model_inputs['constants']['e_v'] = 1e-3

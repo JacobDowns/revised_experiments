@@ -6,10 +6,11 @@ spd = sim_constants['spd']
 
 
 ### Steady state high melt
-run1 = cle_experiment.add_run('high_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
+#run1 = cle_experiment.add_run('high_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
+run1 = cle_experiment.add_run('high_steady1', '../inputs/le/high_steady.hdf5', steady = True)
 run1.run_options['vark'] = True
-run1.run_options['k_bound_low'] = 2e-4
-run1.run_options['k_bound_high'] = 4e-4
+run1.run_options['k_bound_low'] = 1e-4
+run1.run_options['k_bound_high'] = 2e-4
 run1.run_options['scale_k_max'] = 0.00027639320225
 run1.run_options['scale_k_min'] = 1e-6
 run1.run_options['end_time'] = 1000.0*spd
@@ -27,7 +28,6 @@ run2.run_options['scale_k_min'] = 1e-6
 run2.run_options['end_time'] = 1000.0*spd
 run2.model_inputs['use_channels'] = True
 run2.run_options['tune_atol'] = 1e-8
-
 
 high_steady = run1.model_inputs['steady_file'] + '.hdf5'
 low_steady = run2.model_inputs['steady_file'] + '.hdf5'
