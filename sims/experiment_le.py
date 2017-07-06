@@ -1,15 +1,13 @@
 from experiment import *
 from sim_constants import *
-from experiment_kse import *
 
 le_experiment = Experiment('le')
 spd = sim_constants['spd']
-scale_k_max = kse_experiment.steady_runs['steady'].run_options['scale_k_max']
 
 ### Steady state high melt
 run1 = le_experiment.add_run('high_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.run_options['vark'] = True
-run1.run_options['scale_k_max'] = scale_k_max
+run1.run_options['scale_k_max'] = 0.00573600939766
 run1.run_options['scale_k_min'] = 1e-6
 run1.run_options['scale_m_max'] = 5.0
 
@@ -17,7 +15,7 @@ run1.run_options['scale_m_max'] = 5.0
 ### Steady state low melt
 run2 = le_experiment.add_run('low_steady', '../inputs/synthetic/inputs_trough_low.hdf5', steady = True)
 run2.run_options['vark'] = True
-run2.run_options['scale_k_max'] = scale_k_max
+run2.run_options['scale_k_max'] = 0.00556788792095
 run2.run_options['scale_k_min'] = 1e-6
 run2.run_options['scale_m_max'] = 5.0
 

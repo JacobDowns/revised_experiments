@@ -1,17 +1,16 @@
 from experiment import *
 from sim_constants import *
 
-cle_experiment = Experiment('le')
+cle_experiment = Experiment('cle')
 spd = sim_constants['spd']
 
 
 ### Steady state high melt
-#run1 = cle_experiment.add_run('high_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
-run1 = cle_experiment.add_run('high_steady1', '../inputs/le/high_steady.hdf5', steady = True)
+run1 = cle_experiment.add_run('high_steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.run_options['vark'] = True
-run1.run_options['k_bound_low'] = 1e-4
-run1.run_options['k_bound_high'] = 2e-4
-run1.run_options['scale_k_max'] = 0.00027639320225
+run1.run_options['k_bound_low'] = 9e-5
+run1.run_options['k_bound_high'] = 1e-4
+run1.run_options['scale_k_max'] = 9.38196601125e-05
 run1.run_options['scale_k_min'] = 1e-6
 run1.run_options['end_time'] = 1000.0*spd
 run1.model_inputs['use_channels'] = True
