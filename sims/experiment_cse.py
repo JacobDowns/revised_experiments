@@ -19,11 +19,19 @@ run2 = cse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf
 run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run2.model_inputs['use_channels'] = True
 
-### Trough winter1 for basal melt experiment
+
+### Trough winter 1 for basal melt experiment
 run3 = cse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.model_inputs['use_channels'] = True
 run3.run_options['scale_m_min'] = 1e-9
-  
-  
+
+
+### Trough winter 2 for basal melt experiment
+run4 = cse_experiment.add_run('winter2', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
+run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
+run4.model_inputs['use_channels'] = True
+run4.run_options['scale_m_min'] = 1e-9
+run4.model_inputs['constants']['e_v'] = 1e-3  
+
   

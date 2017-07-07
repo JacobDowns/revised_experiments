@@ -1,6 +1,8 @@
 from experiment import *
 from sim_constants import *
 
+""" Geometry sensitivity test on Isunnguata Sermia. """
+
 gse_experiment = Experiment('gse')
 
 spd = sim_constants['spd']
@@ -23,7 +25,7 @@ run2 = gse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf
 run2.run_options['constraints'] = True
 run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
   
-### Winter1
+### Winter 1 for basal melt experiment
 run3 = gse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['constraints'] = True
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
