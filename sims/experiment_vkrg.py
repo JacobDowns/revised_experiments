@@ -16,10 +16,11 @@ run1.run_options['vark'] = True
 run1.run_options['dt'] = dt
 run1.run_options['constraints'] = True
 run1.run_options['k_bound_low'] = 9e-3
-run1.run_options['k_bound_high'] = 1.5e-2
+run1.run_options['k_bound_high'] = 1e-2
 run1.run_options['scale_k_min'] = 5e-7
 run1.run_options['scale_k_max'] = 0.00214589803375
 run1.run_options['tune_pfo'] = 0.825
+run1.run_options['tune_atol'] = 5e-2
  
 
 ### Winter

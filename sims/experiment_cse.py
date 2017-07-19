@@ -4,7 +4,7 @@ from dolfin import *
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 250
+N = 300
 
 ### Trough steady
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
@@ -64,7 +64,7 @@ run5.run_options['scale_m_min'] = 3.171e-10
 run5.model_inputs['constants']['e_v'] = 1e-3
 # Newton params
 run5.model_inputs['newton_params']['newton_solver']['relative_tolerance'] = 5e-10
-run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 1.5e-7
+run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 5e-7
 
 
   
