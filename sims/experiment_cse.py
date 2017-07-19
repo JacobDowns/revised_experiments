@@ -13,7 +13,10 @@ run1.run_options['scale_k_max'] = 7e-4
 run1.run_options['end_time'] = 120.0*spd
 run1.model_inputs['use_channels'] = True
 run1.run_options['tune_atol'] = 1e-8
-run1.run_options['dt'] = spd / 64
+run1.run_options['dt'] = spd / 100
+# Initial sheet height
+run1.run_options['h_0'] = 0.01
+
 
 
 ### Trough steady with englacial storage
@@ -24,15 +27,16 @@ run2.run_options['scale_k_max'] = 9e-4
 run2.run_options['end_time'] = 120.0*spd
 run2.model_inputs['use_channels'] = True
 run2.run_options['tune_atol'] = 1e-8
-run2.run_options['dt'] = spd / 64
+run2.run_options['dt'] = spd / 100
 run2.model_inputs['constants']['e_v'] = 1e-3
 run2.run_options['scale_m_min'] = 3.171e-10
+# Initial sheet height
+run2.run_options['h_0'] = 0.01
 
 ### Trough winter
 run3 = cse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.model_inputs['use_channels'] = True
-run3.run_options['dt'] = spd / N
 run3.run_options['dt'] = spd / N
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N*2
