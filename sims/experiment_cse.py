@@ -1,10 +1,9 @@
 from experiment import *
 from sim_constants import *
-from dolfin import *
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 350
+N = 400
 
 ### Trough steady
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
@@ -29,7 +28,6 @@ run2.run_options['dt'] = spd / 64
 run2.model_inputs['constants']['e_v'] = 1e-3
 run2.run_options['scale_m_min'] = 3.171e-10
 
-
 ### Trough winter
 run3 = cse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -39,7 +37,7 @@ run3.run_options['dt'] = spd / N
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N*2
 
-
+"""
 ### Trough winter 1 for basal melt experiment
 run4 = cse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -64,7 +62,7 @@ run5.run_options['scale_m_min'] = 3.171e-10
 run5.model_inputs['constants']['e_v'] = 1e-3
 # Newton params
 run5.model_inputs['newton_params']['newton_solver']['relative_tolerance'] = 1e-9
-run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 7e-7
+run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 7e-7"""
 
 
   

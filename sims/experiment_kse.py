@@ -14,7 +14,7 @@ run1.run_options['k_bound_high'] = 8e-3
 run1.run_options['scale_k_min'] = 5e-7
 run1.run_options['scale_k_max'] = 0.005527864045
 
-"""
+
 ### Winter 1
 run2 = kse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run2.run_options['vark'] = True
@@ -31,15 +31,7 @@ run3.run_options['scale_k'] = True
 run3.run_options['scale_k_min'] = run1.run_options['scale_k_min']
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.run_options['scale_k_lag'] = 0.25 * spd
-run3.run_options['pvd_vars'] = ['pfo', 'h', 'phi']"""
+run3.run_options['pvd_vars'] = ['pfo', 'h', 'phi']
 
 
-### Winter 3 for basal melt experiment
-run4 = kse_experiment.add_run('winter3', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
-run4.run_options['vark'] = True
-run4.run_options['scale_k'] = True
-run4.run_options['scale_k_min'] = 5e-5
-run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
-run4.run_options['scale_k_lag'] = 0.25 * spd
-run4.run_options['pvd_vars'] = ['pfo', 'h', 'phi']
-run4.run_options['scale_m_min'] = 1e-9
+

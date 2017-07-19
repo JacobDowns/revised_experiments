@@ -3,7 +3,7 @@ import sim_constants
 from winter_run_opts import *
 from steady_run_opts import *
 from copy import deepcopy
-from dolfin import *
+from dolfin import NonlinearVariationalSolver 
 
 class Run(object):
   def __init__(self, title, input_file, experiment_title = '', steady = True):
