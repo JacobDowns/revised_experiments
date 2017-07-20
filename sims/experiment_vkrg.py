@@ -29,7 +29,6 @@ run2.run_options['vark'] = True
 run2.run_options['constraints'] = True
 run2.run_options['scale_k'] = True
 run2.run_options['scale_k_min'] = run1.run_options['scale_k_min']
-run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']
-run2.run_options['scale_k_max'] = run1.run_options['scale_k_max']  
+run2.run_options['scale_k_max'] = run1.run_options['scale_k_max'] 
 run2.model_inputs['constants']['e_v'] = 1e-4
   

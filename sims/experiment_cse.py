@@ -3,7 +3,7 @@ from sim_constants import *
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 450
+N = 500
 
 ### Trough steady
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
