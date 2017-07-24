@@ -3,7 +3,7 @@ from sim_constants import *
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 500
+N = 250
 
 ### Trough steady
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
@@ -41,7 +41,7 @@ run3.run_options['dt'] = spd / N
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N*2
 
-
+"""
 ### Trough winter 1 for basal melt experiment
 run4 = cse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -50,7 +50,7 @@ run4.run_options['dt'] = spd / N
 run4.run_options['pvd_interval'] = N*15
 run4.run_options['checkpoint_interval'] = N*2
 # 1cm basal melt
-run4.run_options['scale_m_min'] = 3.171e-10
+run4.run_options['scale_m_min'] = 3.171e-10"""
 
 
 ### Trough winter 2 for basal melt experiment
