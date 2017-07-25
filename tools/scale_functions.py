@@ -8,7 +8,7 @@ from constants import *
 
 class ScaleFunctions(object):
   
-  def __init__(self, m, u_b, k_min = 5e-5, k_max = 5e-3, shutoff_length = 30.0 * pcs['spd'], u_b_max = 100.0, lag_time = 0.0, m_max = None, m_min = 0.0):
+  def __init__(self, m, u_b, run):
 
     # Melt
     self.m = Function(m.function_space())
@@ -19,36 +19,35 @@ class ScaleFunctions(object):
     # Get function space from the melt function
     self.V_cg = m.function_space()
     # Maximum melt input
-    if m_max == None:
-      self.m_max = m.vector().max()
-    else :
-      self.m_max = m_max / pcs['spy']
+    self.m_max = run.run_options['scale_k_min'] / pcs['spy']
     # Shutoff length
-    self.shutoff_length = shutoff_length
+    self.shutoff_length = run.run_options['scale_shutoff_length']
     # Minimum conductivity
-    self.k_min = k_min
+    self.k_min = run.run_options['scale_k_min']
     # Maximum conductivity
-    self.k_max = k_max
+    self.k_max = run.run_options['scale_k_max']
     # Lag of conductivity behind melt
-    self.b = lag_time
+    self.l = run.run_options['scale_k_lag']
     # Parameter in the sliding speed scale function 
-    self.c = (u_b_max / pcs['spy']) / self.u_b.vector().max()
+    self.c = (run.run_options['scale_u_b_max'] / pcs['spy']) / self.u_b.vector().max()
     # Background basal melt
-    self.m_min = m_min
-
+    self.m_min = run.run_options['scale_m_min']
     
-  # Melt scale function
-  def m_scale(self, t):
-    if t < 0.0:
-      return 1.0
-    if t <= self.shutoff_length:
-      return cos((pi / (2.0 * self.shutoff_length)) * t)
-    return 0.0
-  
+    def default_m_scale(t):
+      if t < 0.0:
+        return 1.0
+      if t <= self.shutoff_length:
+        return cos((pi / (2.0 * self.shutoff_length)) * t)
+      return 0.0
+    # Function for scaling melt
+    if 'scale_m_scale' in run.run_options :
+      self.m_scale = run.run_options['scale_m_scale']
+    else :
+      self.m_scale = default_m_scale
   
   # Conductivity scale function
   def k_scale(self, t):
-    return ((self.k_max - self.k_min) / self.m_max) * self.m_scale(t - self.b)
+    return ((self.k_max - self.k_min) / self.m_max) * self.m_scale(t - self.l)
 
 
   # Sliding speed scale function

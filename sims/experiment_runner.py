@@ -71,7 +71,7 @@ class ExperimentRunner(object):
         print "Max S: " + str(max_S)
       
     # Channel runner object
-    channel_runner = ChannelRunner(model_inputs, run_options, pre_step = pre_step)
+    channel_runner = ChannelRunner(run, pre_step = pre_step)
     
     
     def set_k(k):
@@ -114,7 +114,7 @@ class ExperimentRunner(object):
           # Update conductivity
           set_k(k)
           # Run simulation for a while
-          channel_runner.run(channel_runner.model.t + T, dt, steady_file = steady_file)
+          channel_runner.do_run(channel_runner.model.t + T, dt, steady_file = steady_file)
           # Get average pressure
           avg_pfo = assemble(channel_runner.model.pfo * dx(channel_runner.model.mesh)) / assemble(1.0 * dx(channel_runner.model.mesh))
           # Compute error
@@ -159,7 +159,7 @@ class ExperimentRunner(object):
         # Update conductivity
         set_k(run_options['scale_k_max'])
         # Run simulation
-        channel_runner.run(T, dt, steady_file = steady_file) 
+        channel_runner.do_run(T, dt, steady_file = steady_file) 
         
     else :
       ### Winter run
@@ -167,6 +167,6 @@ class ExperimentRunner(object):
       # Update conductivity
       set_k(run_options['scale_k_max'])
       # Run simulation
-      channel_runner.run(T, dt) 
+      channel_runner.do_run(T, dt) 
 
     

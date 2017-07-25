@@ -27,6 +27,8 @@ winter_run_options['vark'] = False
 winter_run_options['constraints'] = False
 # Scale melt ?
 winter_run_options['scale_m'] = True
+# Fall length
+winter_run_options['scale_shutoff_length'] = spm
 # m_max for melt scaling
 winter_run_options['scale_m_max'] = 5.0
 # m_min for melt scaling

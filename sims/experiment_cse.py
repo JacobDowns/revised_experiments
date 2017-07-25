@@ -1,38 +1,48 @@
 from experiment import *
 from sim_constants import *
+import numpy as np
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 250
+N = 200
+
+shutoff_length = 7.0 * spd
+
+def scale_m(t):
+  m_s = 1.0
+  if t <= shutoff_length:
+    m_s = np.sin((np.pi / (2.0 * shutoff_length)) * t)
+    
+  return m_s
 
 ### Trough steady
+# No winter melt sources
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
-run1.run_options['k_bound_low'] = 1e-4
-run1.run_options['k_bound_high'] = 2e-4
-run1.run_options['scale_k_max'] = 7e-4
-run1.run_options['end_time'] = 120.0*spd
 run1.model_inputs['use_channels'] = True
-run1.run_options['tune_atol'] = 1e-8
-run1.run_options['dt'] = spd / 100
-# Initial sheet height
+run1.run_options['end_time'] = 120.0*spd
+run1.run_options['scale_k_max'] = 7e-4
+run1.run_options['dt'] = spd / N
+run1.run_options['h_0'] = 0.01
+run1.run_options['scale_m'] = True
+run1.run_options['scale_m_scale'] = scale_m
 run1.run_options['h_0'] = 0.01
 
 
-
-### Trough steady with englacial storage
+### Trough steady1
+# 1cm basal melt + englacial storage
 run2 = cse_experiment.add_run('steady1', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
-run2.run_options['k_bound_low'] = 1e-4
-run2.run_options['k_bound_high'] = 2e-4
-run2.run_options['scale_k_max'] = 9e-4
-run2.run_options['end_time'] = 120.0*spd
 run2.model_inputs['use_channels'] = True
-run2.run_options['tune_atol'] = 1e-8
-run2.run_options['dt'] = spd / 100
+run2.run_options['end_time'] = 120.0*spd
+run2.run_options['scale_k_max'] = 8e-4
+run2.run_options['dt'] = spd / N
+run2.run_options['h_0'] = 0.01
+run2.run_options['scale_m'] = True
+run2.run_options['scale_m_scale'] = scale_m
 run2.model_inputs['constants']['e_v'] = 1e-3
 run2.run_options['scale_m_min'] = 3.171e-10
-# Initial sheet height
 run2.run_options['h_0'] = 0.01
 
+"""
 ### Trough winter
 run3 = cse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -41,7 +51,7 @@ run3.run_options['dt'] = spd / N
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N*2
 
-"""
+
 ### Trough winter 1 for basal melt experiment
 run4 = cse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
@@ -50,7 +60,7 @@ run4.run_options['dt'] = spd / N
 run4.run_options['pvd_interval'] = N*15
 run4.run_options['checkpoint_interval'] = N*2
 # 1cm basal melt
-run4.run_options['scale_m_min'] = 3.171e-10"""
+run4.run_options['scale_m_min'] = 3.171e-10
 
 
 ### Trough winter 2 for basal melt experiment
@@ -66,7 +76,7 @@ run5.run_options['scale_m_min'] = 3.171e-10
 run5.model_inputs['constants']['e_v'] = 1e-3
 # Newton params
 run5.model_inputs['newton_params']['newton_solver']['relative_tolerance'] = 1e-9
-run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 8e-7
+run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 8e-7"""
 
 
   
