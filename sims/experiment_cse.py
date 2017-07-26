@@ -4,9 +4,9 @@ import numpy as np
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 400
+N = 200
 
-shutoff_length = 7.0 * spd
+shutoff_length = 15.0 * spd
 
 def scale_m(t):
   m_s = 1.0
@@ -20,7 +20,7 @@ def scale_m(t):
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.model_inputs['use_channels'] = True
 run1.run_options['end_time'] = 120.0*spd
-run1.run_options['scale_k_max'] = 8e-4
+run1.run_options['scale_k_max'] = 1e-3
 run1.run_options['dt'] = spd / N
 run1.run_options['h_0'] = 0.01
 run1.run_options['scale_m'] = True
@@ -33,7 +33,7 @@ run1.run_options['h_0'] = 0.01
 run2 = cse_experiment.add_run('steady1', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run2.model_inputs['use_channels'] = True
 run2.run_options['end_time'] = 120.0*spd
-run2.run_options['scale_k_max'] = 8e-4
+run2.run_options['scale_k_max'] = 1e-3
 run2.run_options['dt'] = spd / N
 run2.run_options['h_0'] = 0.01
 run2.run_options['scale_m'] = True
