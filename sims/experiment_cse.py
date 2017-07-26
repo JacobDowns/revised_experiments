@@ -15,8 +15,8 @@ def scale_m(t):
     
   return m_s
 
-### Trough steady
-# No winter melt sources
+### Summer
+# No melt sources
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.model_inputs['use_channels'] = True
 run1.run_options['end_time'] = 120.0*spd
@@ -28,7 +28,7 @@ run1.run_options['scale_m_scale'] = scale_m
 run1.run_options['h_0'] = 0.01
 
 
-### Trough steady1
+### Summer1
 # 1cm basal melt + englacial storage
 run2 = cse_experiment.add_run('steady1', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run2.model_inputs['use_channels'] = True
@@ -42,41 +42,27 @@ run2.model_inputs['constants']['e_v'] = 1e-3
 run2.run_options['scale_m_min'] = 3.171e-10
 run2.run_options['h_0'] = 0.01
 
-"""
-### Trough winter
+
+### Winter
+# No melt sources
 run3 = cse_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
-run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.model_inputs['use_channels'] = True
+run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.run_options['dt'] = spd / N
 run3.run_options['pvd_interval'] = N*15
 run3.run_options['checkpoint_interval'] = N*2
 
 
-### Trough winter 1 for basal melt experiment
-run4 = cse_experiment.add_run('winter1', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
-run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
+### Winter1
+# 1cm basal melt + englacial storage
+run4 = cse_experiment.add_run('winter1', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
+run4.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run4.model_inputs['use_channels'] = True
 run4.run_options['dt'] = spd / N
 run4.run_options['pvd_interval'] = N*15
 run4.run_options['checkpoint_interval'] = N*2
-# 1cm basal melt
+run4.model_inputs['constants']['e_v'] = 1e-3
 run4.run_options['scale_m_min'] = 3.171e-10
-
-
-### Trough winter 2 for basal melt experiment
-run5 = cse_experiment.add_run('winter2', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
-run5.run_options['scale_k_max'] = run2.run_options['scale_k_max']
-run5.model_inputs['use_channels'] = True
-run5.run_options['dt'] = spd / N
-run5.run_options['pvd_interval'] = N*15
-run5.run_options['checkpoint_interval'] = N*2
-# 1cm basal melt
-run5.run_options['scale_m_min'] = 3.171e-10
-# Englacial storage
-run5.model_inputs['constants']['e_v'] = 1e-3
-# Newton params
-run5.model_inputs['newton_params']['newton_solver']['relative_tolerance'] = 1e-9
-run5.model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 8e-7"""
 
 
   
