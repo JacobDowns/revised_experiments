@@ -8,6 +8,7 @@ from experiment_le import *
 from experiment_kge import *
 from experiment_cse import *
 from experiment_cse1 import *
+from experiment_csef import *
 from experiment_cle import *
 from experiment_kvar import *
 from experiment_vkrg import *
@@ -24,6 +25,7 @@ experiment_db['le'] = le_experiment
 experiment_db['kge'] = kge_experiment
 experiment_db['cse'] = cse_experiment
 experiment_db['cse1'] = cse1_experiment
+experiment_db['csef'] = csef_experiment
 experiment_db['kvar'] = kvar_experiment
 experiment_db['vkrg'] = vkrg_experiment
 experiment_db['cke'] = cke_experiment
