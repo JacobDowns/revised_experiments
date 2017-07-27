@@ -24,6 +24,7 @@ experiment_db['gse'] = gse_experiment
 experiment_db['le'] = le_experiment
 experiment_db['kge'] = kge_experiment
 experiment_db['cse'] = cse_experiment
+experiment_db['cse1'] = cse1_experiment
 experiment_db['csef'] = csef_experiment
 experiment_db['kvar'] = kvar_experiment
 experiment_db['vkrg'] = vkrg_experiment
