@@ -33,7 +33,7 @@ run1.run_options['h_0'] = 0.02
 run2 = cse_experiment.add_run('steady1', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run2.model_inputs['use_channels'] = True
 run2.run_options['end_time'] = 120.0*spd
-run2.run_options['scale_k_max'] = 8e-4
+run2.run_options['scale_k_max'] = 1e-3
 run2.run_options['dt'] = spd / N
 run2.run_options['scale_m'] = True
 run2.run_options['scale_m_scale'] = scale_m 
