@@ -20,7 +20,7 @@ def scale_m(t):
 run1 = cse_experiment.add_run('steady', '../inputs/synthetic/inputs_trough_high.hdf5', steady = True)
 run1.model_inputs['use_channels'] = True
 run1.run_options['end_time'] = 120.0*spd
-run1.run_options['scale_k_max'] = 8e-4
+run1.run_options['scale_k_max'] = 1e-3
 run1.run_options['dt'] = spd / N
 run1.run_options['h_0'] = 0.02
 run1.run_options['scale_m'] = True
