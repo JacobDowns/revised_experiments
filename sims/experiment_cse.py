@@ -4,7 +4,7 @@ import numpy as np
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 300
+N = 400
 
 shutoff_length = 15.0 * spd
 
