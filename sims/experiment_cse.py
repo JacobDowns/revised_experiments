@@ -4,7 +4,7 @@ import numpy as np
 
 cse_experiment = Experiment('cse')
 spd = sim_constants['spd']
-N = 200
+N = 300
 
 shutoff_length = 15.0 * spd
 
@@ -22,7 +22,6 @@ run1.model_inputs['use_channels'] = True
 run1.run_options['end_time'] = 120.0*spd
 run1.run_options['scale_k_max'] = 1e-3
 run1.run_options['dt'] = spd / N
-run1.run_options['h_0'] = 0.02
 run1.run_options['scale_m'] = True
 run1.run_options['scale_m_scale'] = scale_m
 run1.run_options['h_0'] = 0.02
