@@ -25,6 +25,7 @@ run1.run_options['dt'] = spd / N
 run1.run_options['scale_m'] = True
 run1.run_options['scale_m_scale'] = scale_m
 run1.run_options['h_0'] = 0.02
+run1.model_inputs['use_pi'] = False
 
 
 ### Summer1
@@ -39,6 +40,7 @@ run2.run_options['scale_m_scale'] = scale_m
 run2.model_inputs['constants']['e_v'] = 1e-3
 run2.run_options['scale_m_min'] = 3.171e-10
 run2.run_options['h_0'] = 0.02
+run2.model_inputs['use_pi'] = False
 
 
   
