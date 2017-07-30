@@ -31,11 +31,6 @@ def write_run(run):
   # Times
   ts = view.get_ts() / pcs['spm']
   
-  pfo = view.V_cg
-  for i in range(len(ts)):
-    view.get_phi()
-  quit()
-  
   # Pressure at points
   if not realistic:
     pfos = view.get_pfo_array_at_points([10e3, 20e3, 50e3], [10e3, 10e3, 10e3])
