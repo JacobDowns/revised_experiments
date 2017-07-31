@@ -43,6 +43,7 @@ run2.run_options['scale_m_min'] = 3.171e-10
 run2.run_options['h_0'] = 0.02
 
 
+"""
 ### Winter
 # No melt sources
 run3 = csef_experiment.add_run('winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
@@ -50,7 +51,7 @@ run3.model_inputs['use_channels'] = True
 run3.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 run3.run_options['dt'] = spd / N
 run3.run_options['pvd_interval'] = N*15
-run3.run_options['checkpoint_interval'] = N*2
+run3.run_options['checkpoint_interval'] = N*2"""
 
 
 ### Winter1
