@@ -14,7 +14,7 @@ import numpy as np
 
 ### Load results file
 
-view = tv.TimeView('../hdf5_results/is_ref.hdf5')
+view = tv.TimeView('../results_winter1/hdf5_results/winter1.hdf5')
 # Load the end of summer steady state pressure
 pfo_first = tv.dolfin.project(view.get_pfo(0), view.V_cg)
 # Load the end of winter pressure
@@ -73,7 +73,7 @@ cdict = pickle.load(open("desaturated.p", "rb"))
 desaturated = LinearSegmentedColormap('desaturated', cdict)
 
 # Make a contour plot
-cont = tricontourf(vx, vy, fi, pfo1, 100, cmap = desaturated, aspect = 'auto')
+cont = tricontourf(vx, vy, fi, pfo1, 256, cmap = desaturated, aspect = 'auto')
 # Keep proper aspect ratio
 axis('scaled')
 axis('off')
@@ -81,9 +81,24 @@ xlim([-2.0, 72.0])
 ylim([-2.0, 22.0])
 clim(0.0, 1.0)
 #colorbar(cont, ticks = linspace(0,1.0,11), fraction = 0.015, pad = 0.04)
-title('(a) Summer Steady State ')
+title('(a) End of Summer')
+
+xs = [0.0, 60.0, 60.0, 0., 0.0]
+ys = [0.0, 0.0, 20.0, 20.0, 0.0]
 plot(xs, ys, 'k', linewidth = 2)
 
+
+# Plot test points
+borehole_xs = array([10., 20., 50.]) 
+borehole_ys = array([10., 10., 10.]) 
+
+scatter(borehole_xs, borehole_ys, s=110, c='k', edgecolors='w', linewidth = 0)
+bbox_props = dict(boxstyle="round,pad=0.32", fc="white", ec="k", lw=1.5, alpha = 1.)
+text(borehole_xs[0] + 1.5, borehole_ys[0] + 1.5, '1', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.32", fc="white", ec="k", lw=1.5, alpha = 1.)
+text(borehole_xs[1] + 1.5 , borehole_ys[1] + 1.5, '2', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.32", fc="white", ec="k", lw=1.5, alpha = 1.)
+text(borehole_xs[2] + 1.5, borehole_ys[2] + 1.5, '3', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
 
 ### Plot end of winter pressure
 
@@ -95,7 +110,7 @@ vy = append(vy, 1000.0)
 pfo2 = append(pfo2, 1.0 - 1e-16)
 
 # Make a contour plot
-cont = tricontourf(vx, vy, fi, pfo2, 100, cmap = desaturated, aspect = 'auto')
+cont = tricontourf(vx, vy, fi, pfo2, 256, cmap = desaturated, aspect = 'auto')
 # Keep proper aspect ratio
 axis('scaled')
 axis('off')
@@ -106,13 +121,23 @@ ylim([-2.0, 22.0])
 clim(0.0, 1.0)
 #colorbar(cont, ticks = linspace(0,1.0,11), fraction = 0.05, pad = 0.04, orientation='horizontal')
 title('(b) End of Winter')
+xs = [0.0, 60.0, 60.0, 0., 0.0]
+ys = [0.0, 0.0, 20.0, 20.0, 0.0]
 plot(xs, ys, 'k', linewidth = 2)
+
+scatter(borehole_xs, borehole_ys, s=110, c='k', edgecolors='w', linewidth = 0)
+bbox_props = dict(boxstyle="round,pad=0.32", fc="white", ec="k", lw=2, alpha = 1.)
+text(borehole_xs[0] + 1.5, borehole_ys[0]+ 1.5, '1', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.3", fc="white", ec="k", lw=2, alpha = 1.)
+text(borehole_xs[1] + 1.5 , borehole_ys[1] + 1.5, '2', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
+bbox_props = dict(boxstyle="round,pad=0.3", fc="white", ec="k", lw=2, alpha = 1.)
+text(borehole_xs[2] + 1.5, borehole_ys[2] + 1.5, '3', ha = 'center', va = 'center', bbox=bbox_props, fontsize=fs)
 
 subplots_adjust(right=0.95)
 cbar_ax = fig.add_axes([0.9, 0.2, 0.015, 0.6])
 cb = fig.colorbar(cont, cax = cbar_ax, ticks = linspace(0.0, 1.0, 11), label = 'Water Pressure (Flotation Fraction)')
 cb.ax.tick_params(labelsize=fs) 
 
-savefig('images/is_ref_2d.png')
+savefig('images/cse.png')
 #show()
 

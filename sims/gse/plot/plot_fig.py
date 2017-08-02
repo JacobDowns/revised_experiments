@@ -59,7 +59,7 @@ pfo2[pfo2 > 1.0] = 1.0
 ### Plot the steady state pressure
 
 fig = figure(figsize = (26,13.5))
-fs = 32
+fs = 26
 matplotlib.rcParams.update({'font.size': fs})
 subplot(2,1,1)
 
@@ -140,6 +140,6 @@ cbar_ax = fig.add_axes([0.9, 0.2, 0.015, 0.6])
 cb = fig.colorbar(cont, cax = cbar_ax, ticks = linspace(0.0, 1.0, 11), label = 'Water Pressure (Flotation Fraction)')
 cb.ax.tick_params(labelsize=fs) 
 
-savefig('figs/gse.png')
+savefig('images/gse.png')
 #show()
 

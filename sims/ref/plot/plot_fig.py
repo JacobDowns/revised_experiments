@@ -7,12 +7,12 @@ from pylab import *
 from txt_results_reader import *
 
 reader = TxtResultsReader('ref')
-matplotlib.rcParams.update({'font.size': 14})
+matplotlib.rcParams.update({'font.size': 15})
 lw = 2.0
 
 ### Plot test point pressures
 
-fig = figure(figsize = (12., 5))
+fig = figure(figsize = (12., 5.2))
 
 pfos_f = reader.pfos[0]
 pfos_t = reader.pfos[1]
@@ -34,4 +34,4 @@ ylabel('Water Pressure (Flotation Fraction)')
 legend()
 grid(True)
   
-savefig('figs/ref.png', dpi = 500)  
+savefig('images/ref.png', dpi = 500)  

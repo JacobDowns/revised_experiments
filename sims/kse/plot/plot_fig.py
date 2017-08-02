@@ -7,12 +7,12 @@ from pylab import *
 from txt_results_reader import *
 
 reader = TxtResultsReader('kse')
-matplotlib.rcParams.update({'font.size': 14})
+matplotlib.rcParams.update({'font.size': 15})
 lw = 2.0
 
 ### Plot test point pressures
 
-fig = figure(figsize = (12., 5))
+fig = figure(figsize = (12., 5.5))
 
 pfos_1 = reader.pfos[0]
 pfos_2 = reader.pfos[1]
@@ -36,4 +36,4 @@ grid(True)
 
 ylim([0.73, 1.0])
   
-savefig('figs/kse.png', dpi = 500)  
+savefig('images/kse.png', dpi = 500)  

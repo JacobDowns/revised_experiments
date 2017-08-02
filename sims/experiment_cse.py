@@ -61,6 +61,4 @@ run4.run_options['pvd_interval'] = N*15
 run4.run_options['checkpoint_interval'] = N*2
 run4.model_inputs['constants']['e_v'] = 1e-3
 run4.run_options['scale_m_min'] = 3.171e-10
-
-
   
