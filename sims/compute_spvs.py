@@ -1,7 +1,9 @@
 from txt_results_reader import *
 import sys
 
-### Computes SPV ratios for an experiment
+""" Computes SPV ratios for all runs in an experiment. Invoked by
+python compute_spvs.py [experiment_name]
+"""
 
 experiment_title = sys.argv[1]
 reader = TxtResultsReader(experiment_title)
@@ -27,18 +29,17 @@ for i in range(len(reader.run_titles)):
   for j in range(len(reader.pfos[i])):
     # Compute SPV ratio at this point
     spv = average(reader.pfos[i][j,:][indexes]) / reader.pfos[i][j,:][0]
-  
+
     print "Point " + str(j) + " : " + str(spv)
-    print    
-    
+    print
+
     min_max[str(j)].append(spv)
-    
-    
+
   ### Compute whole domain SPV ratio
-  spvd = average(reader.avg_pfos[i][indexes]) / reader.avg_pfos[i][0] 
-  print "SPVD: " + str(spvd)    
+  spvd = average(reader.avg_pfos[i][indexes]) / reader.avg_pfos[i][0]
+  print "SPVD: " + str(spvd)
   print
-  
+
   min_max['d'].append(spvd)
 
 print
@@ -57,9 +58,3 @@ print
 print "SPV4 Min: " + str(min(min_max['3']))
 print "SPV4 Max: " + str(max(min_max['3']))
 print
-
-  
-
-    
-  
-
