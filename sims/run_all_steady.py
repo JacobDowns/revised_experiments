@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 """
-Created on Mon Jun 12 16:19:13 2017
-
-@author: jake
+Performs all steady state runs in an experiment. Invoked by:
+python run_all_steady.py [experiment_name] [tune]
 """
 
 import sys
@@ -19,5 +17,3 @@ if len(sys.argv) > 2 :
 
 runner = ExperimentRunner()
 runner.run_all_steady(experiment_title, tune = tune)
-
-

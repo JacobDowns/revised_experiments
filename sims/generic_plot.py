@@ -1,6 +1,13 @@
 from pylab import *
 from txt_results_reader import *
 
+"""
+Makes some generic plots of inputs and outputs for all runs in an experiment.
+Invoked by:
+python generic_plot.py [experiment_name]
+Assumes data has already been writen by write_data.py. 
+"""
+
 experiment_title = sys.argv[1]
 reader = TxtResultsReader(experiment_title)
 matplotlib.rcParams.update({'font.size': 16})
@@ -17,20 +24,20 @@ for i in range(len(reader.run_titles)):
 
   subplot(N, 1, i + 1)
   title(run_title + ' PFO')
-  
+
   for j in range(len(reader.pfos[i])):
     plot(reader.ts, reader.pfos[i][j,:], linewidth = lw, label = str(j))
-  
+
   xlim([0.0, max(reader.ts)])
   xlabel('Time (Months)')
   ylabel('Water Pressure (Flotation Fraction)')
   legend()
   grid(True)
-  
-savefig(experiment_title + '/plot/images/pfos.png', dpi = 500)  
-  
-  
-  
+
+savefig(experiment_title + '/plot/images/pfos.png', dpi = 500)
+
+
+
 ### Plot Average Pressure
 
 fig = figure(figsize = (13., 5.5))
@@ -39,7 +46,7 @@ title(experiment_title + ' Avg. PFO')
 for i in range(len(reader.run_titles)):
   run_title = reader.run_titles[i]
   plot(reader.ts, reader.avg_pfos[i], linewidth = lw, label = run_title)
-  
+
 xlim([0.0, max(reader.ts)])
 xlabel('Time (Months)')
 ylabel('Water Pressure (Flotation Fraction)')
@@ -57,7 +64,7 @@ title(experiment_title + ' Avg. Sheet Height')
 for i in range(len(reader.run_titles)):
   run_title = reader.run_titles[i]
   plot(reader.ts, reader.avg_hs[i], linewidth = lw, label = run_title)
-  
+
 xlim([0.0, max(reader.ts)])
 xlabel('Time (Months)')
 ylabel('Sheet Height (m)')
@@ -77,7 +84,7 @@ for i in range(len(reader.run_titles)):
   plot(reader.ts, reader.avg_ms[i], linewidth = lw, label = run_title)
   print reader.avg_ms[i]
   print
-  
+
 xlim([0.0, max(reader.ts)])
 xlabel('Time (Months)')
 ylabel('Melt (m/a)')
@@ -95,7 +102,7 @@ title(experiment_title + ' Avg. Sliding Speed')
 for i in range(len(reader.run_titles)):
   run_title = reader.run_titles[i]
   plot(reader.ts, reader.avg_ubs[i], linewidth = lw, label = run_title)
-  
+
 xlim([0.0, max(reader.ts)])
 xlabel('Time (Months)')
 ylabel('Sliding Speed (m/a)')
@@ -113,7 +120,7 @@ title(experiment_title + ' Avg. Conductivity')
 for i in range(len(reader.run_titles)):
   run_title = reader.run_titles[i]
   plot(reader.ts, reader.avg_ks[i], linewidth = lw, label = run_title)
-  
+
 xlim([0.0, max(reader.ts)])
 xlabel('Time (Months)')
 ylabel('k')

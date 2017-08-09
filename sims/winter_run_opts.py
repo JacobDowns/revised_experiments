@@ -1,6 +1,10 @@
 from sim_constants import *
 from steady_run_opts import *
 
+"""
+Dictionary of default options for winter runs.
+"""
+
 # Seconds per month
 spm = sim_constants['spm']
 # Seconds per day

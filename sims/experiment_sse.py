@@ -1,5 +1,10 @@
 from experiment import *
 
+"""
+Sliding sensitivity experiment. Has six total runs with slow, medium, or fast
+summer sliding in combination with slow or fast winter sliding.
+"""
+
 sse_experiment = Experiment('sse')
 
 ### Slow summer steady
@@ -23,45 +28,44 @@ run3.run_options['k_bound_high'] = 6e-3
 run3.run_options['scale_k_max'] = 4.234058737598503722e-03
 
 
-###  Slow to fast
+###  Winter slow to fast
 run4 = sse_experiment.add_run('s_f_winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run4.run_options['u_b_max'] = 100.0
 run4.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 
 
-### Slow to slow
+### Winter slow to slow
 run5 = sse_experiment.add_run('s_s_winter', run1.model_inputs['steady_file'] + '.hdf5', steady = False)
 run5.run_options['scale_u_b_max'] = 5.0
 run5.run_options['scale_k_max'] = run1.run_options['scale_k_max']
 
 
-###  Moderate to fast
+###  Winter moderate to fast
 run6 = sse_experiment.add_run('m_f_winter', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run6.run_options['scale_u_b_max'] = 100.0
 run6.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 
 
-### Moderate to slow
+### Winter moderate to slow
 run7 = sse_experiment.add_run('m_s_winter', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run7.run_options['scale_u_b_max'] = 5.0
 run7.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 
-  
-###  Fast to fast
+
+###  Winter fast to fast
 run8 = sse_experiment.add_run('f_f_winter', run3.model_inputs['steady_file'] + '.hdf5', steady = False)
 run8.run_options['scale_u_b_max'] = 100.0
 run8.run_options['scale_k_max'] = run3.run_options['scale_k_max']
 
 
-### Fast to slow
+### Winter fast to slow
 run9 = sse_experiment.add_run('f_s_winter', run3.model_inputs['steady_file'] + '.hdf5', steady = False)
 run9.run_options['scale_u_b_max'] = 5.0
 run9.run_options['scale_k_max'] = run3.run_options['scale_k_max']
 
 
-### Moderate to slow run 1 for the basal melt experiment
+### Winter moderate to slow run + 3cm basal melt
 run10 = sse_experiment.add_run('m_s_winter1', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run10.run_options['scale_u_b_max'] = 5.0
 run10.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run10.run_options['scale_m_min'] = 1e-9
-  

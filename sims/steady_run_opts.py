@@ -1,6 +1,9 @@
 from sim_constants import *
 
-### Default run options for a steady state simulation
+"""
+Dictionary of default options for steady state runs.
+"""
+
 steady_run_options = {}
 
 # Run time
@@ -36,4 +39,3 @@ steady_run_options['constraints'] = False
 steady_run_options['tune_pfo'] = 0.85
 # Tolerance parameter for tuning
 steady_run_options['tune_atol'] = 1.2e-4
-

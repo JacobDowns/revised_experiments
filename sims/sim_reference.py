@@ -1,6 +1,6 @@
 from sim_steady import *
 from sim_winter import *
-from 
+from
 
 experiment = {}
 
@@ -46,7 +46,7 @@ run1['run_options'] = winter_run_options
 model_inputs3 = {}
 model_inputs3['input_file'] = model_inputs2['steady_file']
 model_inputs3['out_dir'] = experiment['title'] + '/' + 'results_flat_winter'
-model_inputs3['checkpoint_file'] = experiment['title'] + '/hdf5_results/' + 
+model_inputs3['checkpoint_file'] = experiment['title'] + '/hdf5_results/' +
 model_inputs3['constants'] = sim_constants
 model_inputs3['steady_file'] = '../../inputs/' + experiment['title'] + '/' + title
 run1['model_inputs'] = model_inputs1
@@ -54,15 +54,15 @@ run1['model_inputs'] = model_inputs1
 
 
 
-""" 
-Generates steady states for a flat bed or trough with conductivity tuned to 
+"""
+Generates steady states for a flat bed or trough with conductivity tuned to
 produce an average summer PFO of around 0.95 OB.
 """
 set_log_level(50)
 # Process number
 MPI_rank = MPI.rank(mpi_comm_world())
 
-### Model inputs 
+### Model inputs
 
 n = 0
 if len(sys.argv) > 1:
@@ -82,7 +82,7 @@ input_files.append('../../inputs/synthetic/inputs_trough_high.hdf5')
 input_file = input_files[n]
 
 
-# Output directory 
+# Output directory
 out_dir = 'results_' + title
 # Steady state file
 steady_file = '../../inputs/reference_tune/' + title
@@ -100,7 +100,7 @@ if MPI_rank == 0:
   print "Output dir: " + out_dir
   print "k: " + str(k)
   print
-  
+
 
 ### Run options
 
@@ -121,45 +121,45 @@ options['pvd_vars'] = ['pfo', 'h']
 
 # Function called prior to each step
 def pre_step(model):
-  # Print the average pfo    
+  # Print the average pfo
   avg_pfo = assemble(model.pfo * dx(model.mesh)) / assemble(1.0 * dx(model.mesh))
   # Print average water height
   avg_h = assemble(model.h * dx(model.mesh)) / assemble(1.0 * dx(model.mesh))
-  
+
   if MPI_rank == 0:
     print "Avg. PFO: " + str(avg_pfo)
     print "Avg. h: " + str(avg_h)
     print
-    
-    
+
+
 ### To tune k, we'll use the simplex method
-    
+
 runner = SheetRunner(model_inputs, options, pre_step = pre_step)
 target_pfo = 0.90
 
-# Objective function   
+# Objective function
 def f(k):
   if MPI_rank == 0:
     print "k: "  + str(k)
     print
-  
+
   # Set conductivity
   runner.model.set_k(interpolate(Constant(k),runner.model.V_cg))
   # Run simulation
   runner.run(runner.model.t + T, dt, steady_file = steady_file)
-  
-  
+
+
   # Return average pressure
   avg_pfo = assemble(runner.model.pfo * dx(runner.model.mesh)) / assemble(1.0 * dx(runner.model.mesh))
   err = abs(avg_pfo - target_pfo)
-  
+
   if MPI_rank == 0:
     print
     print "Error: " + str(err)
     print
-  
+
   return err
-  
+
 # Do the optimization
 options = {}
 options['maxiter'] = 10
@@ -169,6 +169,3 @@ res = minimize_scalar(f, bounds=(2e-3, 5e-3), method='bounded', tol = 1.09e-4, o
 if MPI_rank == 0:
   print
   print res.x
-
-  
-  

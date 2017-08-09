@@ -1,8 +1,6 @@
-# -*- coding: utf-8 -*-
 """
-Created on Mon Jun 12 16:19:13 2017
-
-@author: jake
+Runs a single model experiment. Invoked by
+python run_experiment.py [experiment_name] [run_name] [tune]
 """
 
 import sys
@@ -20,4 +18,3 @@ if len(sys.argv) > 3 :
 
 runner = ExperimentRunner()
 runner.run(experiment_title, run_title, tune)
-

@@ -1,11 +1,12 @@
 from experiment import *
 from sim_constants import *
 
-
-""" Reference experiment with constant conductivity and decreasing sliding speed. """
+"""
+Reference experiment with constant conductivity, no channels, and no water
+sources.
+"""
 
 ref_experiment = Experiment('ref')
-spm = sim_constants['spm']
 
 ### Flat steady
 run1 = ref_experiment.add_run('flat_steady', '../inputs/synthetic/inputs_flat_high.hdf5', steady = True)
@@ -32,13 +33,13 @@ run4.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run4.run_options['scale_m_min'] = 1e-9
 
 
-### Trough winter 1 for basal melt eperiment
+### Trough winter + 3cm basal melt
 run5 = ref_experiment.add_run('trough_winter1', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run5.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run5.run_options['scale_m_min'] = 1e-9
 
 
-### Trough winter 2 for basal melt eperiment
+### Trough winter + 3cm basal melt + englacial storage
 run6 = ref_experiment.add_run('trough_winter2', run2.model_inputs['steady_file'] + '.hdf5', steady = False)
 run6.run_options['scale_k_max'] = run2.run_options['scale_k_max']
 run6.run_options['scale_m_min'] = 1e-9
