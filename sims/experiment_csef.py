@@ -4,7 +4,7 @@ import numpy as np
 
 csef_experiment = Experiment('csef')
 spd = sim_constants['spd']
-N = 200
+N = 350
 
 shutoff_length = 15.0 * spd
 

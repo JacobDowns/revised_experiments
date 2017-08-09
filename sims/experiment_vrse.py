@@ -23,10 +23,11 @@ run3.model_inputs['constants']['e_v'] = 1e-2
 run3.run_options['pvd_vars'] = ['pfo', 'h', 'h_e']
 run3.run_options['scale_k_max'] = ref_experiment.steady_runs['trough_steady'].run_options['scale_k_max']
 
+"""
 ### Basal melt
 run4 = vrse_experiment.add_run('basal_winter', steady_file, steady = False)
 run4.model_inputs['constants']['e_v'] = 1e-4
 run4.run_options['checkpoint_vars'] = ['h', 'pfo', 'q', 'u_b', 'm', 'k', 'h_e']
 run4.run_options['pvd_vars'] = ['pfo', 'h', 'h_e']
 run4.run_options['scale_k_max'] = ref_experiment.steady_runs['trough_steady'].run_options['scale_k_max']
-run4.run_options['m_min'] = 1e-9
+run4.run_options['m_min'] = 1e-9"""
