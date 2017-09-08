@@ -61,7 +61,7 @@ class Run(object):
     model_inputs['newton_params'] = NonlinearVariationalSolver.default_parameters()
     model_inputs['newton_params']['newton_solver']['relaxation_parameter'] = 0.9
     model_inputs['newton_params']['newton_solver']['relative_tolerance'] = 1e-13
-    model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 5e-8
+    model_inputs['newton_params']['newton_solver']['absolute_tolerance'] = 1e-8
     model_inputs['newton_params']['newton_solver']['error_on_nonconvergence'] = True
     model_inputs['newton_params']['newton_solver']['maximum_iterations'] = 30
 
@@ -73,7 +73,7 @@ class Run(object):
                         "report": True,
                         "error_on_nonconvergence": True,
                         "relative_tolerance" : 1e-11,
-                        "absolute_tolerance" : 1e-7}}
+                        "absolute_tolerance" : 8e-8}}
 
 
     self.model_inputs = model_inputs
